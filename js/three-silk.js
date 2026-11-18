@@ -109,10 +109,34 @@
     mouse.targetY = -(e.clientY / window.innerHeight) * 2 + 1;
   }, { passive: true });
 
-  window.addEventListener('scroll', () => {
+  // Mobile Touch Support: Touch drag moves cursor lighting & silk ripples
+  function handleTouch(e) {
+    if (e.touches && e.touches.length > 0) {
+      const touch = e.touches[0];
+      mouse.targetX = (touch.clientX / window.innerWidth) * 2 - 1;
+      mouse.targetY = -(touch.clientY / window.innerHeight) * 2 + 1;
+    }
+  }
+  window.addEventListener('touchmove', handleTouch, { passive: true });
+  window.addEventListener('touchstart', handleTouch, { passive: true });
+
+  // Mobile Device Tilt / Gyroscope (Silky gentle motion when tilting phone)
+  if (window.DeviceOrientationEvent) {
+    window.addEventListener('deviceorientation', (e) => {
+      if (e.gamma !== null && e.beta !== null) {
+        mouse.targetX = Math.min(1, Math.max(-1, e.gamma / 25));
+        mouse.targetY = Math.min(1, Math.max(-1, (e.beta - 40) / 25));
+      }
+    }, { passive: true });
+  }
+
+  // Cross-Platform Scroll Calculation (Works with native touch scroll & Lenis)
+  function updateScrollProgress() {
     const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-    targetScrollProgress = Math.min(1, Math.max(0, window.scrollY / maxScroll));
-  }, { passive: true });
+    targetScrollProgress = Math.min(1, Math.max(0, (window.pageYOffset || window.scrollY) / maxScroll));
+  }
+  window.addEventListener('scroll', updateScrollProgress, { passive: true });
+  window.addEventListener('touchmove', updateScrollProgress, { passive: true });
 
   // Pre-cached vertex counts & arrays
   const pos = geometry.attributes.position;

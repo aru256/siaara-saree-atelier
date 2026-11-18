@@ -45,25 +45,31 @@ function initLenis() {
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 1.0,
-      touchMultiplier: 1.1
+      syncTouch: true,
+      smoothTouch: false,
+      touchMultiplier: 1.2
+    });
+
+    window.lenis = lenis;
+
+    // Direct scroll sync for ScrollTrigger on wheel AND touch
+    lenis.on('scroll', () => {
+      if (window.ScrollTrigger) ScrollTrigger.update();
     });
 
     // Unified single RAF loop via GSAP ticker - eliminates double RAF micro-stutter
     if (window.gsap && window.ScrollTrigger) {
-      lenis.on('scroll', ScrollTrigger.update);
       gsap.ticker.add((time) => {
         lenis.raf(time * 1000);
       });
       gsap.ticker.lagSmoothing(0);
-    } else {
-      function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-      requestAnimationFrame(raf);
     }
   }
+
+  // Always bind window scroll to ScrollTrigger for rock-solid mobile touch responsiveness
+  window.addEventListener('scroll', () => {
+    if (window.ScrollTrigger) ScrollTrigger.update();
+  }, { passive: true });
 }
 
 // ================= GSAP SCROLL ANIMATIONS =================
@@ -71,6 +77,12 @@ function initGSAPAnimations() {
   if (!window.gsap || !window.ScrollTrigger) return;
 
   gsap.registerPlugin(ScrollTrigger);
+
+  // Critical for Mobile: Ignore browser address bar collapse/expand to avoid jerky jumps
+  ScrollTrigger.config({
+    ignoreMobileResize: true,
+    autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load'
+  });
 
   // 1. Hero Entrance Sequence (Centered Monumental Opening)
   const heroTl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 1.0 } });
@@ -235,27 +247,30 @@ function initGSAPAnimations() {
     });
   }
 
-  // 9. Horizontal Collection Runway (Pinned Vertical-to-Horizontal Runway Experience)
+  // 9. Horizontal Collection Runway (Pinned Vertical-to-Horizontal Runway Experience on PC & Mobile)
   const runwaySection = document.getElementById('collections');
   const runwayTrack = document.getElementById('runway-track');
 
-  if (runwaySection && runwayTrack && window.innerWidth >= 768) {
-    const getScrollDistance = () => -(runwayTrack.scrollWidth - window.innerWidth + 80);
+  if (runwaySection && runwayTrack) {
+    const isMobile = window.innerWidth < 768;
+    const getScrollDistance = () => -(runwayTrack.scrollWidth - window.innerWidth + (isMobile ? 24 : 80));
 
     const runwayTween = gsap.to(runwayTrack, {
       x: getScrollDistance,
       ease: 'none'
     });
 
+    const scrollDistanceMultiplier = isMobile ? 1200 : 1800;
+
     ScrollTrigger.create({
       trigger: runwaySection,
       start: 'top top',
-      end: () => `+=${Math.max(1600, runwayTrack.scrollWidth - window.innerWidth + 350)}`,
+      end: () => `+=${Math.max(scrollDistanceMultiplier, runwayTrack.scrollWidth - window.innerWidth + 200)}`,
       pin: true,
       pinSpacing: true,
       anticipatePin: 1,
       animation: runwayTween,
-      scrub: 1.0,
+      scrub: isMobile ? 0.6 : 1.0,
       invalidateOnRefresh: true,
       onUpdate: (self) => {
         const p = self.progress;
@@ -270,15 +285,15 @@ function initGSAPAnimations() {
     // Counter-parallax on runway panel imagery for high-fashion spatial depth
     gsap.utils.toArray('.runway-panel img').forEach((img) => {
       gsap.fromTo(img,
-        { xPercent: 8 },
+        { xPercent: isMobile ? 4 : 8 },
         {
-          xPercent: -8,
+          xPercent: isMobile ? -4 : -8,
           ease: 'none',
           scrollTrigger: {
             trigger: runwaySection,
             start: 'top top',
-            end: () => `+=${Math.max(1600, runwayTrack.scrollWidth - window.innerWidth + 350)}`,
-            scrub: 1.2
+            end: () => `+=${Math.max(scrollDistanceMultiplier, runwayTrack.scrollWidth - window.innerWidth + 200)}`,
+            scrub: isMobile ? 0.6 : 1.2
           }
         }
       );
@@ -303,17 +318,18 @@ function initGSAPAnimations() {
     );
   });
 
-  // 11. Pinned Craftsmanship ScrollTrigger (Desktop Pinned Stage Storytelling)
+  // 11. Craftsmanship ScrollTrigger (Desktop Pinned Stage Storytelling, Mobile Active Scrub)
   const pinWrap = document.getElementById('craftsmanship-pin-wrap');
-  if (pinWrap && window.innerWidth >= 1024) {
+  if (pinWrap) {
+    const isDesktop = window.innerWidth >= 1024;
     ScrollTrigger.create({
       trigger: pinWrap,
-      start: 'top 12%',
-      end: '+=1600',
-      pin: true,
-      pinSpacing: true,
+      start: isDesktop ? 'top 12%' : 'top 60%',
+      end: isDesktop ? '+=1600' : 'bottom 40%',
+      pin: isDesktop,
+      pinSpacing: isDesktop,
       anticipatePin: 1,
-      scrub: 1.0,
+      scrub: 0.8,
       onUpdate: (self) => {
         const p = self.progress;
         let idx = 0;
@@ -332,13 +348,14 @@ function initGSAPAnimations() {
   initProductCard3DTilt();
 }
 
-// ================= INTERACTIVE 3D PRODUCT CARD TILT =================
+// ================= INTERACTIVE 3D PRODUCT CARD TILT (MOUSE & TOUCH) =================
 function initProductCard3DTilt() {
   const cards = document.querySelectorAll('.product-card');
   cards.forEach(card => {
     if (card.dataset.tiltInitialized) return;
     card.dataset.tiltInitialized = 'true';
 
+    // Desktop Mouse Perspective Tilt
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width - 0.5;
@@ -347,6 +364,22 @@ function initProductCard3DTilt() {
     });
 
     card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
+    });
+
+    // Mobile Touch Perspective Tilt
+    card.addEventListener('touchmove', (e) => {
+      if (!e.touches || e.touches.length === 0) return;
+      const rect = card.getBoundingClientRect();
+      const touch = e.touches[0];
+      const x = (touch.clientX - rect.left) / rect.width - 0.5;
+      const y = (touch.clientY - rect.top) / rect.height - 0.5;
+      if (x >= -0.5 && x <= 0.5 && y >= -0.5 && y <= 0.5) {
+        card.style.transform = `perspective(1000px) rotateX(${-y * 5}deg) rotateY(${x * 5}deg) translateY(-3px)`;
+      }
+    }, { passive: true });
+
+    card.addEventListener('touchend', () => {
       card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
     });
   });

@@ -296,14 +296,44 @@ body {
 
 @media (max-width: 767px) {
   .runway-track {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 1rem;
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    will-change: transform;
+    overflow: visible;
+    gap: 1.25rem;
   }
   .runway-panel {
-    width: 90vw;
-    scroll-snap-align: center;
+    width: 86vw;
+    max-width: 420px;
+    padding: 1.15rem;
+    border-radius: 20px;
+    flex-shrink: 0;
+    gap: 0.85rem;
+  }
+  .runway-panel .aspect-\[4\/5\] {
+    aspect-ratio: 16 / 10 !important;
+    max-height: 195px;
+    border-radius: 16px;
+  }
+  .runway-panel h3 {
+    font-size: 1.55rem !important;
+    line-height: 1.15 !important;
+  }
+  .runway-panel p {
+    font-size: 0.78rem !important;
+    line-height: 1.4 !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .runway-panel .space-y-4 > * + * {
+    margin-top: 0.45rem;
+  }
+  .runway-panel .py-3 {
+    padding-top: 0.45rem;
+    padding-bottom: 0.45rem;
   }
 }
 
