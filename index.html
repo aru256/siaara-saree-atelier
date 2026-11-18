@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SIAARA ATELIER | Indian Haute Couture & Handcrafted Heirloom Silks</title>
+  <title>कल्रा KRUTI by Vyara | Indian Haute Couture 3D Saree Atelier</title>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -78,13 +78,16 @@
     <nav class="glass-nav py-3 px-4 sm:px-7 rounded-full flex items-center justify-between transition-all duration-300">
       
       <!-- Brand Seal & Monogram -->
-      <a href="#home" class="flex items-center gap-2.5 sm:gap-3 group">
-        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-brand-gold-light via-brand-gold to-brand-mocha flex items-center justify-center text-brand-dark font-cinzel font-bold text-base shadow group-hover:scale-105 transition-transform border border-brand-sand/50">
-          S
+      <a href="#home" class="flex items-center gap-2.5 sm:gap-3.5 group">
+        <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-brand-gold-light via-brand-gold to-brand-mocha flex items-center justify-center text-brand-dark font-rozha font-bold text-lg shadow-md group-hover:scale-105 transition-transform border border-brand-sand/60">
+          क
         </div>
         <div class="flex flex-col">
-          <span class="font-cinzel text-lg sm:text-xl tracking-[0.28em] font-bold text-brand-espresso group-hover:text-brand-gold transition-colors">SIAARA</span>
-          <span class="text-[8px] sm:text-[9px] tracking-[0.4em] text-brand-mocha uppercase -mt-0.5 font-medium">Haute Couture Atelier</span>
+          <div class="flex items-baseline gap-1.5">
+            <span class="font-rozha text-xl sm:text-2xl font-bold text-brand-espresso group-hover:text-brand-gold transition-colors tracking-wide leading-none">कल्रा</span>
+            <span class="font-cinzel text-xs sm:text-sm tracking-[0.2em] font-bold text-brand-gold">KRUTI</span>
+          </div>
+          <span class="text-[9px] sm:text-[10px] tracking-[0.32em] text-brand-mocha uppercase -mt-0.5 font-medium">by Vyara · Atelier</span>
         </div>
       </a>
 
@@ -139,9 +142,15 @@
   <!-- ================= MOBILE NAVIGATION DRAWER ================= -->
   <div id="mobile-menu-drawer" class="slide-drawer p-6 text-brand-espresso">
     <div class="flex items-center justify-between pb-6 border-b border-brand-gold/20">
-      <div class="flex items-center gap-2">
-        <div class="w-8 h-8 rounded-full bg-brand-gold text-brand-dark font-cinzel font-bold flex items-center justify-center text-sm">S</div>
-        <span class="font-cinzel tracking-widest font-bold text-sm">SIAARA ATELIER</span>
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-full bg-brand-gold text-brand-dark font-rozha font-bold flex items-center justify-center text-sm">क</div>
+        <div>
+          <div class="flex items-baseline gap-1">
+            <span class="font-rozha text-base font-bold text-brand-espresso leading-none">कल्रा</span>
+            <span class="font-cinzel text-xs tracking-wider text-brand-gold font-bold">KRUTI</span>
+          </div>
+          <span class="block text-[8px] tracking-[0.25em] text-brand-mocha uppercase">by Vyara</span>
+        </div>
       </div>
       <button onclick="toggleMobileMenu(false)" class="w-8 h-8 rounded-full bg-brand-sand flex items-center justify-center text-brand-mocha hover:bg-brand-gold transition-colors">
         <i data-lucide="x" class="w-4 h-4"></i>
@@ -267,7 +276,7 @@
         </h2>
 
         <p class="font-sans text-brand-mocha text-sm sm:text-base leading-relaxed font-light">
-          Founded on the uncompromising refusal of industrial homogenization, <strong>SIAARA</strong> stands as a guardian of sacred Indian handloom traditions.
+          Founded on the uncompromising refusal of industrial homogenization, <strong>कल्रा KRUTI by Vyara</strong> stands as a guardian of sacred Indian handloom traditions and heirloom handcrafted sarees.
         </p>
 
         <p class="font-sans text-brand-mocha text-sm sm:text-base leading-relaxed font-light">
@@ -631,7 +640,7 @@
             <i data-lucide="star" class="w-4 h-4 fill-current"></i>
           </div>
           <p class="font-cormorant text-xl italic text-brand-espresso leading-snug">
-            "Finding genuine Kadwa Banarasi without machine shortcuts is rare today. Siaara’s pit-loom craftsmanship is a generational triumph."
+            "Finding genuine Kadwa Banarasi without machine shortcuts is rare today. कल्रा Kruti by Vyara’s pit-loom craftsmanship is a generational triumph."
           </p>
         </div>
         <div class="pt-6 mt-6 border-hairline-t">
@@ -675,13 +684,13 @@
           Track Your Heirloom
         </h2>
         <p class="text-xs text-brand-mocha mt-2 font-light">
-          Enter your Order ID (e.g. <span class="font-bold text-brand-espresso cursor-pointer underline" onclick="fillSampleTrack('SIA-88342')">SIA-88342</span> or <span class="font-bold text-brand-espresso cursor-pointer underline" onclick="fillSampleTrack('SIA-76129')">SIA-76129</span>) or customer telephone number to inspect live weaving stages.
+          Enter your Order ID (e.g. <span class="font-bold text-brand-espresso cursor-pointer underline" onclick="fillSampleTrack('KLA-88342')">KLA-88342</span> or <span class="font-bold text-brand-espresso cursor-pointer underline" onclick="fillSampleTrack('KLA-76129')">KLA-76129</span>) or customer telephone number to inspect live weaving stages.
         </p>
       </div>
 
       <!-- Tracking Search Form -->
       <form onsubmit="handleTrackOrder(event)" class="max-w-md mx-auto flex items-center gap-2 p-1.5 bg-white rounded-full border border-brand-gold/30 shadow-sm mb-6">
-        <input type="text" id="track-order-input" placeholder="e.g. SIA-88342 or 9948033211" class="w-full bg-transparent border-none text-xs sm:text-sm px-4 focus:ring-0 text-brand-espresso font-medium" required />
+        <input type="text" id="track-order-input" placeholder="e.g. KLA-88342 or 9948033211" class="w-full bg-transparent border-none text-xs sm:text-sm px-4 focus:ring-0 text-brand-espresso font-medium" required />
         <button type="submit" class="btn-luxury-primary !py-2.5 !px-6 !text-xs shrink-0">
           <span>Track</span>
           <i data-lucide="search" class="w-3.5 h-3.5"></i>
@@ -752,7 +761,7 @@
                 <span class="text-[10px] text-emerald-300">Live styling & swift custom orders</span>
               </div>
             </div>
-            <a href="https://wa.me/919840012345?text=Hello%20Siaara%20Atelier,%20I%20would%20like%20to%20inquire%20about%20your%20handcrafted%20sarees." target="_blank" rel="noopener noreferrer" class="px-4 py-1.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all shadow-md">
+            <a href="https://wa.me/919840012345?text=Hello%20कल्रा%20KRUTI%20by%20Vyara,%20I%20would%20like%20to%20inquire%20about%20your%20handcrafted%20saree%20collection." target="_blank" rel="noopener noreferrer" class="px-4 py-1.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all shadow-md">
               Chat Now
             </a>
           </div>
@@ -896,13 +905,19 @@
         <!-- Brand Info & Manifesto -->
         <div class="lg:col-span-2">
           <div class="flex items-center gap-3 mb-4">
-            <div class="w-9 h-9 rounded-full bg-brand-gold text-brand-dark font-cinzel font-bold flex items-center justify-center text-sm">
-              S
+            <div class="w-10 h-10 rounded-full bg-brand-gold text-brand-dark font-rozha font-bold flex items-center justify-center text-lg shadow">
+              क
             </div>
-            <span class="font-cinzel text-xl font-bold tracking-[0.25em] text-brand-gold-light">SIAARA ATELIER</span>
+            <div>
+              <div class="flex items-baseline gap-1.5">
+                <span class="font-rozha text-2xl font-bold tracking-wide text-brand-gold-light leading-none">कल्रा</span>
+                <span class="font-cinzel text-sm font-bold tracking-[0.25em] text-white">KRUTI</span>
+              </div>
+              <span class="text-[9px] tracking-[0.35em] text-brand-sand/70 uppercase block -mt-0.5">by Vyara · Haute Couture</span>
+            </div>
           </div>
           <p class="text-xs text-brand-sand/75 leading-relaxed max-w-sm mb-6 font-light">
-            An Indian Haute Couture atelier dedicated to pure pit-loom heritage. Handcrafted Tissue, Banarasi, Kanjivaram, and Malai Silks born from unadulterated craftsmanship.
+            An Indian Haute Couture atelier dedicated to pure pit-loom heritage, handcrafted sarees, and bridal heirlooms born from unadulterated craftsmanship.
           </p>
 
           <!-- Direct Social Links with Official Logos (As requested) -->
@@ -974,7 +989,7 @@
 
         <!-- Copyright -->
         <div class="text-[11px] text-brand-sand/50 text-center font-light">
-          © 2026 SIAARA ATELIER. All rights reserved. Handcrafted in Varanasi & Kanchipuram.
+          © 2026 कल्रा KRUTI by Vyara. All rights reserved. Handcrafted in Varanasi, Chanderi & Jaipur.
         </div>
 
       </div>
@@ -1007,7 +1022,7 @@
   </div>
 
   <!-- ================= DESKTOP FLOATING WHATSAPP BUTTON ================= -->
-  <a href="https://wa.me/919840012345?text=Hello%20Siaara%20Atelier,%20I%20would%20like%20to%20inquire%20about%20your%20handcrafted%20sarees." target="_blank" rel="noopener noreferrer" class="hidden lg:flex whatsapp-float-btn" title="Chat on WhatsApp">
+  <a href="https://wa.me/919840012345?text=Hello%20कल्रा%20KRUTI%20by%20Vyara,%20I%20would%20like%20to%20inquire%20about%20your%20handcrafted%20saree%20collection." target="_blank" rel="noopener noreferrer" class="hidden lg:flex whatsapp-float-btn" title="Chat on WhatsApp">
     <i data-lucide="message-circle" class="w-7 h-7"></i>
   </a>
 
@@ -1199,7 +1214,7 @@
       <div class="my-6 p-4 rounded-xl bg-white border-hairline text-left space-y-1.5 text-xs">
         <div class="flex justify-between">
           <span class="text-brand-mocha">Tracking Order ID:</span>
-          <span id="confirmed-order-id" class="font-bold text-brand-gold">SIA-00000</span>
+          <span id="confirmed-order-id" class="font-bold text-brand-gold">KLA-00000</span>
         </div>
         <div class="flex justify-between">
           <span class="text-brand-mocha">Estimated Delivery:</span>

@@ -1,5 +1,5 @@
 /**
- * SIAARA ATELIER - Optimized Ultra-Smooth 3D Silk Simulation
+ * कल्रा KRUTI by Vyara (Klakruti by Vyara) - Optimized Ultra-Smooth 3D Silk Simulation
  * Engineered for 60/120 FPS Lag-Free Performance
  */
 

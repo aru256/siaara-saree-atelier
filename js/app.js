@@ -1,5 +1,5 @@
 /**
- * SIAARA ATELIER - Master Motion & Interactive Commerce Engine
+ * कल्रा KRUTI by Vyara (Klakruti by Vyara) - Master Motion & Interactive Commerce Engine
  * Powered by Lenis, GSAP ScrollTrigger, and Three.js
  */
 
@@ -1106,7 +1106,7 @@ function handleBookingSubmit(e) {
   const service = (document.getElementById('style-service') || document.getElementById('book-service'))?.value;
 
   StoreDB.addBooking({
-    name, phone, email: 'concierge@siaaraatelier.com', preferredDate: date, preferredTime: time, service
+    name, phone, email: 'concierge@klakruti.com', preferredDate: date, preferredTime: time, service
   });
 
   alert(`Thank you, ${name}! Your virtual drape appointment on ${date} at ${time} is registered in our private salon diary.`);
@@ -1159,7 +1159,7 @@ const POLICY_TEXTS = {
     title: 'Privacy & Security Policy',
     content: `
       <h4 class="font-cormorant text-lg font-bold text-brand-espresso">1. Information We Collect</h4>
-      <p>SIAARA ATELIER collects only the essential customer information required to handcraft, book, and deliver your orders safely: recipient name, telephone/WhatsApp number, delivery destination, and billing coordinates.</p>
+      <p>कल्रा KRUTI by Vyara collects only the essential customer information required to handcraft, book, and deliver your orders safely: recipient name, telephone/WhatsApp number, delivery destination, and billing coordinates.</p>
 
       <h4 class="font-cormorant text-lg font-bold text-brand-espresso mt-3">2. Payment Security & Encryption</h4>
       <p>We do not store complete credit card or debit card numbers on our local databases. All digital transactions are processed through RBI-compliant, 256-bit SSL encrypted payment gateways.</p>
@@ -1245,7 +1245,7 @@ function handleRegister(e) {
   const user = { name, phone, email, address: '' };
   StoreDB.saveCurrentUser(user);
   closeAuthModal();
-  alert(`Registration complete! Welcome to SIAARA ATELIER, ${name}!`);
+  alert(`Registration complete! Welcome to कल्रा KRUTI by Vyara, ${name}!`);
 }
 
 function updateAuthUI() {

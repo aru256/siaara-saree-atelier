@@ -1,5 +1,5 @@
 /**
- * SIAARA ATELIER - Master E-Commerce & Persistence Data Architecture
+ * कल्रा KRUTI by Vyara (Klakruti by Vyara) - Master E-Commerce & Persistence Data Architecture
  * Synchronized across Customer Storefront and Executive Admin Panel
  */
 
@@ -252,7 +252,7 @@ const DEFAULT_PRODUCTS = [
 // Seed Real Verified Orders
 const DEFAULT_ORDERS = [
   {
-    orderId: 'SIA-94210',
+    orderId: 'KLA-94210',
     date: '2026-11-16T14:30:00Z',
     customerName: 'Ananya Deshmukh',
     customerPhone: '+91 98201 45890',
@@ -279,7 +279,7 @@ const DEFAULT_ORDERS = [
     estimatedDelivery: 'Delivered on Nov 18, 2026'
   },
   {
-    orderId: 'SIA-88342',
+    orderId: 'KLA-88342',
     date: '2026-11-17T10:15:00Z',
     customerName: 'Priyanka Reddy',
     customerPhone: '+91 99480 33211',
@@ -306,7 +306,7 @@ const DEFAULT_ORDERS = [
     estimatedDelivery: 'Est. Delivery by Nov 22, 2026'
   },
   {
-    orderId: 'SIA-76129',
+    orderId: 'KLA-76129',
     date: '2026-11-18T09:40:00Z',
     customerName: 'Samyuktha Rao',
     customerPhone: '+91 91760 99824',
@@ -446,7 +446,7 @@ const StoreDB = {
     const orders = this.getOrders();
     const randomSuffix = Math.floor(10000 + Math.random() * 90000);
     const newOrder = {
-      orderId: 'SIA-' + randomSuffix,
+      orderId: 'KLA-' + randomSuffix,
       date: new Date().toISOString(),
       orderStatus: 'Order Confirmed',
       trackingCourier: 'Bluedart Luxury Express',
@@ -476,10 +476,12 @@ const StoreDB = {
   findOrderByQuery(query) {
     if (!query) return null;
     const cleanQuery = query.trim().toUpperCase();
+    const cleanDigits = cleanQuery.replace(/\D/g, '');
     const orders = this.getOrders();
     return orders.find(o => 
       o.orderId.toUpperCase() === cleanQuery || 
-      o.customerPhone.replace(/\D/g, '').includes(cleanQuery.replace(/\D/g, '')) ||
+      o.orderId.replace(/^(KLA|SIA)-/, '') === cleanQuery.replace(/^(KLA|SIA)-/, '') ||
+      (cleanDigits && o.customerPhone.replace(/\D/g, '').includes(cleanDigits)) ||
       o.trackingNumber.toUpperCase() === cleanQuery
     ) || null;
   },

@@ -1,6 +1,6 @@
-# SIAARA ATELIER | Indian Haute Couture 3D Saree E-Commerce
+# कल्रा KRUTI by Vyara (Klakruti by Vyara) | Indian Haute Couture 3D Saree E-Commerce
 
-A luxury Indian handloom fashion campaign and full-featured e-commerce platform featuring immersive **Three.js 3D fabric physics**, **GSAP ScrollTrigger cinematic pinned storytelling**, **Lenis smooth inertia scrolling**, and a comprehensive **Executive Admin Control Center**.
+A luxury Indian handloom fashion campaign and full-featured e-commerce platform for **कल्रा KRUTI by Vyara** (Klakruti by Vyara) featuring immersive **Three.js 3D fabric physics**, **GSAP ScrollTrigger cinematic pinned storytelling**, **Lenis smooth inertia scrolling**, and a comprehensive **Executive Admin Control Center**.
 
 ---
 
@@ -63,3 +63,4 @@ Open your browser to:
 - **Accents**: 24K Antique Zari Gold (`#C59B51`), Warm Champagne (`#E4C58B`), Terracotta (`#9B482E`)
 - **Darks**: Royal Espresso (`#140B07`), Deep Mocha (`#24150E`)
 - **Typography**: Cormorant Garamond, Cinzel Decorative, Italiana, Plus Jakarta Sans
+

@@ -1,10 +1,10 @@
 /* ==========================================================================
-   SIAARA ATELIER - LUXURY FASHION CAMPAIGN STYLESHEET
+   कल्रा KRUTI by Vyara - LUXURY FASHION CAMPAIGN STYLESHEET
    Design Language: Indian Haute Couture x International Editorial Fashion
    Aesthetic: Deep Espresso, Warm Sandstone, Champagne Silk & Pure Antique Zari
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Italiana&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Italiana&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Rozha+One&display=swap');
 
 :root {
   /* Editorial Palette: Muted, Rich, Refined */
@@ -85,6 +85,9 @@ body {
 }
 
 /* Typography Utility Classes */
+.font-rozha {
+  font-family: 'Rozha One', 'Noto Serif Devanagari', 'Cinzel Decorative', serif;
+}
 .font-cinzel {
   font-family: 'Cinzel Decorative', serif;
 }
