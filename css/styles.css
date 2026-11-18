@@ -34,7 +34,7 @@
   --radius-card: 20px;
   --radius-card-lg: 28px;
   --radius-modal: 28px;
-  --radius-input: 14px;
+  --radius-input: 10px;
 }
 
 /* Lenis Smooth Scroll Resets */
@@ -477,37 +477,63 @@ input:not([type="radio"]):not([type="checkbox"]), select, textarea, .luxury-inpu
   display: block;
   width: 100%;
   border-radius: var(--radius-input);
-  background: #FAF7F2;
+  background: #FFFFFF;
   border: 1.5px solid rgba(197, 155, 81, 0.38);
   color: var(--espresso-dark);
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   font-weight: 500;
   line-height: 1.5;
-  padding: 0.88rem 1.35rem;
+  padding: 0.92rem 1.25rem;
   outline: none;
   transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: inset 0 1px 2px rgba(20, 11, 7, 0.03), 0 2px 6px rgba(197, 155, 81, 0.04);
+  box-shadow: 0 2px 8px -2px rgba(20, 11, 7, 0.04), inset 0 1px 2px rgba(255, 255, 255, 0.9);
   -webkit-appearance: none;
   appearance: none;
 }
 
+/* Luxury Input Field with Icon Accent */
+.luxury-input-wrap {
+  position: relative;
+  width: 100%;
+}
+.luxury-input-wrap .luxury-input {
+  padding-left: 2.75rem !important;
+}
+.luxury-input-wrap .input-icon {
+  position: absolute;
+  left: 0.95rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.05rem;
+  height: 1.05rem;
+  color: rgba(197, 155, 81, 0.7);
+  pointer-events: none;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+.luxury-input-wrap:focus-within .input-icon {
+  color: var(--gold-primary);
+  transform: translateY(-50%) scale(1.1);
+}
+
 input::placeholder, textarea::placeholder {
-  color: rgba(120, 95, 78, 0.55);
+  color: rgba(120, 95, 78, 0.52);
   font-weight: 400;
   letter-spacing: 0.01em;
 }
 
 input:not([type="radio"]):not([type="checkbox"]):hover, select:hover, textarea:hover, .luxury-input:hover {
-  border-color: rgba(197, 155, 81, 0.65);
+  border-color: rgba(197, 155, 81, 0.75);
   background: #FFFFFF;
+  box-shadow: 0 4px 14px -2px rgba(197, 155, 81, 0.15);
 }
 
 input:not([type="radio"]):not([type="checkbox"]):focus, select:focus, textarea:focus, .luxury-input:focus {
   border-color: #C59B51;
   background: #FFFFFF;
-  box-shadow: 0 0 0 3.5px rgba(197, 155, 81, 0.22), 0 6px 18px rgba(197, 155, 81, 0.12);
+  box-shadow: 0 0 0 3.5px rgba(197, 155, 81, 0.22), 0 8px 24px -4px rgba(197, 155, 81, 0.16);
   outline: none;
+  transform: translateY(-1px);
 }
 
 select {
@@ -520,9 +546,44 @@ select {
 }
 
 textarea {
-  border-radius: 16px;
+  border-radius: 12px;
   resize: vertical;
-  min-height: 95px;
+  min-height: 105px;
+}
+
+/* Haute-Couture Search & Tracking Bars */
+.luxury-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.55rem 0.45rem 1.25rem;
+  background: #FFFFFF;
+  border-radius: 14px;
+  border: 1.5px solid rgba(197, 155, 81, 0.4);
+  box-shadow: 0 4px 18px -4px rgba(20, 11, 7, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.luxury-search-bar:hover {
+  border-color: rgba(197, 155, 81, 0.7);
+  box-shadow: 0 6px 20px -4px rgba(197, 155, 81, 0.14);
+}
+.luxury-search-bar:focus-within {
+  border-color: #C59B51;
+  box-shadow: 0 0 0 3.5px rgba(197, 155, 81, 0.22), 0 8px 26px -4px rgba(197, 155, 81, 0.2);
+  transform: translateY(-1px);
+}
+.luxury-search-bar input {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0.55rem 0.5rem !important;
+  border-radius: 0 !important;
+  font-size: 0.9rem;
+  color: var(--espresso-dark);
+}
+.luxury-search-bar input:focus {
+  transform: none !important;
+  box-shadow: none !important;
 }
 
 /* Reset for inline pill search bars (Track order, Catalog search, Newsletter) */
@@ -535,8 +596,9 @@ textarea {
   border-radius: 0 !important;
 }
 #catalog-search-input {
-  border-radius: 9999px;
-  padding-left: 2.6rem;
+  border-radius: 12px;
+  padding-left: 2.75rem;
+  background: #FFFFFF;
 }
 
 /* Persistent Ambient Lighting Layer (Natural Scroll Transitions, Zero CPU Lag) */
