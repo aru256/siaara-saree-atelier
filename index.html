@@ -302,109 +302,234 @@
     </div>
   </section>
 
-  <!-- ================= D. FEATURED COLLECTIONS (IMAGE-LED SHOWCASE) ================= -->
-  <section id="collections" class="py-24 sm:py-32 px-4 sm:px-8 max-w-7xl mx-auto border-hairline-t">
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-      <div>
-        <div class="badge-luxury badge-gold mb-3">
-          <i data-lucide="crown" class="w-3.5 h-3.5 text-brand-gold"></i>
-          <span>Seasonal Curations</span>
-        </div>
-        <h2 class="font-cormorant text-4xl sm:text-6xl font-normal text-brand-espresso">
-          The Five Signature <span class="font-italiana italic text-gold-gradient font-normal">Weaves</span>
-        </h2>
-      </div>
-      <p class="text-xs sm:text-sm text-brand-mocha max-w-md font-light">
-        Explore our curated pillars of textile art, from statuesque metallic tissue glazes to timeless Varanasi Katan brocades.
-      </p>
-    </div>
-
-    <!-- 5 Collections Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  <!-- ================= D. HORIZONTAL COLLECTION RUNWAY (CINEMATIC PINNED SCROLL) ================= -->
+  <section id="collections" class="relative overflow-hidden border-hairline-t bg-brand-cream/40">
+    
+    <!-- Pinned Runway Viewport Container -->
+    <div id="runway-pin-container" class="relative min-h-[92vh] sm:min-h-screen flex flex-col justify-between py-10 sm:py-14 overflow-hidden">
       
-      <!-- Collection 1: Tissue Silk -->
-      <div onclick="filterByCollection('tissue-silk')" class="product-card group cursor-pointer flex flex-col justify-between">
-        <div class="img-curtain-wrap aspect-[4/5] bg-brand-sand relative">
-          <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=900&q=85" alt="Tissue Silk" class="w-full h-full object-cover" />
-          <span class="absolute top-4 left-4 badge-luxury bg-brand-dark/90 text-brand-gold-light text-[9px]">Metallic Weft</span>
-          <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          <div class="absolute bottom-5 left-5 right-5 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            <span class="btn-luxury-gold !py-1.5 !px-4 !text-[10px]">Explore Weaves →</span>
+      <!-- Runway Header Bar -->
+      <div class="px-4 sm:px-12 max-w-7xl w-full mx-auto flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-4 sm:mb-6 z-10">
+        <div>
+          <div class="badge-luxury badge-gold mb-2.5">
+            <i data-lucide="crown" class="w-3.5 h-3.5 text-brand-gold"></i>
+            <span>Seasonal Curations · The Haute Couture Runway</span>
           </div>
+          <h2 class="font-cormorant text-4xl sm:text-6xl font-normal text-brand-espresso">
+            The Five Signature <span class="font-italiana italic text-gold-gradient font-normal">Weaves</span>
+          </h2>
         </div>
-        <div class="p-6">
-          <h3 class="font-cormorant text-2xl font-bold text-brand-espresso group-hover:text-brand-gold transition-colors">Tissue Silk Sarees</h3>
-          <span class="text-[10px] tracking-[0.2em] uppercase font-semibold text-brand-gold block mt-1">Luminous Glaze & Metallic Aura</span>
-          <p class="text-xs text-brand-mocha mt-2 font-light line-clamp-2">Pure mulberry silk warp interwoven with tested gold and silver zari weft.</p>
+        <div class="flex items-center gap-5 text-xs text-brand-mocha">
+          <span class="hidden sm:inline font-light tracking-wider uppercase text-[11px]">Scroll vertically to travel the runway</span>
+          <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-sand/70 border border-brand-gold/30">
+            <span id="runway-index-display" class="font-cinzel text-sm sm:text-base font-bold text-brand-espresso">01</span>
+            <span class="text-brand-gold font-bold">/</span>
+            <span class="text-brand-mocha/70 text-xs">05</span>
+          </div>
         </div>
       </div>
 
-      <!-- Collection 2: Banarasi Silk -->
-      <div onclick="filterByCollection('banarasi-silk')" class="product-card group cursor-pointer flex flex-col justify-between">
-        <div class="img-curtain-wrap aspect-[4/5] bg-brand-sand relative">
-          <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=900&q=85" alt="Banarasi Silk" class="w-full h-full object-cover" />
-          <span class="absolute top-4 left-4 badge-luxury bg-brand-dark/90 text-brand-gold-light text-[9px]">Kadwa Heritage</span>
-          <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          <div class="absolute bottom-5 left-5 right-5 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            <span class="btn-luxury-gold !py-1.5 !px-4 !text-[10px]">Explore Weaves →</span>
+      <!-- Horizontal Track Viewport Layer -->
+      <div class="relative w-full overflow-hidden flex-1 flex items-center">
+        <div id="runway-track" class="runway-track flex gap-6 sm:gap-10 px-4 sm:px-12 will-change-transform">
+          
+          <!-- Runway Panel 1: Tissue Silk -->
+          <div class="runway-panel p-6 sm:p-10 flex flex-col md:flex-row gap-6 sm:gap-10 items-center justify-between">
+            <div class="w-full md:w-1/2 aspect-[4/5] rounded-[22px] overflow-hidden shadow-xl relative img-curtain-wrap cursor-pointer" onclick="filterByCollection('tissue-silk'); document.getElementById('shop').scrollIntoView({behavior: 'smooth'})">
+              <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1000&q=85" alt="Tissue Silk Sarees" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/70 via-transparent to-transparent"></div>
+              <span class="absolute top-4 left-4 badge-luxury bg-brand-dark/90 text-brand-gold-light text-[9px]">Look 01 · Metallic Weft</span>
+              <div class="absolute bottom-4 left-4 right-4 text-brand-sand">
+                <span class="text-[10px] tracking-widest uppercase font-bold text-brand-gold-light">Loom 12 · Varanasi</span>
+                <p class="text-xs text-brand-sand/80 italic">Sculptural Golden Glaze</p>
+              </div>
+            </div>
+            <div class="w-full md:w-1/2 flex flex-col justify-between space-y-4 text-left">
+              <div>
+                <span class="text-xs uppercase tracking-[0.25em] font-bold text-brand-gold block mb-1">Weave I / V</span>
+                <h3 class="font-cormorant text-3xl sm:text-5xl font-bold text-brand-espresso leading-tight">Tissue Silk Sarees</h3>
+                <span class="font-italiana italic text-brand-gold text-lg block mt-1">Luminous Glaze & Liquid Gold Aura</span>
+                <p class="text-xs sm:text-sm text-brand-mocha mt-3 font-light leading-relaxed">
+                  Pure mulberry silk warp interwoven with tested 24K gold and silver zari weft. Celebrated for its crisp structural drape that holds sculptural shape throughout high-society occasions.
+                </p>
+              </div>
+              <div class="grid grid-cols-2 gap-3 py-3 border-hairline-t border-hairline-b text-xs">
+                <div>
+                  <span class="text-[10px] text-brand-mocha uppercase tracking-wider block">Weft Material</span>
+                  <span class="font-bold text-brand-espresso">Tested 24K Zari</span>
+                </div>
+                <div>
+                  <span class="text-[10px] text-brand-mocha uppercase tracking-wider block">Drape Weight</span>
+                  <span class="font-bold text-brand-gold font-cormorant text-base">580g Crisp Satin</span>
+                </div>
+              </div>
+              <button onclick="filterByCollection('tissue-silk'); document.getElementById('shop').scrollIntoView({behavior: 'smooth'})" class="btn-luxury-primary !py-2.5 !px-6 !text-xs self-start">
+                <span>Explore Tissue Silk Archive</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
           </div>
-        </div>
-        <div class="p-6">
-          <h3 class="font-cormorant text-2xl font-bold text-brand-espresso group-hover:text-brand-gold transition-colors">Banarasi Katan Brocades</h3>
-          <span class="text-[10px] tracking-[0.2em] uppercase font-semibold text-brand-gold block mt-1">Varanasi Pit-Loom Heirlooms</span>
-          <p class="text-xs text-brand-mocha mt-2 font-light line-clamp-2">Authentic Kadwa bootis and heavy Shikargah hunting motifs on dense pure katan.</p>
+
+          <!-- Runway Panel 2: Banarasi Katan -->
+          <div class="runway-panel p-6 sm:p-10 flex flex-col md:flex-row gap-6 sm:gap-10 items-center justify-between">
+            <div class="w-full md:w-1/2 aspect-[4/5] rounded-[22px] overflow-hidden shadow-xl relative img-curtain-wrap cursor-pointer" onclick="filterByCollection('banarasi-silk'); document.getElementById('shop').scrollIntoView({behavior: 'smooth'})">
+              <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1000&q=85" alt="Banarasi Katan Brocades" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/70 via-transparent to-transparent"></div>
+              <span class="absolute top-4 left-4 badge-luxury bg-brand-dark/90 text-brand-gold-light text-[9px]">Look 02 · Kadwa Brocade</span>
+              <div class="absolute bottom-4 left-4 right-4 text-brand-sand">
+                <span class="text-[10px] tracking-widest uppercase font-bold text-brand-gold-light">Pit-Loom 04 · Varanasi</span>
+                <p class="text-xs text-brand-sand/80 italic">Generational Masterpiece</p>
+              </div>
+            </div>
+            <div class="w-full md:w-1/2 flex flex-col justify-between space-y-4 text-left">
+              <div>
+                <span class="text-xs uppercase tracking-[0.25em] font-bold text-brand-gold block mb-1">Weave II / V</span>
+                <h3 class="font-cormorant text-3xl sm:text-5xl font-bold text-brand-espresso leading-tight">Banarasi Katan Brocades</h3>
+                <span class="font-italiana italic text-brand-gold text-lg block mt-1">Authentic Pit-Loom Heirlooms</span>
+                <p class="text-xs sm:text-sm text-brand-mocha mt-3 font-light leading-relaxed">
+                  Authentic Kadwa bootis and heavy Shikargah hunting motifs manually hand-knotted on dense pure katan silk. Up to 120 hours of master weaver dedication with zero loose floats on the reverse.
+                </p>
+              </div>
+              <div class="grid grid-cols-2 gap-3 py-3 border-hairline-t border-hairline-b text-xs">
+                <div>
+                  <span class="text-[10px] text-brand-mocha uppercase tracking-wider block">Weave Technique</span>
+                  <span class="font-bold text-brand-espresso">Kadwa Interlock</span>
+                </div>
+                <div>
+                  <span class="text-[10px] text-brand-mocha uppercase tracking-wider block">Loom Duration</span>
+                  <span class="font-bold text-brand-gold font-cormorant text-base">120+ Dedicated Hours</span>
+                </div>
+              </div>
+              <button onclick="filterByCollection('banarasi-silk'); document.getElementById('shop').scrollIntoView({behavior: 'smooth'})" class="btn-luxury-primary !py-2.5 !px-6 !text-xs self-start">
+                <span>Explore Banarasi Archive</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Runway Panel 3: Malai Silk -->
+          <div class="runway-panel p-6 sm:p-10 flex flex-col md:flex-row gap-6 sm:gap-10 items-center justify-between">
+            <div class="w-full md:w-1/2 aspect-[4/5] rounded-[22px] overflow-hidden shadow-xl relative img-curtain-wrap cursor-pointer" onclick="filterByCollection('malai-silk'); document.getElementById('shop').scrollIntoView({behavior: 'smooth'})">
+              <img src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1000&q=85" alt="Malai Silk Drapes" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/70 via-transparent to-transparent"></div>
+              <span class="absolute top-4 left-4 badge-luxury bg-brand-dark/90 text-brand-gold-light text-[9px]">Look 03 · Butter Fluidity</span>
+              <div class="absolute bottom-4 left-4 right-4 text-brand-sand">
+                <span class="text-[10px] tracking-widest uppercase font-bold text-brand-gold-light">Chanderi Looms</span>
+                <p class="text-xs text-brand-sand/80 italic">Crease-Free Tactile Bliss</p>
+              </div>
+            </div>
+            <div class="w-full md:w-1/2 flex flex-col justify-between space-y-4 text-left">
+              <div>
+                <span class="text-xs uppercase tracking-[0.25em] font-bold text-brand-gold block mb-1">Weave III / V</span>
+                <h3 class="font-cormorant text-3xl sm:text-5xl font-bold text-brand-espresso leading-tight">Malai Butter Silk Drapes</h3>
+                <span class="font-italiana italic text-brand-gold text-lg block mt-1">Featherlight Velvet Fluidity</span>
+                <p class="text-xs sm:text-sm text-brand-mocha mt-3 font-light leading-relaxed">
+                  Crease-free butter silk contours effortlessly around the body with natural grace. Treated in botanical washes for ultra-smooth skin feel that resists wrinkling even after 8 hours of festive movement.
+                </p>
+              </div>
+              <div class="grid grid-cols-2 gap-3 py-3 border-hairline-t border-hairline-b text-xs">
+                <div>
+                  <span class="text-[10px] text-brand-mocha uppercase tracking-wider block">Texture Finish</span>
+                  <span class="font-bold text-brand-espresso">Butter Satin Peach</span>
+                </div>
+                <div>
+                  <span class="text-[10px] text-brand-mocha uppercase tracking-wider block">Wrinkle Index</span>
+                  <span class="font-bold text-emerald-700 font-cormorant text-base">Zero-Crease Active</span>
+                </div>
+              </div>
+              <button onclick="filterByCollection('malai-silk'); document.getElementById('shop').scrollIntoView({behavior: 'smooth'})" class="btn-luxury-primary !py-2.5 !px-6 !text-xs self-start">
+                <span>Explore Malai Silk Archive</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Runway Panel 4: Kanjivaram Temple Silks -->
+          <div class="runway-panel p-6 sm:p-10 flex flex-col md:flex-row gap-6 sm:gap-10 items-center justify-between">
+            <div class="w-full md:w-1/2 aspect-[4/5] rounded-[22px] overflow-hidden shadow-xl relative img-curtain-wrap cursor-pointer" onclick="filterByCollection('kanjivaram-silk'); document.getElementById('shop').scrollIntoView({behavior: 'smooth'})">
+              <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1000&q=85" alt="Kanjivaram Temple Silks" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/70 via-transparent to-transparent"></div>
+              <span class="absolute top-4 left-4 badge-luxury bg-brand-dark/90 text-brand-gold-light text-[9px]">Look 04 · 3-Shuttle Korvai</span>
+              <div class="absolute bottom-4 left-4 right-4 text-brand-sand">
+                <span class="text-[10px] tracking-widest uppercase font-bold text-brand-gold-light">Kanchipuram Guild</span>
+                <p class="text-xs text-brand-sand/80 italic">Interlocked Temple Borders</p>
+              </div>
+            </div>
+            <div class="w-full md:w-1/2 flex flex-col justify-between space-y-4 text-left">
+              <div>
+                <span class="text-xs uppercase tracking-[0.25em] font-bold text-brand-gold block mb-1">Weave IV / V</span>
+                <h3 class="font-cormorant text-3xl sm:text-5xl font-bold text-brand-espresso leading-tight">Kanjivaram Temple Silks</h3>
+                <span class="font-italiana italic text-brand-gold text-lg block mt-1">Heavyweight Gold Checks & Korvai</span>
+                <p class="text-xs sm:text-sm text-brand-mocha mt-3 font-light leading-relaxed">
+                  Interlocked temple borders woven with traditional three-shuttle Korvai methodology. Woven on dense 3-ply mulberry silk with tested gold zari for royal South Indian bridal ceremonies.
+                </p>
+              </div>
+              <div class="grid grid-cols-2 gap-3 py-3 border-hairline-t border-hairline-b text-xs">
+                <div>
+                  <span class="text-[10px] text-brand-mocha uppercase tracking-wider block">Border Metier</span>
+                  <span class="font-bold text-brand-espresso">3-Shuttle Korvai</span>
+                </div>
+                <div>
+                  <span class="text-[10px] text-brand-mocha uppercase tracking-wider block">Silk Ply Count</span>
+                  <span class="font-bold text-brand-gold font-cormorant text-base">3-Ply Mulberry Heavy</span>
+                </div>
+              </div>
+              <button onclick="filterByCollection('kanjivaram-silk'); document.getElementById('shop').scrollIntoView({behavior: 'smooth'})" class="btn-luxury-primary !py-2.5 !px-6 !text-xs self-start">
+                <span>Explore Kanjivaram Archive</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Runway Panel 5: Organza & Festive Couture -->
+          <div class="runway-panel p-6 sm:p-10 flex flex-col md:flex-row gap-6 sm:gap-10 items-center justify-between">
+            <div class="w-full md:w-1/2 aspect-[4/5] rounded-[22px] overflow-hidden shadow-xl relative img-curtain-wrap cursor-pointer" onclick="filterByCollection('organza-silk'); document.getElementById('shop').scrollIntoView({behavior: 'smooth'})">
+              <img src="https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=1000&q=85" alt="Organza & Festive Couture" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/70 via-transparent to-transparent"></div>
+              <span class="absolute top-4 left-4 badge-luxury bg-brand-dark/90 text-brand-gold-light text-[9px]">Look 05 · Scalloped Cutwork</span>
+              <div class="absolute bottom-4 left-4 right-4 text-brand-sand">
+                <span class="text-[10px] tracking-widest uppercase font-bold text-brand-gold-light">Jaipur Atelier</span>
+                <p class="text-xs text-brand-sand/80 italic">Hand-Cut Floral Borders</p>
+              </div>
+            </div>
+            <div class="w-full md:w-1/2 flex flex-col justify-between space-y-4 text-left">
+              <div>
+                <span class="text-xs uppercase tracking-[0.25em] font-bold text-brand-gold block mb-1">Weave V / V</span>
+                <h3 class="font-cormorant text-3xl sm:text-5xl font-bold text-brand-espresso leading-tight">Organza & Festive Couture</h3>
+                <span class="font-italiana italic text-brand-gold text-lg block mt-1">Translucent Sheer & Floral Scallops</span>
+                <p class="text-xs sm:text-sm text-brand-mocha mt-3 font-light leading-relaxed">
+                  Whisper-light translucent silk crowned with hand-cut floral scalloping, delicate kardana sequins, and resham thread embroidery for festive cocktails and modern receptions.
+                </p>
+              </div>
+              <div class="grid grid-cols-2 gap-3 py-3 border-hairline-t border-hairline-b text-xs">
+                <div>
+                  <span class="text-[10px] text-brand-mocha uppercase tracking-wider block">Artisanal Edges</span>
+                  <span class="font-bold text-brand-espresso">Hand-Cut Scallops</span>
+                </div>
+                <div>
+                  <span class="text-[10px] text-brand-mocha uppercase tracking-wider block">Sheer Weight</span>
+                  <span class="font-bold text-brand-gold font-cormorant text-base">340g Translucent</span>
+                </div>
+              </div>
+              <button onclick="filterByCollection('organza-silk'); document.getElementById('shop').scrollIntoView({behavior: 'smooth'})" class="btn-luxury-primary !py-2.5 !px-6 !text-xs self-start">
+                <span>Explore Organza Archive</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <!-- Collection 3: Malai Silk -->
-      <div onclick="filterByCollection('malai-silk')" class="product-card group cursor-pointer flex flex-col justify-between">
-        <div class="img-curtain-wrap aspect-[4/5] bg-brand-sand relative">
-          <img src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=900&q=85" alt="Malai Silk" class="w-full h-full object-cover" />
-          <span class="absolute top-4 left-4 badge-luxury bg-brand-dark/90 text-brand-gold-light text-[9px]">Butter Soft</span>
-          <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          <div class="absolute bottom-5 left-5 right-5 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            <span class="btn-luxury-gold !py-1.5 !px-4 !text-[10px]">Explore Weaves →</span>
-          </div>
+      <!-- Runway Footer Progress Bar -->
+      <div class="px-4 sm:px-12 max-w-7xl w-full mx-auto mt-4 sm:mt-6 z-10 flex items-center justify-between gap-6">
+        <div class="flex-1 bg-brand-sand/70 h-1.5 rounded-full overflow-hidden border border-brand-gold/20">
+          <div id="runway-progress-bar" class="bg-gradient-to-r from-brand-gold via-brand-gold-light to-brand-gold h-full rounded-full transition-all duration-150" style="width: 20%;"></div>
         </div>
-        <div class="p-6">
-          <h3 class="font-cormorant text-2xl font-bold text-brand-espresso group-hover:text-brand-gold transition-colors">Malai Silk Drapes</h3>
-          <span class="text-[10px] tracking-[0.2em] uppercase font-semibold text-brand-gold block mt-1">Featherlight Velvet Fluidity</span>
-          <p class="text-xs text-brand-mocha mt-2 font-light line-clamp-2">Crease-free butter silk contours effortlessly around the body with natural grace.</p>
-        </div>
-      </div>
-
-      <!-- Collection 4: Kanjivaram Silk -->
-      <div onclick="filterByCollection('kanjivaram-silk')" class="product-card group cursor-pointer flex flex-col justify-between">
-        <div class="img-curtain-wrap aspect-[4/5] bg-brand-sand relative">
-          <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=900&q=85" alt="Kanjivaram Silk" class="w-full h-full object-cover" />
-          <span class="absolute top-4 left-4 badge-luxury bg-brand-dark/90 text-brand-gold-light text-[9px]">3-Shuttle Korvai</span>
-          <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          <div class="absolute bottom-5 left-5 right-5 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            <span class="btn-luxury-gold !py-1.5 !px-4 !text-[10px]">Explore Weaves →</span>
-          </div>
-        </div>
-        <div class="p-6">
-          <h3 class="font-cormorant text-2xl font-bold text-brand-espresso group-hover:text-brand-gold transition-colors">Kanjivaram Temple Silks</h3>
-          <span class="text-[10px] tracking-[0.2em] uppercase font-semibold text-brand-gold block mt-1">Heavyweight Gold Checks</span>
-          <p class="text-xs text-brand-mocha mt-2 font-light line-clamp-2">Interlocked borders and traditional yali motifs woven on 3-ply mulberry silk.</p>
-        </div>
-      </div>
-
-      <!-- Collection 5: Organza & Festive -->
-      <div onclick="filterByCollection('organza-silk')" class="product-card group cursor-pointer flex flex-col justify-between">
-        <div class="img-curtain-wrap aspect-[4/5] bg-brand-sand relative">
-          <img src="https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=900&q=85" alt="Organza Silk" class="w-full h-full object-cover" />
-          <span class="absolute top-4 left-4 badge-luxury bg-brand-dark/90 text-brand-gold-light text-[9px]">Sheer Cutwork</span>
-          <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          <div class="absolute bottom-5 left-5 right-5 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            <span class="btn-luxury-gold !py-1.5 !px-4 !text-[10px]">Explore Weaves →</span>
-          </div>
-        </div>
-        <div class="p-6">
-          <h3 class="font-cormorant text-2xl font-bold text-brand-espresso group-hover:text-brand-gold transition-colors">Organza & Festive Couture</h3>
-          <span class="text-[10px] tracking-[0.2em] uppercase font-semibold text-brand-gold block mt-1">Translucent Scalloped Edges</span>
-          <p class="text-xs text-brand-mocha mt-2 font-light line-clamp-2">Whisper-light translucent silk crowned with hand-cut floral scalloping.</p>
-        </div>
+        <a href="#shop" class="btn-luxury-outline !py-2 !px-5 !text-[11px] shrink-0">
+          <span>View All Atelier Sarees</span>
+          <i data-lucide="arrow-down" class="w-3.5 h-3.5 text-brand-gold"></i>
+        </a>
       </div>
 
     </div>

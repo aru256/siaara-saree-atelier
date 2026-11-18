@@ -188,7 +188,104 @@ function initGSAPAnimations() {
     });
   }
 
-  // 8. Cinematic Image Mask & Curtain Reveals
+  // 8. Brand Story Editorial Parallax and Split Entrances
+  const storySection = document.getElementById('story');
+  if (storySection) {
+    gsap.from('#story .img-curtain-wrap:first-child', {
+      x: -35,
+      opacity: 0,
+      duration: 1.1,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '#story',
+        start: 'top 82%',
+        toggleActions: 'play none none none'
+      }
+    });
+    gsap.from('#story .img-curtain-wrap:last-child', {
+      y: 45,
+      opacity: 0,
+      duration: 1.2,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '#story',
+        start: 'top 80%',
+        toggleActions: 'play none none none'
+      }
+    });
+    gsap.to('#story .img-curtain-wrap:first-child img', {
+      yPercent: -10,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#story',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 1.2
+      }
+    });
+    gsap.to('#story .img-curtain-wrap:last-child img', {
+      yPercent: 10,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#story',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 1.2
+      }
+    });
+  }
+
+  // 9. Horizontal Collection Runway (Pinned Vertical-to-Horizontal Runway Experience)
+  const runwaySection = document.getElementById('collections');
+  const runwayTrack = document.getElementById('runway-track');
+
+  if (runwaySection && runwayTrack && window.innerWidth >= 768) {
+    const getScrollDistance = () => -(runwayTrack.scrollWidth - window.innerWidth + 80);
+
+    const runwayTween = gsap.to(runwayTrack, {
+      x: getScrollDistance,
+      ease: 'none'
+    });
+
+    ScrollTrigger.create({
+      trigger: runwaySection,
+      start: 'top top',
+      end: () => `+=${Math.max(1600, runwayTrack.scrollWidth - window.innerWidth + 350)}`,
+      pin: true,
+      pinSpacing: true,
+      anticipatePin: 1,
+      animation: runwayTween,
+      scrub: 1.0,
+      invalidateOnRefresh: true,
+      onUpdate: (self) => {
+        const p = self.progress;
+        const currentIdx = Math.min(5, Math.floor(p * 5) + 1);
+        const indexDisp = document.getElementById('runway-index-display');
+        if (indexDisp) indexDisp.textContent = '0' + currentIdx;
+        const progBar = document.getElementById('runway-progress-bar');
+        if (progBar) progBar.style.width = `${Math.max(20, p * 100)}%`;
+      }
+    });
+
+    // Counter-parallax on runway panel imagery for high-fashion spatial depth
+    gsap.utils.toArray('.runway-panel img').forEach((img) => {
+      gsap.fromTo(img,
+        { xPercent: 8 },
+        {
+          xPercent: -8,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: runwaySection,
+            start: 'top top',
+            end: () => `+=${Math.max(1600, runwayTrack.scrollWidth - window.innerWidth + 350)}`,
+            scrub: 1.2
+          }
+        }
+      );
+    });
+  }
+
+  // 10. Cinematic Image Mask & Curtain Reveals
   gsap.utils.toArray('.img-curtain-wrap').forEach((wrap) => {
     gsap.fromTo(wrap,
       { clipPath: 'inset(14% 0% 0% 0%)', opacity: 0.85 },
@@ -206,7 +303,7 @@ function initGSAPAnimations() {
     );
   });
 
-  // 9. Pinned Craftsmanship ScrollTrigger (Desktop Pinned Stage Storytelling)
+  // 11. Pinned Craftsmanship ScrollTrigger (Desktop Pinned Stage Storytelling)
   const pinWrap = document.getElementById('craftsmanship-pin-wrap');
   if (pinWrap && window.innerWidth >= 1024) {
     ScrollTrigger.create({
@@ -230,6 +327,29 @@ function initGSAPAnimations() {
       }
     });
   }
+
+  // 12. Initialize Interactive 3D Product Card Tilt
+  initProductCard3DTilt();
+}
+
+// ================= INTERACTIVE 3D PRODUCT CARD TILT =================
+function initProductCard3DTilt() {
+  const cards = document.querySelectorAll('.product-card');
+  cards.forEach(card => {
+    if (card.dataset.tiltInitialized) return;
+    card.dataset.tiltInitialized = 'true';
+
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      card.style.transform = `perspective(1000px) rotateX(${-y * 7}deg) rotateY(${x * 7}deg) translateY(-5px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
+    });
+  });
 }
 
 // ================= CRAFTSMANSHIP PINNED STORYTELLING CONTROLLER =================
@@ -452,6 +572,7 @@ function renderProducts() {
   }).join('');
 
   if (window.lucide) lucide.createIcons();
+  initProductCard3DTilt();
 }
 
 // ================= RENDER BEST SELLERS =================
@@ -485,6 +606,7 @@ function renderBestSellers() {
   `).join('');
 
   if (window.lucide) lucide.createIcons();
+  initProductCard3DTilt();
 }
 
 // ================= FILTER CONTROLS =================

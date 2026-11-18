@@ -271,18 +271,55 @@ body {
   box-shadow: 0 20px 40px -10px rgba(20, 11, 7, 0.12), 0 0 25px var(--gold-glow);
 }
 
-/* Product Card - Clean Editorial Aesthetic */
+/* Horizontal Collection Runway (Pinned Vertical-to-Horizontal Motion) */
+.runway-track {
+  display: flex;
+  flex-direction: row;
+  will-change: transform;
+}
+
+.runway-panel {
+  width: 82vw;
+  max-width: 840px;
+  flex-shrink: 0;
+  border-radius: 28px;
+  background: var(--bg-cream);
+  border: 1px solid rgba(197, 155, 81, 0.32);
+  box-shadow: 0 20px 48px -12px rgba(20, 11, 7, 0.12);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.runway-panel:hover {
+  border-color: var(--gold-primary);
+  box-shadow: 0 25px 60px -15px rgba(20, 11, 7, 0.18), 0 0 25px rgba(197, 155, 81, 0.15);
+}
+
+@media (max-width: 767px) {
+  .runway-track {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 1rem;
+  }
+  .runway-panel {
+    width: 90vw;
+    scroll-snap-align: center;
+  }
+}
+
+/* Product Card - Clean Editorial Aesthetic with 3D Spatial Perspective */
 .product-card {
   border-radius: var(--radius-card);
   background: var(--bg-cream);
   border: 1px solid rgba(197, 155, 81, 0.2);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
   overflow: hidden;
+  transform-style: preserve-3d;
+  perspective: 1000px;
 }
 .product-card:hover {
-  transform: translateY(-5px);
   border-color: var(--gold-primary);
-  box-shadow: 0 16px 36px -8px rgba(20, 11, 7, 0.1);
+  box-shadow: 0 20px 45px -10px rgba(20, 11, 7, 0.14), 0 0 20px rgba(197, 155, 81, 0.12);
 }
 
 /* Slide Drawers */

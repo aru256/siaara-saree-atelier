@@ -30,16 +30,17 @@
   const segmentsH = 26;
   const geometry = new THREE.PlaneGeometry(width, height, segmentsW, segmentsH);
 
-  // Pure Mulberry Silk Material with antique gold sheen
+  // Pure Mulberry Silk Material with antique gold sheen and liquid satin drape
   const material = new THREE.MeshPhysicalMaterial({
-    color: 0xdeb887,
-    roughness: 0.38,
-    metalness: 0.55,
-    clearcoat: 0.75,
-    clearcoatRoughness: 0.3,
+    color: 0xdfb987,
+    roughness: 0.28,
+    metalness: 0.46,
+    clearcoat: 0.92,
+    clearcoatRoughness: 0.24,
+    reflectivity: 0.88,
     side: THREE.DoubleSide,
     transparent: true,
-    opacity: 0.78
+    opacity: 0.84
   });
 
   const silkMesh = new THREE.Mesh(geometry, material);
@@ -144,18 +145,26 @@
 
     const time = elapsedTime * 0.75 + scrollProgress * 3.0;
 
-    // Fast, optimized wave calculation (zero normal re-computation overhead)
+    // Multi-harmonic satin silk cloth folds (simulates realistic pleats and fluid drape)
     for (let i = 0; i < vertexCount; i++) {
       const u = (i % (segmentsW + 1)) / segmentsW;
       const v = Math.floor(i / (segmentsW + 1)) / segmentsH;
 
-      const wave1 = Math.sin(u * 4.0 + time * 1.5) * 1.15;
-      const wave2 = Math.cos(v * 3.5 + time * 1.2) * 0.9;
-      const mouseDist = Math.hypot(u - 0.5 - mouse.x * 0.2, v - 0.5 - mouse.y * 0.2);
-      const mouseInfluence = Math.sin(mouseDist * 7.0 - time * 2.5) * Math.max(0, 1.0 - mouseDist * 2.5) * 0.6;
-      const scrollDrift = Math.sin(u * 5.0 - scrollProgress * 8.0) * 0.4;
+      // Primary diagonal cascade fold (mimics heavy pallu draping)
+      const primaryFold = Math.sin((u * 2.4 + v * 3.6) + time * 0.85) * 1.45;
+      // Secondary transverse wave
+      const secondaryWave = Math.cos(v * 4.2 - u * 1.8 + time * 1.1) * 0.75;
+      // Micro satin ripples
+      const microRipple = Math.sin(u * 8.5 + v * 6.2 + time * 1.7) * 0.28;
+      // Center sag (natural gravity drape)
+      const gravitySag = Math.sin(u * Math.PI) * Math.sin(v * Math.PI) * 0.55;
+      // Interactive pointer ripple
+      const mouseDist = Math.hypot(u - 0.5 - mouse.x * 0.22, v - 0.5 - mouse.y * 0.22);
+      const mouseInfluence = Math.sin(mouseDist * 8.0 - time * 2.8) * Math.max(0, 1.0 - mouseDist * 2.8) * 0.7;
+      // Natural scroll velocity glide
+      const scrollDrift = Math.sin(u * 4.5 - scrollProgress * 7.5) * 0.45;
 
-      pos.setZ(i, wave1 + wave2 + mouseInfluence + scrollDrift);
+      pos.setZ(i, primaryFold + secondaryWave + microRipple + gravitySag + mouseInfluence + scrollDrift);
     }
     pos.needsUpdate = true;
 
@@ -165,12 +174,13 @@
     silkMesh.rotation.y = 0.08 + mouse.x * 0.08;
     silkMesh.position.y = -1 - scrollProgress * 1.8;
 
-    // Interactive cursor lighting & subtle 3D spatial camera tracking
+    // Interactive cursor lighting & camera depth choreography
     cursorLight.position.x = mouse.x * 12;
     cursorLight.position.y = mouse.y * 8;
-    camera.position.x = mouse.x * 0.8;
-    camera.position.y = mouse.y * 0.5;
-    camera.lookAt(0, 0, 0);
+    camera.position.x = mouse.x * 0.9;
+    camera.position.y = mouse.y * 0.6 - scrollProgress * 3.5;
+    camera.position.z = 22 + scrollProgress * 4.5;
+    camera.lookAt(0, -scrollProgress * 1.5, 0);
 
     // Floating particles
     const pArray = particleGeo.attributes.position.array;
