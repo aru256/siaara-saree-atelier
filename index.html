@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en" class="lenis">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SIAARA ATELIER | Indian Haute Couture & Handcrafted Heirloom Silks</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-beige': '#F8F5EE',
+            'brand-sand': '#EFE8DA',
+            'brand-cream': '#FAF7F2',
+            'brand-espresso': '#180E09',
+            'brand-dark': '#120905',
+            'brand-mocha': '#4E3325',
+            'brand-gold': '#C59B51',
+            'brand-gold-light': '#E4C58B',
+            'brand-gold-pale': '#F3E5C8',
+            'brand-terracotta': '#96442A'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Three.js CDN for 3D Fabric Simulation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- GSAP & ScrollTrigger CDN for Cinematic Scroll Animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Lenis Smooth Scroll CDN -->
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+  <!-- Master Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-brand-beige text-brand-espresso antialiased selection:bg-brand-gold selection:text-brand-dark relative">
+
+  <!-- ================= PERSISTENT AMBIENT LIGHT MESH (NATURAL SCROLL TRANSITIONS) ================= -->
+  <div class="ambient-bg-layer" aria-hidden="true">
+    <div class="ambient-orb ambient-orb-gold" id="ambient-orb-1"></div>
+    <div class="ambient-orb ambient-orb-mocha" id="ambient-orb-2"></div>
+    <div class="ambient-orb ambient-orb-warm" id="ambient-orb-3"></div>
+  </div>
+
+  <!-- ================= TOP LUXURY ANNOUNCEMENT ================= -->
+  <div class="bg-brand-dark text-brand-sand py-2.5 px-4 text-[11px] tracking-[0.18em] uppercase flex items-center justify-between border-b border-brand-gold/20 relative z-30">
+    <div class="hidden md:flex items-center gap-2">
+      <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand-gold animate-pulse"></span>
+      <span>Complimentary Insured Express Worldwide Delivery on All Heirlooms</span>
+    </div>
+    <div class="mx-auto md:mx-0 font-medium flex items-center gap-4 text-center">
+      <span>Private Bridal Trunk Shows · Use Code <strong class="text-brand-gold-light font-bold">ROYAL10</strong></span>
+      <span class="hidden sm:inline text-brand-gold/40">|</span>
+      <a href="tel:+919840012345" class="hidden sm:flex hover:text-brand-gold transition-colors items-center gap-1">
+        <i data-lucide="phone" class="w-3 h-3"></i> +91 98400 12345
+      </a>
+    </div>
+    <!-- Direct Admin Control Center Switch -->
+    <a href="admin.html" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-0.5 bg-brand-gold/20 hover:bg-brand-gold text-brand-sand hover:text-brand-dark rounded-full text-[10px] font-semibold transition-all border border-brand-gold/30">
+      <i data-lucide="shield-check" class="w-3 h-3"></i> Executive Admin
+    </a>
+  </div>
+
+  <!-- ================= EDITORIAL FLOATING NAVBAR ================= -->
+  <header class="sticky top-3 sm:top-4 z-50 px-3 sm:px-8 max-w-7xl mx-auto">
+    <nav class="glass-nav py-3 px-4 sm:px-7 rounded-full flex items-center justify-between transition-all duration-300">
+      
+      <!-- Brand Seal & Monogram -->
+      <a href="#home" class="flex items-center gap-2.5 sm:gap-3 group">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-brand-gold-light via-brand-gold to-brand-mocha flex items-center justify-center text-brand-dark font-cinzel font-bold text-base shadow group-hover:scale-105 transition-transform border border-brand-sand/50">
+          S
+        </div>
+        <div class="flex flex-col">
+          <span class="font-cinzel text-lg sm:text-xl tracking-[0.28em] font-bold text-brand-espresso group-hover:text-brand-gold transition-colors">SIAARA</span>
+          <span class="text-[8px] sm:text-[9px] tracking-[0.4em] text-brand-mocha uppercase -mt-0.5 font-medium">Haute Couture Atelier</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <div class="hidden lg:flex items-center gap-7 text-[11px] font-medium tracking-[0.16em] text-brand-mocha uppercase">
+        <a href="#home" class="hover:text-brand-gold transition-colors py-1">Home</a>
+        <a href="#story" class="hover:text-brand-gold transition-colors py-1">Brand Story</a>
+        <a href="#collections" class="hover:text-brand-gold transition-colors py-1">Collections</a>
+        <a href="#shop" class="hover:text-brand-gold transition-colors py-1">Atelier Shop</a>
+        <a href="#craftsmanship" class="hover:text-brand-gold transition-colors py-1">Craftsmanship</a>
+        <a href="#track-order" class="hover:text-brand-gold transition-colors py-1 flex items-center gap-1">
+          <i data-lucide="truck" class="w-3.5 h-3.5"></i> Track
+        </a>
+        <a href="#contact" class="hover:text-brand-gold transition-colors py-1">Appointment</a>
+      </div>
+
+      <!-- Action Utilities -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        
+        <!-- Search Trigger -->
+        <button onclick="openSearchModal()" title="Search Heirlooms" class="w-9 h-9 rounded-full hover:bg-brand-sand/80 text-brand-espresso flex items-center justify-center transition-colors">
+          <i data-lucide="search" class="w-4 h-4"></i>
+        </button>
+
+        <!-- Wishlist Button with Badge -->
+        <button onclick="toggleWishlistDrawer(true)" title="Saved Heirlooms" class="relative w-9 h-9 rounded-full hover:bg-brand-sand/80 text-brand-espresso flex items-center justify-center transition-colors">
+          <i data-lucide="heart" class="w-4 h-4"></i>
+          <span id="nav-wishlist-badge" class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-brand-terracotta text-white text-[9px] font-bold flex items-center justify-center opacity-0 transition-opacity">0</span>
+        </button>
+
+        <!-- Shopping Bag with Live Counter -->
+        <button onclick="toggleCartDrawer(true)" class="flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-brand-dark text-brand-sand hover:bg-brand-espresso transition-all shadow-sm">
+          <i data-lucide="shopping-bag" class="w-3.5 h-3.5 text-brand-gold"></i>
+          <span id="nav-cart-badge" class="text-xs font-bold">0</span>
+        </button>
+
+        <!-- Customer Login / Account Pill -->
+        <button onclick="openAuthModal()" title="Customer Account" class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-brand-sand/60 hover:bg-brand-sand text-brand-espresso text-xs font-medium transition-colors border border-brand-gold/25">
+          <i data-lucide="user" class="w-3.5 h-3.5"></i>
+          <span id="nav-user-label">Sign In</span>
+        </button>
+
+        <!-- Mobile Drawer Menu Trigger -->
+        <button onclick="toggleMobileMenu(true)" class="lg:hidden w-9 h-9 rounded-full hover:bg-brand-sand/80 text-brand-espresso flex items-center justify-center">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+
+      </div>
+    </nav>
+  </header>
+
+  <!-- ================= MOBILE NAVIGATION DRAWER ================= -->
+  <div id="mobile-menu-drawer" class="slide-drawer p-6 text-brand-espresso">
+    <div class="flex items-center justify-between pb-6 border-b border-brand-gold/20">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-full bg-brand-gold text-brand-dark font-cinzel font-bold flex items-center justify-center text-sm">S</div>
+        <span class="font-cinzel tracking-widest font-bold text-sm">SIAARA ATELIER</span>
+      </div>
+      <button onclick="toggleMobileMenu(false)" class="w-8 h-8 rounded-full bg-brand-sand flex items-center justify-center text-brand-mocha hover:bg-brand-gold transition-colors">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+    </div>
+
+    <div class="flex flex-col gap-4 py-8 text-base font-serif">
+      <a href="#home" onclick="toggleMobileMenu(false)" class="hover:text-brand-gold transition-colors py-1">Home Campaign</a>
+      <a href="#story" onclick="toggleMobileMenu(false)" class="hover:text-brand-gold transition-colors py-1">Brand Heritage</a>
+      <a href="#collections" onclick="toggleMobileMenu(false)" class="hover:text-brand-gold transition-colors py-1">Featured Collections</a>
+      <a href="#shop" onclick="toggleMobileMenu(false)" class="hover:text-brand-gold transition-colors py-1">Atelier Catalog</a>
+      <a href="#craftsmanship" onclick="toggleMobileMenu(false)" class="hover:text-brand-gold transition-colors py-1">Loom Craftsmanship</a>
+      <a href="#track-order" onclick="toggleMobileMenu(false)" class="hover:text-brand-gold transition-colors py-1">Track Delivery</a>
+      <a href="#contact" onclick="toggleMobileMenu(false)" class="hover:text-brand-gold transition-colors py-1">Inquiry & Studio Visit</a>
+    </div>
+
+    <div class="mt-auto pt-6 border-t border-brand-gold/20 flex flex-col gap-3">
+      <button onclick="openAuthModal(); toggleMobileMenu(false)" class="btn-luxury-primary w-full text-center text-xs">
+        <i data-lucide="user" class="w-4 h-4"></i> Customer Account Portal
+      </button>
+      <a href="admin.html" class="btn-luxury-outline w-full text-center text-xs">
+        <i data-lucide="shield-check" class="w-4 h-4 text-brand-gold"></i> Open Executive Admin
+      </a>
+    </div>
+  </div>
+
+  <!-- ================= B. HERO SECTION (CINEMATIC 3D OPENING) ================= -->
+  <section id="home" class="relative min-h-[92vh] sm:min-h-[96vh] flex items-center justify-center overflow-hidden pt-8 pb-20 px-4 sm:px-8">
+    
+    <!-- Three.js 3D Silk Simulation Background Canvas -->
+    <canvas id="silk-canvas"></canvas>
+
+    <div class="hero-content max-w-4xl mx-auto w-full flex flex-col items-center text-center gap-6 sm:gap-7 relative z-10 px-4">
+      
+      <!-- Luxury Monogram Badge -->
+      <div class="badge-luxury badge-gold">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-brand-gold"></i>
+        <span>Campaign 2026 · Pure Handloom Couture</span>
+      </div>
+
+      <!-- Monumental Headline -->
+      <h1 class="font-cormorant text-5xl sm:text-7xl lg:text-8xl font-normal tracking-tight text-brand-espresso leading-[1.02]">
+        Woven in Whispers, <br/>
+        <span class="font-italiana italic text-gold-gradient font-normal">Draped in Royalty.</span>
+      </h1>
+
+      <!-- Refined Atelier Narrative -->
+      <p class="font-sans text-brand-mocha text-sm sm:text-lg max-w-2xl leading-relaxed font-light mx-auto">
+        An evocative communion of pit-loom authenticity and high-fashion editorial grace. Explore metallic <strong>Tissue Silks</strong>, featherlight <strong>Malai Drapes</strong>, and generations-old <strong>Kadwa Banarasi</strong> brocades.
+      </p>
+
+      <!-- Royal Action CTAs -->
+      <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+        <a href="#shop" class="btn-luxury-primary shadow-xl">
+          <span>Explore Atelier Catalog</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+        <a href="#contact" class="btn-luxury-outline">
+          <i data-lucide="calendar" class="w-4 h-4 text-brand-gold"></i>
+          <span>Bespoke Bridal Appointment</span>
+        </a>
+      </div>
+
+      <!-- Hallmark Quality Indicators (Refined 3-Column Centerpiece) -->
+      <div class="grid grid-cols-3 gap-6 sm:gap-14 pt-8 border-hairline-t w-full max-w-xl mx-auto mt-2">
+        <div class="text-center">
+          <span class="block text-2xl sm:text-3xl font-cormorant font-bold text-brand-espresso">100%</span>
+          <span class="text-[10px] text-brand-mocha tracking-widest uppercase">Mulberry Silk</span>
+        </div>
+        <div class="text-center">
+          <span class="block text-2xl sm:text-3xl font-cormorant font-bold text-brand-espresso">GI-Tagged</span>
+          <span class="text-[10px] text-brand-mocha tracking-widest uppercase">Varanasi Looms</span>
+        </div>
+        <div class="text-center">
+          <span class="block text-2xl sm:text-3xl font-cormorant font-bold text-brand-espresso">Tested Zari</span>
+          <span class="text-[10px] text-brand-mocha tracking-widest uppercase">24K Micron Gold</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Minimalist Scroll Indicator -->
+    <a href="#story" class="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-brand-mocha/70 hover:text-brand-gold transition-colors z-10 text-[9px] uppercase tracking-[0.3em] font-semibold">
+      <span>Scroll</span>
+      <i data-lucide="chevrons-down" class="w-3.5 h-3.5 animate-bounce"></i>
+    </a>
+  </section>
+
+  <!-- ================= C. BRAND STORY (EDITORIAL HERITAGE) ================= -->
+  <section id="story" class="py-24 sm:py-32 px-4 sm:px-8 max-w-7xl mx-auto border-hairline-t">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      
+      <!-- Large Editorial Visuals Layer -->
+      <div class="lg:col-span-6 relative">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="img-curtain-wrap rounded-2xl overflow-hidden aspect-[3/4] shadow-lg">
+            <img src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=800&q=85" alt="Master Weaver at Loom" class="w-full h-full object-cover" />
+          </div>
+          <div class="img-curtain-wrap rounded-2xl overflow-hidden aspect-[3/4] shadow-lg translate-y-8">
+            <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=800&q=85" alt="Handloom Silk Texture" class="w-full h-full object-cover" />
+          </div>
+        </div>
+
+        <!-- Floating Master Quote Badge -->
+        <div class="absolute -bottom-6 left-6 right-6 sm:right-auto glass-card p-5 rounded-2xl border-hairline max-w-sm shadow-xl">
+          <span class="text-[9px] uppercase tracking-[0.25em] text-brand-gold font-bold block mb-1">Varanasi Looms Guild</span>
+          <p class="font-cormorant text-base italic text-brand-espresso leading-snug">
+            "We do not merely weave threads. We weave the dignity, memories, and prayers of three generations."
+          </p>
+        </div>
+      </div>
+
+      <!-- Textual Narrative & Philosophy -->
+      <div class="lg:col-span-6 flex flex-col gap-6 text-left">
+        <div class="badge-luxury badge-espresso">
+          <i data-lucide="feather" class="w-3.5 h-3.5 text-brand-gold"></i>
+          <span>The Atelier Manifesto</span>
+        </div>
+
+        <h2 class="font-cormorant text-4xl sm:text-6xl font-normal text-brand-espresso leading-[1.05]">
+          A Tapestry of Heritage, <br/>
+          <span class="font-italiana italic text-gold-gradient font-normal">Born on Wooden Pit-Looms.</span>
+        </h2>
+
+        <p class="font-sans text-brand-mocha text-sm sm:text-base leading-relaxed font-light">
+          Founded on the uncompromising refusal of industrial homogenization, <strong>SIAARA</strong> stands as a guardian of sacred Indian handloom traditions.
+        </p>
+
+        <p class="font-sans text-brand-mocha text-sm sm:text-base leading-relaxed font-light">
+          Each saree is hand-knotted by generational artisans in Varanasi, Kanchipuram, and Chanderi. Using raw, unadulterated mulberry silks, tested 24K electroplated gold zaris, and organic botanical dyeing, our drapes take up to 45 days to materialize.
+        </p>
+
+        <div class="grid grid-cols-3 gap-6 pt-6 border-hairline-t">
+          <div>
+            <span class="block text-2xl font-cormorant font-bold text-brand-gold">45+</span>
+            <span class="text-[10px] text-brand-mocha uppercase tracking-wider">Artisan Families</span>
+          </div>
+          <div>
+            <span class="block text-2xl font-cormorant font-bold text-brand-gold">100%</span>
+            <span class="text-[10px] text-brand-mocha uppercase tracking-wider">Silk Mark Certified</span>
+          </div>
+          <div>
+            <span class="block text-2xl font-cormorant font-bold text-brand-gold">32+</span>
+            <span class="text-[10px] text-brand-mocha uppercase tracking-wider">Countries Shipped</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= D. FEATURED COLLECTIONS (IMAGE-LED SHOWCASE) ================= -->
+  <section id="collections" class="py-24 sm:py-32 px-4 sm:px-8 max-w-7xl mx-auto border-hairline-t">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+      <div>
+        <div class="badge-luxury badge-gold mb-3">
+          <i data-lucide="crown" class="w-3.5 h-3.5 text-brand-gold"></i>
+          <span>Seasonal Curations</span>
+        </div>
+        <h2 class="font-cormorant text-4xl sm:text-6xl font-normal text-brand-espresso">
+          The Five Signature <span class="font-italiana italic text-gold-gradient font-normal">Weaves</span>
+        </h2>
+      </div>
+      <p class="text-xs sm:text-sm text-brand-mocha max-w-md font-light">
+        Explore our curated pillars of textile art, from statuesque metallic tissue glazes to timeless Varanasi Katan brocades.
+      </p>
+    </div>
+
+    <!-- 5 Collections Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      
+      <!-- Collection 1: Tissue Silk -->
+      <div onclick="filterByCollection('tissue-silk')" class="product-card group cursor-pointer flex flex-col justify-between">
+        <div class="img-curtain-wrap aspect-[4/5] bg-brand-sand relative">
+          <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=900&q=85" alt="Tissue Silk" class="w-full h-full object-cover" />
+          <span class="absolute top-4 left-4 badge-luxury bg-brand-dark/90 text-brand-gold-light text-[9px]">Metallic Weft</span>
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div class="absolute bottom-5 left-5 right-5 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+            <span class="btn-luxury-gold !py-1.5 !px-4 !text-[10px]">Explore Weaves →</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="font-cormorant text-2xl font-bold text-brand-espresso group-hover:text-brand-gold transition-colors">Tissue Silk Sarees</h3>
+          <span class="text-[10px] tracking-[0.2em] uppercase font-semibold text-brand-gold block mt-1">Luminous Glaze & Metallic Aura</span>
+          <p class="text-xs text-brand-mocha mt-2 font-light line-clamp-2">Pure mulberry silk warp interwoven with tested gold and silver zari weft.</p>
+        </div>
+      </div>
+
+      <!-- Collection 2: Banarasi Silk -->
+      <div onclick="filterByCollection('banarasi-silk')" class="product-card group cursor-pointer flex flex-col justify-between">
+        <div class="img-curtain-wrap aspect-[4/5] bg-brand-sand relative">
+          <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=900&q=85" alt="Banarasi Silk" class="w-full h-full object-cover" />
+          <span class="absolute top-4 left-4 badge-luxury bg-brand-dark/90 text-brand-gold-light text-[9px]">Kadwa Heritage</span>
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div class="absolute bottom-5 left-5 right-5 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+            <span class="btn-luxury-gold !py-1.5 !px-4 !text-[10px]">Explore Weaves →</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="font-cormorant text-2xl font-bold text-brand-espresso group-hover:text-brand-gold transition-colors">Banarasi Katan Brocades</h3>
+          <span class="text-[10px] tracking-[0.2em] uppercase font-semibold text-brand-gold block mt-1">Varanasi Pit-Loom Heirlooms</span>
+          <p class="text-xs text-brand-mocha mt-2 font-light line-clamp-2">Authentic Kadwa bootis and heavy Shikargah hunting motifs on dense pure katan.</p>
+        </div>
+      </div>
+
+      <!-- Collection 3: Malai Silk -->
+      <div onclick="filterByCollection('malai-silk')" class="product-card group cursor-pointer flex flex-col justify-between">
+        <div class="img-curtain-wrap aspect-[4/5] bg-brand-sand relative">
+          <img src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=900&q=85" alt="Malai Silk" class="w-full h-full object-cover" />
+          <span class="absolute top-4 left-4 badge-luxury bg-brand-dark/90 text-brand-gold-light text-[9px]">Butter Soft</span>
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div class="absolute bottom-5 left-5 right-5 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+            <span class="btn-luxury-gold !py-1.5 !px-4 !text-[10px]">Explore Weaves →</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="font-cormorant text-2xl font-bold text-brand-espresso group-hover:text-brand-gold transition-colors">Malai Silk Drapes</h3>
+          <span class="text-[10px] tracking-[0.2em] uppercase font-semibold text-brand-gold block mt-1">Featherlight Velvet Fluidity</span>
+          <p class="text-xs text-brand-mocha mt-2 font-light line-clamp-2">Crease-free butter silk contours effortlessly around the body with natural grace.</p>
+        </div>
+      </div>
+
+      <!-- Collection 4: Kanjivaram Silk -->
+      <div onclick="filterByCollection('kanjivaram-silk')" class="product-card group cursor-pointer flex flex-col justify-between">
+        <div class="img-curtain-wrap aspect-[4/5] bg-brand-sand relative">
+          <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=900&q=85" alt="Kanjivaram Silk" class="w-full h-full object-cover" />
+          <span class="absolute top-4 left-4 badge-luxury bg-brand-dark/90 text-brand-gold-light text-[9px]">3-Shuttle Korvai</span>
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div class="absolute bottom-5 left-5 right-5 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+            <span class="btn-luxury-gold !py-1.5 !px-4 !text-[10px]">Explore Weaves →</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="font-cormorant text-2xl font-bold text-brand-espresso group-hover:text-brand-gold transition-colors">Kanjivaram Temple Silks</h3>
+          <span class="text-[10px] tracking-[0.2em] uppercase font-semibold text-brand-gold block mt-1">Heavyweight Gold Checks</span>
+          <p class="text-xs text-brand-mocha mt-2 font-light line-clamp-2">Interlocked borders and traditional yali motifs woven on 3-ply mulberry silk.</p>
+        </div>
+      </div>
+
+      <!-- Collection 5: Organza & Festive -->
+      <div onclick="filterByCollection('organza-silk')" class="product-card group cursor-pointer flex flex-col justify-between">
+        <div class="img-curtain-wrap aspect-[4/5] bg-brand-sand relative">
+          <img src="https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=900&q=85" alt="Organza Silk" class="w-full h-full object-cover" />
+          <span class="absolute top-4 left-4 badge-luxury bg-brand-dark/90 text-brand-gold-light text-[9px]">Sheer Cutwork</span>
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div class="absolute bottom-5 left-5 right-5 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+            <span class="btn-luxury-gold !py-1.5 !px-4 !text-[10px]">Explore Weaves →</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="font-cormorant text-2xl font-bold text-brand-espresso group-hover:text-brand-gold transition-colors">Organza & Festive Couture</h3>
+          <span class="text-[10px] tracking-[0.2em] uppercase font-semibold text-brand-gold block mt-1">Translucent Scalloped Edges</span>
+          <p class="text-xs text-brand-mocha mt-2 font-light line-clamp-2">Whisper-light translucent silk crowned with hand-cut floral scalloping.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= E. FEATURED PRODUCTS (INTERACTIVE ATELIER CATALOG) ================= -->
+  <section id="shop" class="py-24 sm:py-32 px-4 sm:px-8 max-w-7xl mx-auto border-hairline-t">
+    
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 pb-6 border-hairline-b">
+      <div>
+        <div class="badge-luxury badge-gold mb-2.5">
+          <i data-lucide="layers" class="w-3.5 h-3.5 text-brand-gold"></i>
+          <span>Authentic Loom Catalog</span>
+        </div>
+        <h2 class="font-cormorant text-4xl sm:text-6xl font-normal text-brand-espresso">
+          The Saree Atelier
+        </h2>
+        <p class="text-xs text-brand-mocha mt-1 font-light">
+          Showing <span id="product-count-label" class="font-bold text-brand-espresso">8</span> handcrafted drapes
+        </p>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="flex flex-wrap items-center gap-2">
+        <button onclick="filterByCollection('all')" id="tab-all" class="filter-tab-btn active px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all bg-brand-dark text-brand-sand shadow">
+          All Weaves
+        </button>
+        <button onclick="filterByCollection('tissue-silk')" id="tab-tissue-silk" class="filter-tab-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all bg-brand-sand/70 hover:bg-brand-sand text-brand-espresso">
+          Tissue Silk
+        </button>
+        <button onclick="filterByCollection('banarasi-silk')" id="tab-banarasi-silk" class="filter-tab-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all bg-brand-sand/70 hover:bg-brand-sand text-brand-espresso">
+          Banarasi Silk
+        </button>
+        <button onclick="filterByCollection('malai-silk')" id="tab-malai-silk" class="filter-tab-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all bg-brand-sand/70 hover:bg-brand-sand text-brand-espresso">
+          Malai Silk
+        </button>
+        <button onclick="filterByCollection('kanjivaram-silk')" id="tab-kanjivaram-silk" class="filter-tab-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all bg-brand-sand/70 hover:bg-brand-sand text-brand-espresso">
+          Kanjivaram
+        </button>
+        <button onclick="filterByCollection('organza-silk')" id="tab-organza-silk" class="filter-tab-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all bg-brand-sand/70 hover:bg-brand-sand text-brand-espresso">
+          Organza
+        </button>
+      </div>
+    </div>
+
+    <!-- Saree Cards Grid -->
+    <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
+      <!-- Populated dynamically via store-data.js & app.js -->
+    </div>
+  </section>
+
+  <!-- ================= F. CRAFTSMANSHIP (CINEMATIC PINNED SCROLL STORYTELLING) ================= -->
+  <section id="craftsmanship" class="py-20 sm:py-28 px-4 sm:px-8 max-w-7xl mx-auto border-hairline-t">
+    
+    <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
+      <div class="badge-luxury badge-espresso mb-3">
+        <i data-lucide="scissors" class="w-3.5 h-3.5 text-brand-gold"></i>
+        <span>Generational Métier · Pinned Storytelling</span>
+      </div>
+      <h2 class="font-cormorant text-4xl sm:text-6xl font-normal text-brand-espresso">
+        The Anatomy of a <span class="font-italiana italic text-gold-gradient font-normal">Masterpiece</span>
+      </h2>
+      <p class="text-xs sm:text-sm text-brand-mocha mt-3 font-light">
+        A scroll-driven journey through our uncompromising four-stage handloom metier.
+      </p>
+    </div>
+
+    <!-- Pinned Showcase Architecture Container -->
+    <div id="craftsmanship-pin-wrap" class="relative rounded-[32px] overflow-hidden bg-brand-cream border border-brand-gold/30 shadow-2xl p-6 sm:p-12">
+      
+      <!-- Top Stage Stepper Bar -->
+      <div class="flex flex-wrap items-center justify-between gap-4 border-hairline-b pb-6 mb-8">
+        <div class="flex items-center gap-2.5">
+          <span class="w-2 h-2 rounded-full bg-brand-gold animate-pulse"></span>
+          <span class="text-[10px] uppercase tracking-[0.25em] font-bold text-brand-espresso">Weaving Stages</span>
+        </div>
+        
+        <!-- Interactive Step Pills -->
+        <div class="flex flex-wrap items-center gap-2 text-[10px] uppercase font-bold tracking-wider">
+          <button onclick="setCraftStage(0)" id="craft-btn-0" class="craft-nav-btn active px-3.5 py-1.5 rounded-full border border-brand-gold bg-brand-dark text-brand-sand transition-all shadow-sm">
+            01 Sericulture
+          </button>
+          <button onclick="setCraftStage(1)" id="craft-btn-1" class="craft-nav-btn px-3.5 py-1.5 rounded-full border border-brand-gold/30 text-brand-mocha hover:border-brand-gold transition-all">
+            02 Tested Zari
+          </button>
+          <button onclick="setCraftStage(2)" id="craft-btn-2" class="craft-nav-btn px-3.5 py-1.5 rounded-full border border-brand-gold/30 text-brand-mocha hover:border-brand-gold transition-all">
+            03 Pit Looms
+          </button>
+          <button onclick="setCraftStage(3)" id="craft-btn-3" class="craft-nav-btn px-3.5 py-1.5 rounded-full border border-brand-gold/30 text-brand-mocha hover:border-brand-gold transition-all">
+            04 Silk Mark
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Stage Visual & Editorial Narrative Split -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+        
+        <!-- Left Column: Architectural Arch Image Frame with Crossfade Layers -->
+        <div class="lg:col-span-6 relative aspect-[4/5] sm:aspect-[1/1] lg:aspect-[4/5] rounded-[24px] overflow-hidden shadow-2xl bg-brand-sand">
+          <div id="craft-img-container" class="relative w-full h-full">
+            <img id="craft-img-0" src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1200&q=85" alt="Mulberry Sericulture" class="craft-img-slide absolute inset-0 w-full h-full object-cover transition-all duration-700 opacity-100 scale-100" />
+            <img id="craft-img-1" src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1200&q=85" alt="Pure 24K Tested Zari" class="craft-img-slide absolute inset-0 w-full h-full object-cover transition-all duration-700 opacity-0 scale-105" />
+            <img id="craft-img-2" src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=85" alt="Wooden Pit Looms" class="craft-img-slide absolute inset-0 w-full h-full object-cover transition-all duration-700 opacity-0 scale-105" />
+            <img id="craft-img-3" src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1200&q=85" alt="Silk Mark Certification" class="craft-img-slide absolute inset-0 w-full h-full object-cover transition-all duration-700 opacity-0 scale-105" />
+          </div>
+
+          <!-- Bottom Floating Hallmark Tag -->
+          <div class="absolute bottom-4 left-4 right-4 glass-card py-3 px-5 rounded-2xl border border-brand-gold/30 flex items-center justify-between z-10 shadow-lg">
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="shield-check" class="w-4 h-4 text-brand-gold"></i>
+              <span id="craft-hallmark-title" class="text-[11px] font-bold text-brand-espresso uppercase tracking-wider">Stage 01 · 100% Organic Sericulture</span>
+            </div>
+            <span id="craft-hallmark-counter" class="text-xs font-cinzel font-bold text-brand-gold">01 / 04</span>
+          </div>
+        </div>
+
+        <!-- Right Column: Editorial Narrative & Craft Specifications -->
+        <div class="lg:col-span-6 flex flex-col justify-center space-y-6">
+          <div id="craft-text-wrapper" class="space-y-4">
+            <span id="craft-stage-number" class="text-xs uppercase tracking-[0.25em] text-brand-gold font-bold">Stage 01 / 04</span>
+            <h3 id="craft-stage-title" class="font-cormorant text-3xl sm:text-5xl font-normal text-brand-espresso leading-tight">
+              Mulberry Sericulture & Botanical Washes
+            </h3>
+            <p id="craft-stage-desc" class="font-sans text-xs sm:text-sm text-brand-mocha leading-relaxed font-light">
+              High-grade unbleached silk threads harvested from organic cocoons, treated exclusively in herbal botanical baths for unmatched tensile strength, lustrous sheen, and heirloom skin affinity.
+            </p>
+          </div>
+
+          <!-- Technical Metrics Card -->
+          <div class="grid grid-cols-2 gap-4 p-5 rounded-2xl bg-white border border-brand-gold/25 shadow-sm">
+            <div>
+              <span class="block text-[10px] text-brand-mocha uppercase tracking-wider">Artisan Hallmark</span>
+              <span id="craft-stage-metric1" class="font-cormorant text-2xl font-bold text-brand-espresso">100% Organic</span>
+            </div>
+            <div>
+              <span class="block text-[10px] text-brand-mocha uppercase tracking-wider">Weave Longevity</span>
+              <span id="craft-stage-metric2" class="font-cormorant text-2xl font-bold text-brand-gold">Generational</span>
+            </div>
+          </div>
+
+          <!-- Dynamic Progress Bar -->
+          <div class="space-y-2 pt-2">
+            <div class="flex justify-between text-[10px] uppercase tracking-wider text-brand-mocha font-semibold">
+              <span>Stage Mastery</span>
+              <span id="craft-progress-label">25%</span>
+            </div>
+            <div class="w-full bg-brand-sand h-1.5 rounded-full overflow-hidden">
+              <div id="craft-progress-fill" class="bg-gradient-to-r from-brand-gold via-brand-gold-light to-brand-gold h-full rounded-full transition-all duration-300" style="width: 25%;"></div>
+            </div>
+          </div>
+
+          <!-- Atelier Action -->
+          <div class="flex items-center gap-3 pt-2">
+            <a href="#shop" class="btn-luxury-primary !py-2.5 !px-6 !text-xs">
+              <span>View Certified Heirlooms</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ================= G. BEST SELLERS (CAMPAIGN GRID) ================= -->
+  <section class="py-24 sm:py-32 px-4 sm:px-8 max-w-7xl mx-auto border-hairline-t">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+      <div>
+        <div class="badge-luxury badge-gold mb-2.5">
+          <i data-lucide="award" class="w-3.5 h-3.5 text-brand-gold"></i>
+          <span>Curated Icons</span>
+        </div>
+        <h2 class="font-cormorant text-4xl sm:text-6xl font-normal text-brand-espresso">
+          Atelier Best Sellers
+        </h2>
+      </div>
+      <a href="#shop" class="btn-luxury-outline !text-[11px] !py-2 !px-5">
+        View Full Archive <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+      </a>
+    </div>
+
+    <div id="bestsellers-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
+      <!-- Populated dynamically -->
+    </div>
+  </section>
+
+  <!-- ================= H. TESTIMONIALS (EDITORIAL CRITIQUE & BRIDAL PRAISE) ================= -->
+  <section class="py-24 sm:py-32 px-4 sm:px-8 max-w-7xl mx-auto border-hairline-t">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <div class="badge-luxury badge-espresso mb-3">
+        <i data-lucide="star" class="w-3.5 h-3.5 text-brand-gold"></i>
+        <span>The Connoisseur Voice</span>
+      </div>
+      <h2 class="font-cormorant text-4xl sm:text-6xl font-normal text-brand-espresso">
+        Worn by Modern Heirs, <br/>
+        <span class="font-italiana italic text-gold-gradient font-normal">Celebrated by Couture.</span>
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      
+      <!-- Review 1 -->
+      <div class="testimonial-card p-8 rounded-2xl bg-brand-cream border-hairline flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+        <div class="space-y-4">
+          <div class="flex text-brand-gold gap-1">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="font-cormorant text-xl italic text-brand-espresso leading-snug">
+            "The Aura Metallic Tissue is truly liquid gold. It draped with absolute structural crispness during my wedding reception in Udaipur."
+          </p>
+        </div>
+        <div class="pt-6 mt-6 border-hairline-t">
+          <h4 class="font-sans text-xs font-bold text-brand-espresso uppercase tracking-wider">Aishwarya Singhania</h4>
+          <span class="text-[10px] text-brand-mocha">Bride · New Delhi</span>
+        </div>
+      </div>
+
+      <!-- Review 2 -->
+      <div class="testimonial-card p-8 rounded-2xl bg-brand-cream border-hairline flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+        <div class="space-y-4">
+          <div class="flex text-brand-gold gap-1">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="font-cormorant text-xl italic text-brand-espresso leading-snug">
+            "Finding genuine Kadwa Banarasi without machine shortcuts is rare today. Siaara’s pit-loom craftsmanship is a generational triumph."
+          </p>
+        </div>
+        <div class="pt-6 mt-6 border-hairline-t">
+          <h4 class="font-sans text-xs font-bold text-brand-espresso uppercase tracking-wider">Radhika Kirloskar</h4>
+          <span class="text-[10px] text-brand-mocha">Textile Collector · Mumbai</span>
+        </div>
+      </div>
+
+      <!-- Review 3 -->
+      <div class="testimonial-card p-8 rounded-2xl bg-brand-cream border-hairline flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+        <div class="space-y-4">
+          <div class="flex text-brand-gold gap-1">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="font-cormorant text-xl italic text-brand-espresso leading-snug">
+            "The Malai silk feels like cool velvet against the skin. Zero wrinkles even after 8 hours of festive celebrations. Absolutely supreme."
+          </p>
+        </div>
+        <div class="pt-6 mt-6 border-hairline-t">
+          <h4 class="font-sans text-xs font-bold text-brand-espresso uppercase tracking-wider">Dr. Nithya Sundaram</h4>
+          <span class="text-[10px] text-brand-mocha">Chennai</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= I. LIVE ORDER TRACKING SECTION ================= -->
+  <section id="track-order" class="py-24 sm:py-32 px-4 sm:px-8 max-w-5xl mx-auto border-hairline-t">
+    <div class="p-8 sm:p-14 rounded-3xl glass-card border-hairline shadow-2xl">
+      <div class="text-center max-w-xl mx-auto mb-8">
+        <div class="badge-luxury badge-gold mb-3">
+          <i data-lucide="map-pin" class="w-3.5 h-3.5 text-brand-gold"></i>
+          <span>Loom to Doorstep Concierge</span>
+        </div>
+        <h2 class="font-cormorant text-3xl sm:text-5xl font-normal text-brand-espresso">
+          Track Your Heirloom
+        </h2>
+        <p class="text-xs text-brand-mocha mt-2 font-light">
+          Enter your Order ID (e.g. <span class="font-bold text-brand-espresso cursor-pointer underline" onclick="fillSampleTrack('SIA-88342')">SIA-88342</span> or <span class="font-bold text-brand-espresso cursor-pointer underline" onclick="fillSampleTrack('SIA-76129')">SIA-76129</span>) or customer telephone number to inspect live weaving stages.
+        </p>
+      </div>
+
+      <!-- Tracking Search Form -->
+      <form onsubmit="handleTrackOrder(event)" class="max-w-md mx-auto flex items-center gap-2 p-1.5 bg-white rounded-full border border-brand-gold/30 shadow-sm mb-6">
+        <input type="text" id="track-order-input" placeholder="e.g. SIA-88342 or 9948033211" class="w-full bg-transparent border-none text-xs sm:text-sm px-4 focus:ring-0 text-brand-espresso font-medium" required />
+        <button type="submit" class="btn-luxury-primary !py-2.5 !px-6 !text-xs shrink-0">
+          <span>Track</span>
+          <i data-lucide="search" class="w-3.5 h-3.5"></i>
+        </button>
+      </form>
+
+      <!-- Live Order Status Output Display Box -->
+      <div id="track-result-box" class="hidden pt-6 border-hairline-t">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= J. ATELIER PRIVATE APPOINTMENT & INQUIRY ================= -->
+  <section id="contact" class="py-24 sm:py-32 px-4 sm:px-8 max-w-7xl mx-auto border-hairline-t">
+    
+    <div class="inquiry-editorial-card p-6 sm:p-12 lg:p-16 text-brand-sand relative">
+      
+      <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+        
+        <!-- Left Storytelling Column -->
+        <div class="lg:col-span-5 flex flex-col justify-between space-y-6">
+          
+          <div>
+            <div class="badge-luxury bg-brand-gold/20 text-brand-gold-light border border-brand-gold/40 mb-3 text-[10px]">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5 text-brand-gold"></i>
+              <span>Private Bespoke Salon</span>
+            </div>
+
+            <h2 class="font-cormorant text-4xl sm:text-6xl font-normal text-white leading-[1.02]">
+              Every Message is a <span class="font-italiana italic text-gold-gradient font-normal">Thread,</span><br/>
+              Woven into Memory.
+            </h2>
+
+            <p class="text-brand-sand/80 text-xs sm:text-sm mt-4 leading-relaxed font-light">
+              Connect directly with our master drapers. Whether you seek custom bridal trousseau colorways, blouse tailoring measurements, or physical fabric swatches, our concierge responds within 4 business hours.
+            </p>
+          </div>
+
+          <!-- Studio Visit Card -->
+          <div class="p-5 rounded-2xl bg-white/10 backdrop-blur-md border border-brand-gold/30 space-y-2.5">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-full bg-brand-gold text-brand-dark flex items-center justify-center font-bold">
+                <i data-lucide="map-pin" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <h4 class="font-cormorant text-base font-bold text-white">Flagship Hyderabad Atelier</h4>
+                <p class="text-[11px] text-brand-sand/70">Jubilee Hills, Road No. 36, Hyderabad — 500033</p>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between text-[11px] pt-2 border-hairline-t text-brand-sand/80">
+              <span>Mon – Sat · 10:30 AM – 7:30 PM IST</span>
+              <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="text-brand-gold-light font-bold hover:underline flex items-center gap-1">
+                Directions <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- WhatsApp Concierge Bar -->
+          <div class="p-4 rounded-2xl bg-emerald-950/70 border border-emerald-500/30 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center">
+                <i data-lucide="message-circle" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <span class="text-xs font-bold text-white block">WhatsApp Atelier Concierge</span>
+                <span class="text-[10px] text-emerald-300">Live styling & swift custom orders</span>
+              </div>
+            </div>
+            <a href="https://wa.me/919840012345?text=Hello%20Siaara%20Atelier,%20I%20would%20like%20to%20inquire%20about%20your%20handcrafted%20sarees." target="_blank" rel="noopener noreferrer" class="px-4 py-1.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all shadow-md">
+              Chat Now
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Right Form Column: Haute-Couture Inquiry Bar & Booking Suite -->
+        <div class="lg:col-span-7 p-6 sm:p-10 rounded-[24px] bg-[#FAF7F2]/95 backdrop-blur-xl text-brand-espresso border border-brand-gold/35 shadow-2xl">
+          
+          <!-- Inquiry Tabs -->
+          <div class="flex gap-2 p-1.5 bg-brand-sand/70 rounded-full mb-6 text-xs font-semibold uppercase tracking-wider border border-brand-gold/25">
+            <button onclick="switchInquiryTab('message')" id="inquiry-tab-msg" class="w-1/2 py-2.5 rounded-full bg-brand-dark text-brand-sand transition-all shadow-sm">
+              Fabric & Weave Query
+            </button>
+            <button onclick="switchInquiryTab('styling')" id="inquiry-tab-style" class="w-1/2 py-2.5 rounded-full text-brand-mocha hover:text-brand-espresso transition-all">
+              Book Virtual Styling
+            </button>
+          </div>
+
+          <!-- Tab 1: General Inquiry Form -->
+          <form id="inquiry-msg-form" onsubmit="handleContactSubmit(event)" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[11px] font-semibold text-brand-espresso uppercase tracking-wider mb-1.5">Your Full Name *</label>
+                <input type="text" id="contact-name" placeholder="Priyanka Sen" class="luxury-input" required />
+              </div>
+              <div>
+                <label class="block text-[11px] font-semibold text-brand-espresso uppercase tracking-wider mb-1.5">Mobile / WhatsApp *</label>
+                <input type="tel" id="contact-phone" placeholder="+91 98200 12345" class="luxury-input" required />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[11px] font-semibold text-brand-espresso uppercase tracking-wider mb-1.5">Email Address *</label>
+                <input type="email" id="contact-email" placeholder="priyanka@example.com" class="luxury-input" required />
+              </div>
+              <div>
+                <label class="block text-[11px] font-semibold text-brand-espresso uppercase tracking-wider mb-1.5">Weave of Interest</label>
+                <select id="contact-subject" class="luxury-input">
+                  <option value="Tissue Silk Metallic Weave">Tissue Silk Metallic Weave</option>
+                  <option value="Banarasi Kadwa Heirloom">Banarasi Kadwa Heirloom</option>
+                  <option value="Malai Butter Silk Drapes">Malai Butter Silk Drapes</option>
+                  <option value="Kanjivaram Temple Silk">Kanjivaram Temple Silk</option>
+                  <option value="Organza Scalloped Couture">Organza Scalloped Couture</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-semibold text-brand-espresso uppercase tracking-wider mb-1.5">Your Inquiry / Message *</label>
+              <textarea id="contact-message" rows="3" placeholder="Describe your preferred shade, wedding occasion, or custom requirements..." class="luxury-input" required></textarea>
+            </div>
+
+            <button type="submit" class="btn-luxury-primary w-full !text-xs font-bold tracking-widest uppercase !py-3.5 shadow-lg">
+              <span>Send Message to Atelier</span>
+              <i data-lucide="send" class="w-3.5 h-3.5 text-brand-gold"></i>
+            </button>
+          </form>
+
+          <!-- Tab 2: Virtual Styling Drape Booking Form -->
+          <form id="inquiry-style-form" onsubmit="handleBookingSubmit(event)" class="space-y-4 hidden">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[11px] font-semibold text-brand-espresso uppercase tracking-wider mb-1.5">Full Name *</label>
+                <input type="text" id="style-name" placeholder="Ananya Deshmukh" class="luxury-input" required />
+              </div>
+              <div>
+                <label class="block text-[11px] font-semibold text-brand-espresso uppercase tracking-wider mb-1.5">WhatsApp Video Number *</label>
+                <input type="tel" id="style-phone" placeholder="+91 99480 33211" class="luxury-input" required />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[11px] font-semibold text-brand-espresso uppercase tracking-wider mb-1.5">Preferred Date *</label>
+                <input type="date" id="style-date" class="luxury-input" required />
+              </div>
+              <div>
+                <label class="block text-[11px] font-semibold text-brand-espresso uppercase tracking-wider mb-1.5">Preferred Time *</label>
+                <select id="style-time" class="luxury-input">
+                  <option>11:00 AM IST</option>
+                  <option>02:30 PM IST</option>
+                  <option>04:30 PM IST</option>
+                  <option>06:30 PM IST</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-semibold text-brand-espresso uppercase tracking-wider mb-1.5">Styling Focus</label>
+              <select id="style-service" class="luxury-input">
+                <option>Bridal Trousseau Curation</option>
+                <option>Banarasi vs Kanjivaram Comparison</option>
+                <option>Tissue Silk Color Palette Styling</option>
+                <option>Custom Handloom Weave Order</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn-luxury-gold w-full !text-xs font-bold tracking-widest uppercase !py-3.5 shadow-lg">
+              <span>Confirm Virtual Drape Appointment</span>
+              <i data-lucide="video" class="w-4 h-4"></i>
+            </button>
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= K. NEWSLETTER (THE ATELIER JOURNAL) ================= -->
+  <section class="py-20 px-4 sm:px-8 max-w-4xl mx-auto text-center border-hairline-t">
+    <div class="badge-luxury badge-gold mb-3">
+      <i data-lucide="mail" class="w-3.5 h-3.5 text-brand-gold"></i>
+      <span>The Atelier Journal</span>
+    </div>
+    <h2 class="font-cormorant text-3xl sm:text-5xl font-normal text-brand-espresso">
+      Subscribe to Private Releases
+    </h2>
+    <p class="text-xs text-brand-mocha mt-2 font-light max-w-md mx-auto">
+      Receive invitations to private loom unveilings, bridal trunk shows, and editorial dispatches from our master weavers.
+    </p>
+
+    <form onsubmit="handleNewsletter(event)" class="mt-8 max-w-md mx-auto flex items-center gap-2 p-1.5 bg-white rounded-full border border-brand-gold/30 shadow-sm">
+      <input type="email" id="newsletter-email" placeholder="Enter your email address" class="w-full bg-transparent border-none text-xs px-4 focus:ring-0 text-brand-espresso" required />
+      <button type="submit" class="btn-luxury-primary !py-2.5 !px-6 !text-xs shrink-0">
+        <span>Subscribe</span>
+      </button>
+    </form>
+  </section>
+
+  <!-- ================= L. FOOTER & MANDATORY LEGAL POLICIES ================= -->
+  <footer class="bg-brand-dark text-brand-sand pt-16 pb-20 sm:pb-12 px-4 sm:px-8 border-hairline-t relative z-20">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Top Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-hairline-b">
+        
+        <!-- Brand Info & Manifesto -->
+        <div class="lg:col-span-2">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-9 h-9 rounded-full bg-brand-gold text-brand-dark font-cinzel font-bold flex items-center justify-center text-sm">
+              S
+            </div>
+            <span class="font-cinzel text-xl font-bold tracking-[0.25em] text-brand-gold-light">SIAARA ATELIER</span>
+          </div>
+          <p class="text-xs text-brand-sand/75 leading-relaxed max-w-sm mb-6 font-light">
+            An Indian Haute Couture atelier dedicated to pure pit-loom heritage. Handcrafted Tissue, Banarasi, Kanjivaram, and Malai Silks born from unadulterated craftsmanship.
+          </p>
+
+          <!-- Direct Social Links with Official Logos (As requested) -->
+          <div class="flex items-center gap-3">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-brand-espresso hover:bg-brand-gold text-brand-sand hover:text-brand-dark flex items-center justify-center transition-all shadow" title="Instagram">
+              <i data-lucide="instagram" class="w-4 h-4"></i>
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-brand-espresso hover:bg-brand-gold text-brand-sand hover:text-brand-dark flex items-center justify-center transition-all shadow" title="Facebook">
+              <i data-lucide="facebook" class="w-4 h-4"></i>
+            </a>
+            <a href="https://wa.me/919840012345" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-emerald-700 hover:bg-emerald-600 text-white flex items-center justify-center transition-all shadow" title="WhatsApp Chat">
+              <i data-lucide="message-circle" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Collections Links -->
+        <div>
+          <h4 class="text-xs uppercase tracking-[0.2em] text-brand-gold font-bold mb-4">The Collections</h4>
+          <ul class="space-y-2.5 text-xs text-brand-sand/70 font-light">
+            <li><a href="#shop" onclick="filterByCollection('tissue-silk')" class="hover:text-brand-gold transition-colors">Tissue Silk Sarees</a></li>
+            <li><a href="#shop" onclick="filterByCollection('banarasi-silk')" class="hover:text-brand-gold transition-colors">Banarasi Katan Brocades</a></li>
+            <li><a href="#shop" onclick="filterByCollection('malai-silk')" class="hover:text-brand-gold transition-colors">Malai Butter Silk</a></li>
+            <li><a href="#shop" onclick="filterByCollection('kanjivaram-silk')" class="hover:text-brand-gold transition-colors">Kanjivaram Temple Weaves</a></li>
+            <li><a href="#shop" onclick="filterByCollection('organza-silk')" class="hover:text-brand-gold transition-colors">Organza & Festive Couture</a></li>
+          </ul>
+        </div>
+
+        <!-- Concierge Services -->
+        <div>
+          <h4 class="text-xs uppercase tracking-[0.2em] text-brand-gold font-bold mb-4">Concierge</h4>
+          <ul class="space-y-2.5 text-xs text-brand-sand/70 font-light">
+            <li><a href="#track-order" class="hover:text-brand-gold transition-colors">Track Real-Time Order</a></li>
+            <li><a href="#story" class="hover:text-brand-gold transition-colors">The Master Weavers</a></li>
+            <li><a href="#contact" class="hover:text-brand-gold transition-colors">Flagship Salon Visit</a></li>
+            <li><a href="#contact" class="hover:text-brand-gold transition-colors">Book Virtual Drape Session</a></li>
+            <li><button onclick="openAuthModal()" class="hover:text-brand-gold transition-colors">Customer Portal Sign In</button></li>
+          </ul>
+        </div>
+
+        <!-- Administrative Access -->
+        <div>
+          <h4 class="text-xs uppercase tracking-[0.2em] text-brand-gold font-bold mb-4">Executive Store Access</h4>
+          <p class="text-xs text-brand-sand/70 mb-3 font-light">Manage live customer orders, update delivery tracking stages, and publish new heirloom weaves.</p>
+          <a href="admin.html" class="btn-luxury-gold !py-2 !px-4 !text-xs inline-flex items-center gap-1.5">
+            <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Admin Control Panel
+          </a>
+        </div>
+
+      </div>
+
+      <!-- EXACT LEGAL POLICIES PLACED AT THE VERY BOTTOM -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-brand-sand/70">
+        
+        <!-- Policies Buttons (Direct Modal Triggers) -->
+        <div class="flex flex-wrap items-center justify-center gap-6 font-medium">
+          <button onclick="openPolicyModal('cancellation')" class="hover:text-brand-gold transition-colors underline decoration-brand-gold/40">
+            Cancellation & Return Policy
+          </button>
+          <span class="text-brand-sand/20">|</span>
+          <button onclick="openPolicyModal('refund')" class="hover:text-brand-gold transition-colors underline decoration-brand-gold/40">
+            Refund & Exchange Policy
+          </button>
+          <span class="text-brand-sand/20">|</span>
+          <button onclick="openPolicyModal('privacy')" class="hover:text-brand-gold transition-colors underline decoration-brand-gold/40">
+            Privacy Policy
+          </button>
+        </div>
+
+        <!-- Copyright -->
+        <div class="text-[11px] text-brand-sand/50 text-center font-light">
+          © 2026 SIAARA ATELIER. All rights reserved. Handcrafted in Varanasi & Kanchipuram.
+        </div>
+
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ================= MOBILE STICKY BOTTOM NAV BAR ================= -->
+  <div class="mobile-bottom-nav lg:hidden flex items-center justify-around text-brand-sand">
+    <a href="#shop" class="flex flex-col items-center gap-0.5 text-[10px] text-brand-sand/80 hover:text-brand-gold">
+      <i data-lucide="compass" class="w-4 h-4"></i>
+      <span>Explore</span>
+    </a>
+    <a href="#track-order" class="flex flex-col items-center gap-0.5 text-[10px] text-brand-sand/80 hover:text-brand-gold">
+      <i data-lucide="truck" class="w-4 h-4"></i>
+      <span>Track</span>
+    </a>
+    <a href="https://wa.me/919840012345" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center gap-0.5 text-[10px] text-emerald-400 font-bold">
+      <i data-lucide="message-circle" class="w-4 h-4"></i>
+      <span>WhatsApp</span>
+    </a>
+    <button onclick="toggleWishlistDrawer(true)" class="flex flex-col items-center gap-0.5 text-[10px] text-brand-sand/80 hover:text-brand-gold">
+      <i data-lucide="heart" class="w-4 h-4"></i>
+      <span>Wishlist</span>
+    </button>
+    <button onclick="toggleCartDrawer(true)" class="flex flex-col items-center gap-0.5 text-[10px] text-brand-gold font-bold">
+      <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+      <span>Bag</span>
+    </button>
+  </div>
+
+  <!-- ================= DESKTOP FLOATING WHATSAPP BUTTON ================= -->
+  <a href="https://wa.me/919840012345?text=Hello%20Siaara%20Atelier,%20I%20would%20like%20to%20inquire%20about%20your%20handcrafted%20sarees." target="_blank" rel="noopener noreferrer" class="hidden lg:flex whatsapp-float-btn" title="Chat on WhatsApp">
+    <i data-lucide="message-circle" class="w-7 h-7"></i>
+  </a>
+
+  <!-- ================= DRAWERS & MODALS ================= -->
+
+  <!-- 1. LIVE SEARCH MODAL -->
+  <div id="search-modal" class="modal-overlay">
+    <div class="modal-box p-6 sm:p-8 max-w-2xl">
+      <div class="flex items-center justify-between pb-4 border-hairline-b mb-6">
+        <div class="flex items-center gap-2">
+          <i data-lucide="search" class="w-4 h-4 text-brand-gold"></i>
+          <h3 class="font-cormorant text-2xl font-bold text-brand-espresso">Search the Atelier</h3>
+        </div>
+        <button onclick="closeSearchModal()" class="w-8 h-8 rounded-full bg-brand-sand flex items-center justify-center text-brand-mocha hover:bg-brand-gold transition-colors">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="relative mb-6">
+        <input type="text" id="catalog-search-input" oninput="handleSearchQuery(this.value)" placeholder="Search by weave, color, or motif (e.g. Kadwa, Tissue, Gold)..." class="w-full text-xs pl-10" />
+        <i data-lucide="search" class="w-4 h-4 text-brand-mocha absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+      </div>
+
+      <div id="search-results-container" class="space-y-3 max-h-80 overflow-y-auto">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. CART SLIDE-OUT DRAWER -->
+  <div id="cart-drawer-backdrop" onclick="toggleCartDrawer(false)" class="drawer-backdrop"></div>
+  <div id="cart-drawer" class="slide-drawer p-6 text-brand-espresso">
+    <div class="flex items-center justify-between pb-4 border-hairline-b">
+      <div class="flex items-center gap-2">
+        <i data-lucide="shopping-bag" class="w-5 h-5 text-brand-gold"></i>
+        <h3 class="font-cormorant text-2xl font-bold">Your Atelier Bag</h3>
+      </div>
+      <button onclick="toggleCartDrawer(false)" class="w-8 h-8 rounded-full bg-brand-sand flex items-center justify-center text-brand-mocha hover:bg-brand-gold transition-colors">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+    </div>
+
+    <!-- Free Insured Shipping Progress Bar -->
+    <div class="py-3 px-4 rounded-xl bg-brand-sand/50 my-3 text-xs">
+      <div class="flex justify-between items-center mb-1 text-[10px] font-semibold uppercase tracking-wider text-brand-mocha">
+        <span>Insured Express Shipping</span>
+        <span id="shipping-progress-text" class="text-brand-espresso font-bold">Free Shipping Unlocked!</span>
+      </div>
+      <div class="w-full bg-brand-sand h-1.5 rounded-full overflow-hidden">
+        <div id="shipping-progress-bar" class="bg-brand-gold h-full rounded-full transition-all duration-300" style="width: 100%;"></div>
+      </div>
+    </div>
+
+    <!-- Cart Items Scrollable List -->
+    <div id="cart-items-container" class="flex-1 overflow-y-auto py-2 space-y-4">
+      <!-- Rendered dynamically -->
+    </div>
+
+    <!-- Cart Footer & Checkout Button -->
+    <div class="pt-4 border-hairline-t mt-auto space-y-3">
+      <div class="flex justify-between text-xs text-brand-mocha">
+        <span>Subtotal</span>
+        <span id="cart-subtotal" class="font-bold text-brand-espresso">₹0</span>
+      </div>
+      <div class="flex justify-between text-xs text-brand-mocha">
+        <span>Insured Express Shipping</span>
+        <span id="cart-shipping" class="font-bold text-emerald-700">FREE</span>
+      </div>
+      <div class="flex justify-between text-base font-cormorant font-bold text-brand-espresso pt-2 border-hairline-t">
+        <span>Total Payable</span>
+        <span id="cart-total" class="text-brand-gold text-xl">₹0</span>
+      </div>
+
+      <button onclick="openCheckoutModal()" class="btn-luxury-primary w-full text-xs font-bold tracking-widest uppercase !py-3.5">
+        <span>Proceed to Secure Booking</span>
+        <i data-lucide="lock" class="w-4 h-4 text-brand-gold"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- 3. WISHLIST SLIDE-OUT DRAWER -->
+  <div id="wishlist-drawer-backdrop" onclick="toggleWishlistDrawer(false)" class="drawer-backdrop"></div>
+  <div id="wishlist-drawer" class="slide-drawer p-6 text-brand-espresso">
+    <div class="flex items-center justify-between pb-4 border-hairline-b">
+      <div class="flex items-center gap-2">
+        <i data-lucide="heart" class="w-5 h-5 text-brand-terracotta"></i>
+        <h3 class="font-cormorant text-2xl font-bold">Your Saved Heirlooms</h3>
+      </div>
+      <button onclick="toggleWishlistDrawer(false)" class="w-8 h-8 rounded-full bg-brand-sand flex items-center justify-center text-brand-mocha hover:bg-brand-gold transition-colors">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+    </div>
+
+    <div id="wishlist-items-container" class="flex-1 overflow-y-auto py-4 space-y-4">
+      <!-- Rendered dynamically -->
+    </div>
+  </div>
+
+  <!-- 4. REAL BOOKING & CHECKOUT MODAL -->
+  <div id="checkout-modal" class="modal-overlay">
+    <div class="modal-box p-6 sm:p-10">
+      <div class="flex items-center justify-between pb-4 border-hairline-b mb-6">
+        <div>
+          <span class="text-[10px] uppercase tracking-[0.2em] text-brand-gold font-bold">Atelier Concierge Checkout</span>
+          <h3 class="font-cormorant text-3xl font-bold text-brand-espresso">Complete Real Saree Booking</h3>
+        </div>
+        <button onclick="closeCheckoutModal()" class="w-8 h-8 rounded-full bg-brand-sand flex items-center justify-center text-brand-mocha hover:bg-brand-gold transition-colors">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <form onsubmit="handlePlaceOrder(event)" class="space-y-5">
+        <!-- Customer Details -->
+        <div>
+          <h4 class="text-xs uppercase tracking-wider font-bold text-brand-espresso mb-3 flex items-center gap-2">
+            <span class="w-5 h-5 rounded-full bg-brand-gold text-brand-dark flex items-center justify-center text-[10px]">1</span>
+            Shipping & Customer Information
+          </h4>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <input type="text" id="order-customer-name" placeholder="Full Name *" class="w-full text-xs" required />
+            <input type="tel" id="order-customer-phone" placeholder="Mobile / WhatsApp Number *" class="w-full text-xs" required />
+          </div>
+          <div class="mt-3">
+            <input type="email" id="order-customer-email" placeholder="Email Address for Tracking Invoice *" class="w-full text-xs" required />
+          </div>
+          <div class="mt-3">
+            <textarea id="order-customer-address" rows="2" placeholder="Complete Delivery Address (House/Villa, Street, City, State, Pincode) *" class="w-full text-xs" required></textarea>
+          </div>
+        </div>
+
+        <!-- Payment Method -->
+        <div class="pt-2">
+          <h4 class="text-xs uppercase tracking-wider font-bold text-brand-espresso mb-3 flex items-center gap-2">
+            <span class="w-5 h-5 rounded-full bg-brand-gold text-brand-dark flex items-center justify-center text-[10px]">2</span>
+            Select Payment Method
+          </h4>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <label class="p-3.5 rounded-2xl border border-brand-gold/30 bg-white cursor-pointer flex flex-col justify-between hover:border-brand-gold">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold text-brand-espresso">UPI Instant</span>
+                <input type="radio" name="payment-method" value="UPI" checked class="accent-brand-gold" />
+              </div>
+              <span class="text-[10px] text-brand-mocha font-light">GPay, PhonePe, Paytm QR</span>
+            </label>
+            <label class="p-3.5 rounded-2xl border border-brand-gold/30 bg-white cursor-pointer flex flex-col justify-between hover:border-brand-gold">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold text-brand-espresso">Credit / Debit</span>
+                <input type="radio" name="payment-method" value="Card" class="accent-brand-gold" />
+              </div>
+              <span class="text-[10px] text-brand-mocha font-light">Visa, Mastercard, Amex</span>
+            </label>
+            <label class="p-3.5 rounded-2xl border border-brand-gold/30 bg-white cursor-pointer flex flex-col justify-between hover:border-brand-gold">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold text-brand-espresso">Cash on Delivery</span>
+                <input type="radio" name="payment-method" value="COD" class="accent-brand-gold" />
+              </div>
+              <span class="text-[10px] text-brand-mocha font-light">Pay at Doorstep</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Total Pill & Submit -->
+        <div class="p-4 rounded-2xl bg-brand-sand/40 border-hairline flex items-center justify-between text-xs">
+          <div>
+            <span class="text-brand-mocha block text-[10px] uppercase font-semibold">Payable Total</span>
+            <span id="checkout-total-display" class="font-cormorant text-2xl font-bold text-brand-gold">₹0</span>
+          </div>
+          <button type="submit" class="btn-luxury-primary !py-3 !px-6 !text-xs font-bold tracking-widest uppercase">
+            <span>Confirm & Place Order</span>
+            <i data-lucide="check-circle" class="w-4 h-4 text-brand-gold"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 5. ORDER CONFIRMATION MODAL -->
+  <div id="order-success-modal" class="modal-overlay">
+    <div class="modal-box p-8 text-center max-w-lg">
+      <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center mx-auto mb-4 border border-emerald-300 shadow">
+        <i data-lucide="check" class="w-8 h-8"></i>
+      </div>
+      <span class="text-[10px] uppercase tracking-[0.25em] text-brand-gold font-bold">Booking Confirmed</span>
+      <h3 class="font-cormorant text-3xl font-bold text-brand-espresso mt-1">Heirloom Order Placed</h3>
+      <p class="text-xs text-brand-mocha mt-2 font-light">
+        Your bespoke weave allocation is confirmed. Tracking updates have been dispatched to your contact coordinates.
+      </p>
+
+      <div class="my-6 p-4 rounded-xl bg-white border-hairline text-left space-y-1.5 text-xs">
+        <div class="flex justify-between">
+          <span class="text-brand-mocha">Tracking Order ID:</span>
+          <span id="confirmed-order-id" class="font-bold text-brand-gold">SIA-00000</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-brand-mocha">Estimated Delivery:</span>
+          <span class="font-medium text-brand-espresso">3-4 Business Days via Bluedart Express</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-brand-mocha">Payment Status:</span>
+          <span class="text-emerald-700 font-bold">Confirmed</span>
+        </div>
+      </div>
+
+      <div class="flex gap-3">
+        <button onclick="goToTrackOrderFromModal()" class="btn-luxury-primary w-full !text-xs">
+          <span>Track Order Now</span>
+          <i data-lucide="truck" class="w-4 h-4"></i>
+        </button>
+        <button onclick="closeSuccessModal()" class="btn-luxury-outline w-full !text-xs">
+          Continue Exploring
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. PRODUCT QUICK VIEW / DETAILS MODAL -->
+  <div id="product-detail-modal" class="modal-overlay">
+    <div class="modal-box p-6 sm:p-10 max-w-4xl">
+      <div class="flex justify-end mb-2">
+        <button onclick="closeProductModal()" class="w-8 h-8 rounded-full bg-brand-sand flex items-center justify-center text-brand-mocha hover:bg-brand-gold transition-colors">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+      <div id="product-modal-content" class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. POLICY MODAL (CANCELLATION, REFUND, PRIVACY) -->
+  <div id="policy-modal" class="modal-overlay">
+    <div class="modal-box p-6 sm:p-10 max-w-3xl">
+      <div class="flex items-center justify-between pb-4 border-hairline-b mb-6">
+        <div class="flex items-center gap-2">
+          <i data-lucide="shield" class="w-5 h-5 text-brand-gold"></i>
+          <h3 id="policy-modal-title" class="font-cormorant text-2xl font-bold text-brand-espresso">Atelier Policy</h3>
+        </div>
+        <button onclick="closePolicyModal()" class="w-8 h-8 rounded-full bg-brand-sand flex items-center justify-center text-brand-mocha hover:bg-brand-gold transition-colors">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+      <div id="policy-modal-content" class="text-xs text-brand-mocha leading-relaxed space-y-4 max-h-[60vh] overflow-y-auto pr-2 font-light">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. CUSTOMER AUTH (LOGIN / REGISTER) MODAL -->
+  <div id="auth-modal" class="modal-overlay">
+    <div class="modal-box p-6 sm:p-10 max-w-md">
+      <div class="flex items-center justify-between pb-4 border-hairline-b mb-6">
+        <div>
+          <span class="text-[10px] uppercase tracking-[0.2em] text-brand-gold font-bold">Client Portal</span>
+          <h3 class="font-cormorant text-2xl font-bold text-brand-espresso">Atelier Account</h3>
+        </div>
+        <button onclick="closeAuthModal()" class="w-8 h-8 rounded-full bg-brand-sand flex items-center justify-center text-brand-mocha hover:bg-brand-gold transition-colors">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="flex gap-2 p-1 bg-brand-sand/50 rounded-full mb-6 text-xs font-semibold uppercase tracking-wider">
+        <button onclick="switchAuthTab('login')" id="auth-tab-login" class="w-1/2 py-2 rounded-full bg-brand-dark text-brand-sand transition-all">
+          Sign In
+        </button>
+        <button onclick="switchAuthTab('register')" id="auth-tab-register" class="w-1/2 py-2 rounded-full text-brand-mocha hover:text-brand-espresso transition-all">
+          Register
+        </button>
+      </div>
+
+      <form id="login-form" onsubmit="handleLogin(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-brand-espresso mb-1">Email / Phone *</label>
+          <input type="text" id="login-email" placeholder="priyanka.reddy@outlook.com" class="w-full text-xs" required />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-brand-espresso mb-1">Password *</label>
+          <input type="password" id="login-password" placeholder="••••••••" class="w-full text-xs" required />
+        </div>
+        <button type="submit" class="btn-luxury-primary w-full !text-xs !py-3 font-bold tracking-widest uppercase">
+          Enter Atelier Portal
+        </button>
+      </form>
+
+      <form id="register-form" onsubmit="handleRegister(event)" class="space-y-4 hidden">
+        <div>
+          <label class="block text-xs font-semibold text-brand-espresso mb-1">Full Name *</label>
+          <input type="text" id="reg-name" placeholder="Priyanka Reddy" class="w-full text-xs" required />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-brand-espresso mb-1">Mobile / WhatsApp *</label>
+          <input type="tel" id="reg-phone" placeholder="+91 99480 33211" class="w-full text-xs" required />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-brand-espresso mb-1">Email Address *</label>
+          <input type="email" id="reg-email" placeholder="priyanka.reddy@outlook.com" class="w-full text-xs" required />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-brand-espresso mb-1">Password *</label>
+          <input type="password" id="reg-password" placeholder="••••••••" class="w-full text-xs" required />
+        </div>
+        <button type="submit" class="btn-luxury-primary w-full !text-xs !py-3 font-bold tracking-widest uppercase">
+          Create Account
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/store-data.js"></script>
+  <script src="js/three-silk.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
