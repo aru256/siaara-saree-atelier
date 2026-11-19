@@ -15,12 +15,13 @@ export default function Footer() {
           
           {/* Brand Info */}
           <div className="lg:col-span-4 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-[#58111A] border border-[#C59B51]/50 flex items-center justify-center p-2 shadow-md shrink-0">
+            <div className="flex items-center gap-3.5">
+              {/* Independent Floating Lotus Emblem */}
+              <div className="flex items-center justify-center shrink-0">
                 <img 
                   src="assets/brand-lotus-gold.png" 
                   alt="कला KRUTI by Vyara" 
-                  className="w-full h-full object-contain"
+                  className="w-12 h-12 sm:w-14 sm:h-14 object-contain filter drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]"
                 />
               </div>
               <div className="flex flex-col text-left justify-center">

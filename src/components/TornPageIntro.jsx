@@ -61,8 +61,16 @@ export default function TornPageIntro({ onComplete }) {
       }`}
       style={{ perspective: '1200px' }}
     >
-      {/* Deep Velvet Maroon Stage Backdrop */}
-      <div className="absolute inset-0 bg-[#2B070D]" />
+      {/* Deep Velvet Maroon Celestial Silk Stage Backdrop (From User Image) */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ 
+          backgroundImage: "url('assets/intro-bg.jpg')",
+          backgroundColor: '#2B070D'
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-t from-[#2B070D]/70 via-transparent to-[#2B070D]/70" />
+      </div>
 
       {/* Left Silk Curtain Panel */}
       <div 
@@ -73,20 +81,13 @@ export default function TornPageIntro({ onComplete }) {
         }}
       >
         <div 
-          className="w-[200%] h-full relative"
+          className="w-[200%] h-full relative bg-cover bg-center"
           style={{
-            background: 'linear-gradient(135deg, #3B0910 0%, #58111A 45%, #2B070D 100%)',
-            boxShadow: 'inset -20px 0 50px rgba(0,0,0,0.6)'
+            backgroundImage: "url('assets/intro-bg.jpg')",
+            backgroundColor: '#2B070D',
+            boxShadow: 'inset -20px 0 50px rgba(0,0,0,0.7)'
           }}
         >
-          {/* Subtle Golden Brocade Weave Texture */}
-          <div 
-            className="absolute inset-0 opacity-20 pointer-events-none"
-            style={{
-              backgroundImage: 'radial-gradient(#C59B51 1px, transparent 1px)',
-              backgroundSize: '24px 24px'
-            }}
-          />
           {/* Deckled Torn Edge Shadow & Gold Foil Sparkle */}
           <div 
             className="absolute top-0 right-0 bottom-0 w-8 pointer-events-none"
@@ -107,20 +108,13 @@ export default function TornPageIntro({ onComplete }) {
         }}
       >
         <div 
-          className="w-[200%] h-full relative -left-[100%]"
+          className="w-[200%] h-full relative -left-[100%] bg-cover bg-center"
           style={{
-            background: 'linear-gradient(225deg, #3B0910 0%, #58111A 45%, #2B070D 100%)',
-            boxShadow: 'inset 20px 0 50px rgba(0,0,0,0.6)'
+            backgroundImage: "url('assets/intro-bg.jpg')",
+            backgroundColor: '#2B070D',
+            boxShadow: 'inset 20px 0 50px rgba(0,0,0,0.7)'
           }}
         >
-          {/* Subtle Golden Brocade Weave Texture */}
-          <div 
-            className="absolute inset-0 opacity-20 pointer-events-none"
-            style={{
-              backgroundImage: 'radial-gradient(#C59B51 1px, transparent 1px)',
-              backgroundSize: '24px 24px'
-            }}
-          />
           {/* Deckled Torn Edge Shadow & Gold Foil Sparkle */}
           <div 
             className="absolute top-0 left-0 bottom-0 w-8 pointer-events-none"

@@ -84,14 +84,15 @@ export default function Navbar() {
           <a 
             href="#home" 
             onClick={(e) => { e.preventDefault(); scrollTo('home'); }}
-            className="flex items-center gap-2.5 sm:gap-3.5 group"
+            className="flex items-center gap-3 sm:gap-4 group"
             id="navbar-brand-logo"
           >
-            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#58111A] border border-[#C59B51]/50 flex items-center justify-center p-1.5 shadow-md group-hover:scale-105 transition-transform overflow-hidden shrink-0">
+            {/* Independent Floating Lotus Emblem (No Circle, Sized Prominently) */}
+            <div className="flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
               <img 
                 src="assets/brand-lotus-gold.png" 
                 alt="कलाKruti Emblem" 
-                className="w-full h-full object-contain filter drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]"
+                className="w-10 h-10 sm:w-12 sm:h-12 object-contain filter drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]"
               />
             </div>
             
@@ -105,24 +106,24 @@ export default function Navbar() {
             </div>
           </a>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-7 text-xs font-semibold tracking-wider text-[#FAF7F2]/90 uppercase">
-            <button onClick={() => scrollTo('collections')} className="hover:text-[#E4C58B] transition-colors py-1 cursor-pointer">
+          {/* Desktop Navigation Links (Clean Pure White Text & Crisp Transitions) */}
+          <nav className="hidden lg:flex items-center gap-7 text-xs font-semibold tracking-wider text-white uppercase">
+            <button onClick={() => scrollTo('collections')} className="text-white hover:text-white/75 transition-colors py-1 cursor-pointer">
               Collections
             </button>
-            <button onClick={() => scrollTo('story')} className="hover:text-[#E4C58B] transition-colors py-1 cursor-pointer">
+            <button onClick={() => scrollTo('story')} className="text-white hover:text-white/75 transition-colors py-1 cursor-pointer">
               Brand Story
             </button>
-            <button onClick={() => scrollTo('shop')} className="hover:text-[#E4C58B] transition-colors py-1 cursor-pointer">
+            <button onClick={() => scrollTo('shop')} className="text-white hover:text-white/75 transition-colors py-1 cursor-pointer">
               Shop Sarees
             </button>
-            <button onClick={() => scrollTo('craftsmanship')} className="hover:text-[#E4C58B] transition-colors py-1 cursor-pointer">
+            <button onClick={() => scrollTo('craftsmanship')} className="text-white hover:text-white/75 transition-colors py-1 cursor-pointer">
               Craftsmanship
             </button>
-            <button onClick={() => scrollTo('track-order')} className="hover:text-[#E4C58B] transition-colors py-1 cursor-pointer">
+            <button onClick={() => scrollTo('track-order')} className="text-white hover:text-white/75 transition-colors py-1 cursor-pointer">
               Track Order
             </button>
-            <button onClick={() => scrollTo('contact')} className="hover:text-[#E4C58B] transition-colors py-1 cursor-pointer">
+            <button onClick={() => scrollTo('contact')} className="text-white hover:text-white/75 transition-colors py-1 cursor-pointer">
               Personal Styling
             </button>
           </nav>
@@ -136,11 +137,11 @@ export default function Navbar() {
                 setAuthMode(user ? 'account' : 'login');
                 setAuthOpen(true);
               }}
-              className="p-2 sm:px-3 sm:py-1.5 rounded-full hover:bg-white/10 text-[#FAF7F2] transition-all flex items-center gap-1.5 text-xs font-semibold cursor-pointer"
+              className="p-2 sm:px-3 sm:py-1.5 rounded-full hover:bg-white/10 text-white transition-all flex items-center gap-1.5 text-xs font-semibold cursor-pointer"
               title={user ? `Signed in as ${user.name}` : "Sign In / Customer Portal"}
             >
-              <User className="w-4 h-4 text-[#E4C58B]" />
-              <span className="hidden md:inline-block">
+              <User className="w-4 h-4 text-white" />
+              <span className="hidden md:inline-block text-white">
                 {user ? user.name.split(' ')[0] : 'Account'}
               </span>
             </button>
@@ -148,21 +149,21 @@ export default function Navbar() {
             {/* Wishlist Heart Button */}
             <button 
               onClick={() => setWishlistOpen(true)}
-              className="p-2 rounded-full hover:bg-white/10 text-[#FAF7F2] relative transition-colors cursor-pointer"
+              className="p-2 rounded-full hover:bg-white/10 text-white relative transition-colors cursor-pointer"
               title="Saved Sarees"
             >
-              <Heart className={`w-4 h-4 sm:w-5 sm:h-5 ${wishlist.length > 0 ? 'fill-[#E4C58B] text-[#E4C58B]' : 'text-[#FAF7F2]'}`} />
+              <Heart className={`w-4 h-4 sm:w-5 sm:h-5 ${wishlist.length > 0 ? 'fill-white text-white' : 'text-white'}`} />
               {wishlist.length > 0 && (
-                <span className="absolute top-1 right-1 w-4 h-4 rounded-full bg-[#E4C58B] text-[#2B070D] text-[9px] font-bold flex items-center justify-center">
+                <span className="absolute top-1 right-1 w-4 h-4 rounded-full bg-white text-[#2B070D] text-[9px] font-bold flex items-center justify-center shadow-sm">
                   {wishlist.length}
                 </span>
               )}
             </button>
 
-            {/* Shopping Bag Button */}
+            {/* Shopping Bag Button (White Pill replacing previous Yellow Pill) */}
             <button 
               onClick={() => setCartOpen(true)}
-              className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#E4C58B] hover:bg-[#C59B51] text-[#2B070D] border border-[#C59B51]/40 transition-all flex items-center gap-2 shadow-md hover:scale-105 cursor-pointer"
+              className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white hover:bg-white/90 text-[#2B070D] border border-white/80 transition-all flex items-center gap-2 shadow-md hover:scale-105 cursor-pointer"
               title="Open Shopping Bag"
             >
               <ShoppingBag className="w-4 h-4 text-[#2B070D]" />
@@ -174,7 +175,7 @@ export default function Navbar() {
             {/* Mobile Menu Hamburger */}
             <button 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 rounded-lg text-[#FAF7F2] hover:bg-white/10 transition-colors cursor-pointer"
+              className="lg:hidden p-2 rounded-lg text-white hover:bg-white/10 transition-colors cursor-pointer"
               aria-label="Toggle Navigation Menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -186,32 +187,32 @@ export default function Navbar() {
 
       {/* Mobile Drawer Menu (Velvet Maroon) */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#2B070D] border-b border-[#C59B51]/30 px-6 py-6 flex flex-col gap-4 text-sm font-semibold tracking-wider text-[#FAF7F2] uppercase shadow-2xl animate-in slide-in-from-top-4 duration-300">
-          <button onClick={() => scrollTo('collections')} className="text-left py-2 border-b border-[#C59B51]/20 hover:text-[#E4C58B]">
+        <div className="lg:hidden bg-[#2B070D] border-b border-white/20 px-6 py-6 flex flex-col gap-4 text-sm font-semibold tracking-wider text-white uppercase shadow-2xl animate-in slide-in-from-top-4 duration-300">
+          <button onClick={() => scrollTo('collections')} className="text-left py-2 border-b border-white/10 hover:text-white/80">
             Collections Runway
           </button>
-          <button onClick={() => scrollTo('story')} className="text-left py-2 border-b border-[#C59B51]/20 hover:text-[#E4C58B]">
+          <button onClick={() => scrollTo('story')} className="text-left py-2 border-b border-white/10 hover:text-white/80">
             Brand Heritage Story
           </button>
-          <button onClick={() => scrollTo('shop')} className="text-left py-2 border-b border-[#C59B51]/20 hover:text-[#E4C58B]">
+          <button onClick={() => scrollTo('shop')} className="text-left py-2 border-b border-white/10 hover:text-white/80">
             Shop All Pure Silk Sarees
           </button>
-          <button onClick={() => scrollTo('craftsmanship')} className="text-left py-2 border-b border-[#C59B51]/20 hover:text-[#E4C58B]">
+          <button onClick={() => scrollTo('craftsmanship')} className="text-left py-2 border-b border-white/10 hover:text-white/80">
             Handloom Craftsmanship
           </button>
-          <button onClick={() => scrollTo('track-order')} className="text-left py-2 border-b border-[#C59B51]/20 hover:text-[#E4C58B]">
+          <button onClick={() => scrollTo('track-order')} className="text-left py-2 border-b border-white/10 hover:text-white/80">
             Track Delivery
           </button>
-          <button onClick={() => scrollTo('contact')} className="text-left py-2 border-b border-[#C59B51]/20 hover:text-[#E4C58B]">
+          <button onClick={() => scrollTo('contact')} className="text-left py-2 border-b border-white/10 hover:text-white/80">
             Personal Styling & Studio Visit
           </button>
 
           <div className="pt-2 flex flex-col gap-2.5">
             <a 
               href="admin.html" 
-              className="w-full py-2.5 px-4 rounded-full border border-[#C59B51] text-[#E4C58B] text-center text-xs font-bold flex items-center justify-center gap-1.5 bg-[#58111A]/60"
+              className="w-full py-2.5 px-4 rounded-full border border-white/30 text-white text-center text-xs font-bold flex items-center justify-center gap-1.5 bg-white/10 hover:bg-white/20"
             >
-              <ShieldCheck className="w-4 h-4 text-[#C59B51]" />
+              <ShieldCheck className="w-4 h-4 text-white" />
               <span>Open Executive Admin</span>
             </a>
           </div>
