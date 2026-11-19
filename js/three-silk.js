@@ -21,26 +21,26 @@
     depth: true
   });
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
 
-  // Optimized Grid Geometry (Smooth yet lightweight, prevents CPU bottlenecks)
+  // High performance Grid Geometry (Lightning-fast 60/120 FPS execution)
   const width = 42;
   const height = 28;
-  const segmentsW = 38;
-  const segmentsH = 26;
+  const segmentsW = 22;
+  const segmentsH = 16;
   const geometry = new THREE.PlaneGeometry(width, height, segmentsW, segmentsH);
 
   // Pure Mulberry Silk Material with antique gold sheen and liquid satin drape
   const material = new THREE.MeshPhysicalMaterial({
     color: 0xdfb987,
-    roughness: 0.28,
-    metalness: 0.46,
-    clearcoat: 0.92,
-    clearcoatRoughness: 0.24,
-    reflectivity: 0.88,
+    roughness: 0.32,
+    metalness: 0.42,
+    clearcoat: 0.85,
+    clearcoatRoughness: 0.28,
+    reflectivity: 0.85,
     side: THREE.DoubleSide,
     transparent: true,
-    opacity: 0.84
+    opacity: 0.78
   });
 
   const silkMesh = new THREE.Mesh(geometry, material);
@@ -53,7 +53,7 @@
   geometry.computeVertexNormals();
 
   // Floating micro-embers (Lightweight particle system)
-  const particleCount = 80;
+  const particleCount = 40;
   const particleGeo = new THREE.BufferGeometry();
   const particlePositions = new Float32Array(particleCount * 3);
   const particleVelocities = new Float32Array(particleCount);

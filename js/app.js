@@ -97,40 +97,40 @@ function initCinematicSareeIntro() {
   // Scene 1: Closed Parchment with Center Royal Loom Seal Breathing
   tl.fromTo(centerSeal, 
     { scale: 0.9, opacity: 0.88 }, 
-    { scale: 1.06, opacity: 1, duration: 0.45, ease: 'power2.out' }
+    { scale: 1.05, opacity: 1, duration: 0.25, ease: 'power2.out' }
   );
 
   // Scene 2: Tearing the Page — Glowing rip tracer races down & torn deckled halves rip open in 3D
   if (tearTracer) {
     tl.to(tearTracer, {
       height: '100%',
-      duration: 0.3,
+      duration: 0.2,
       ease: 'power2.in'
-    }, '-=0.1');
+    }, '-=0.08');
   }
 
   if (revealBackdrop) {
-    tl.to(revealBackdrop, { opacity: 1, duration: 0.3 }, '<');
+    tl.to(revealBackdrop, { opacity: 1, duration: 0.2 }, '<');
   }
 
-  tl.to(centerSeal, { scale: 1.45, opacity: 0, duration: 0.35, ease: 'power2.in' }, '<+=0.05')
+  tl.to(centerSeal, { scale: 1.45, opacity: 0, duration: 0.25, ease: 'power2.in' }, '<+=0.04')
     .to(curtainLeft, { 
       xPercent: isMobile ? -112 : -116, 
       rotateZ: isMobile ? -3 : -4.5, 
       rotateY: isMobile ? -14 : -22, 
-      duration: 1.2, 
+      duration: 0.65, 
       ease: 'power3.inOut' 
     }, '<')
     .to(curtainRight, { 
       xPercent: isMobile ? 112 : 116, 
       rotateZ: isMobile ? 3 : 4.5, 
       rotateY: isMobile ? 14 : 22, 
-      duration: 1.2, 
+      duration: 0.65, 
       ease: 'power3.inOut' 
     }, '<')
     .to(introOverlay, { 
       backgroundColor: 'rgba(13, 7, 4, 0)', 
-      duration: 0.8,
+      duration: 0.5,
       onStart: () => {
         // As soon as the curtains begin tearing, make the intro overlay click-through/scroll-through
         if (introOverlay) introOverlay.style.pointerEvents = 'none';
@@ -138,8 +138,8 @@ function initCinematicSareeIntro() {
     }, '<');
 
   // Scene 3: Entering the Atelier & Royal Monogram Reveal through the Tear
-  tl.to(glow, { opacity: 0.9, scale: 1.25, duration: 0.6, ease: 'power2.out' }, '-=0.75')
-    .to(travelingLogo, { opacity: 1, scale: 1.0, duration: 0.6, ease: 'power2.out' }, '<+=0.08');
+  tl.to(glow, { opacity: 0.9, scale: 1.25, duration: 0.35, ease: 'power2.out' }, '-=0.35')
+    .to(travelingLogo, { opacity: 1, scale: 1.0, duration: 0.35, ease: 'power2.out' }, '<+=0.05');
 
   // Scene 4: Logo Sets into Navbar & Smooth Transition Reveals the Website
   tl.add(() => {
@@ -162,13 +162,13 @@ function initCinematicSareeIntro() {
       targetScale = 0.7;
     }
 
-    gsap.to(glow, { opacity: 0, duration: 0.4 });
+    gsap.to(glow, { opacity: 0, duration: 0.25 });
 
     if (revealBackdrop) {
       gsap.to(revealBackdrop, {
         opacity: 0,
         backdropFilter: 'blur(0px)',
-        duration: 0.75,
+        duration: 0.45,
         ease: 'power2.out'
       });
     }
@@ -178,11 +178,11 @@ function initCinematicSareeIntro() {
       y: `+=${deltaY}`,
       scale: targetScale,
       transformOrigin: 'top left',
-      duration: 0.85,
+      duration: 0.45,
       ease: 'power3.inOut',
       onComplete: finishCinematicIntro
     });
-  }, '+=0.2');
+  }, '+=0.1');
 
   window.skipCinematicIntro = function() {
     tl.kill();
@@ -202,10 +202,10 @@ function initCinematicSareeIntro() {
     }, { passive: true });
   });
 
-  // Safety watchdog: automatically finish and remove intro overlay after 2.2 seconds maximum
+  // Safety watchdog: automatically finish and remove intro overlay after 1.4 seconds maximum
   setTimeout(() => {
     finishCinematicIntro();
-  }, 2200);
+  }, 1400);
 
   function finishCinematicIntro() {
     if (navLogo) navLogo.style.opacity = '1';
@@ -461,91 +461,20 @@ function initGSAPAnimations() {
     });
   }
 
-  // 9. Horizontal Collection Runway (Vertical Scroll Drives Horizontal Runway on PC and Mobile)
+  // 9. Horizontal Collection Runway Entrance (Pure Unpinned Natural Flow - Zero Scroll Hijacking)
   const collectionsSection = document.getElementById('collections');
-  const runwayTrack = document.getElementById('runway-track');
-
-  if (collectionsSection && runwayTrack) {
-    ScrollTrigger.matchMedia({
-      // Desktop & Tablet (min-width: 768px): Vertical Wheel Drives Horizontal Runway, then Resumes Vertically
-      "(min-width: 768px)": function() {
-        const getScrollDistance = () => {
-          return Math.max(400, runwayTrack.scrollWidth - window.innerWidth + 80);
-        };
-
-        const horizontalTween = gsap.to(runwayTrack, {
-          x: () => -getScrollDistance(),
-          ease: "none",
-          scrollTrigger: {
-            id: 'runway-pin',
-            trigger: collectionsSection,
-            pin: true,
-            anticipatePin: 1,
-            scrub: 0.8,
-            start: "top top",
-            end: () => `+=${getScrollDistance()}`,
-            invalidateOnRefresh: true,
-            onUpdate: (self) => {
-              const panels = runwayTrack.querySelectorAll('.runway-panel');
-              const totalPanels = panels.length || 5;
-              const currentIdx = Math.min(totalPanels, Math.max(1, Math.round(self.progress * (totalPanels - 1)) + 1));
-              const indexDisp = document.getElementById('runway-index-display');
-              if (indexDisp) indexDisp.textContent = '0' + currentIdx;
-
-              const progBar = document.getElementById('runway-progress-bar');
-              if (progBar) {
-                const percent = Math.min(100, Math.max(20, self.progress * 100));
-                progBar.style.width = `${percent}%`;
-              }
-            }
-          }
-        });
-
-        return () => {
-          horizontalTween.kill();
-          gsap.set(runwayTrack, { clearProps: 'all' });
-        };
+  if (collectionsSection) {
+    gsap.from('#collections .runway-panel', {
+      scrollTrigger: {
+        trigger: collectionsSection,
+        start: 'top 85%',
+        toggleActions: 'play none none none'
       },
-
-      // Mobile (max-width: 767px): Vertical Swipe Glides Through Horizontal Weaves, then Continues Down
-      "(max-width: 767px)": function() {
-        const getMobileScrollDistance = () => {
-          return Math.max(300, runwayTrack.scrollWidth - window.innerWidth + 36);
-        };
-
-        const mobileTween = gsap.to(runwayTrack, {
-          x: () => -getMobileScrollDistance(),
-          ease: "none",
-          scrollTrigger: {
-            id: 'runway-pin',
-            trigger: collectionsSection,
-            pin: true,
-            anticipatePin: 1,
-            scrub: 0.5,
-            start: "top top",
-            end: () => `+=${getMobileScrollDistance()}`,
-            invalidateOnRefresh: true,
-            onUpdate: (self) => {
-              const panels = runwayTrack.querySelectorAll('.runway-panel');
-              const totalPanels = panels.length || 5;
-              const currentIdx = Math.min(totalPanels, Math.max(1, Math.round(self.progress * (totalPanels - 1)) + 1));
-              const indexDisp = document.getElementById('runway-index-display');
-              if (indexDisp) indexDisp.textContent = '0' + currentIdx;
-
-              const progBar = document.getElementById('runway-progress-bar');
-              if (progBar) {
-                const percent = Math.min(100, Math.max(20, self.progress * 100));
-                progBar.style.width = `${percent}%`;
-              }
-            }
-          }
-        });
-
-        return () => {
-          mobileTween.kill();
-          gsap.set(runwayTrack, { clearProps: 'all' });
-        };
-      }
+      y: 28,
+      opacity: 0,
+      duration: 0.75,
+      stagger: 0.08,
+      ease: 'power3.out'
     });
   }
 
@@ -590,22 +519,7 @@ function initGSAPAnimations() {
 // ================= HORIZONTAL COLLECTION RUNWAY CONTROLLER =================
 function slideCollections(direction) {
   const track = document.getElementById('runway-track');
-  const collectionsSection = document.getElementById('collections');
   if (!track) return;
-
-  if (window.ScrollTrigger) {
-    const st = ScrollTrigger.getById('runway-pin');
-    if (st) {
-      const step = (st.end - st.start) / 4;
-      const targetScroll = Math.max(st.start, Math.min(st.end, window.scrollY + direction * step));
-      if (window.lenis) {
-        window.lenis.scrollTo(targetScroll, { duration: 0.6 });
-      } else {
-        window.scrollTo({ top: targetScroll, behavior: 'smooth' });
-      }
-      return;
-    }
-  }
 
   const panel = track.querySelector('.runway-panel');
   const panelWidth = panel ? panel.offsetWidth + 24 : 380;
@@ -641,6 +555,7 @@ function initCollectionsRunwayController() {
   };
 
   track.addEventListener('scroll', updateRunwayState, { passive: true });
+  updateRunwayState();
 }
 
 // ================= INTERACTIVE 3D PRODUCT CARD TILT (DESKTOP MOUSE ONLY) =================
