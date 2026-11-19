@@ -136,7 +136,6 @@
     targetScrollProgress = Math.min(1, Math.max(0, (window.pageYOffset || window.scrollY) / maxScroll));
   }
   window.addEventListener('scroll', updateScrollProgress, { passive: true });
-  window.addEventListener('touchmove', updateScrollProgress, { passive: true });
 
   // Pre-cached vertex counts & arrays
   const pos = geometry.attributes.position;

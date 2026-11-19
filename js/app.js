@@ -62,11 +62,23 @@ function initCinematicSareeIntro() {
     return;
   }
 
-  // Lock scrolling during intro
-  document.body.style.overflow = 'hidden';
-  if (navLogo) navLogo.style.opacity = '0';
+  const isMobile = window.innerWidth < 768 || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
-  const isMobile = window.innerWidth < 768;
+  // On desktop only: lock briefly during initial seal breathing; NEVER lock on mobile touch devices
+  if (!isMobile) {
+    document.body.style.overflow = 'hidden';
+    // Safety auto-unlock after 600ms so user can scroll naturally as soon as tear begins
+    setTimeout(() => {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    }, 600);
+  } else {
+    // Ensure mobile body and html are 100% unlocked from the first millisecond
+    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
+  }
+
+  if (navLogo) navLogo.style.opacity = '0';
 
   // Position traveling logo in the exact center initially
   gsap.set(travelingLogo, {
@@ -116,7 +128,14 @@ function initCinematicSareeIntro() {
       duration: 1.2, 
       ease: 'power3.inOut' 
     }, '<')
-    .to(introOverlay, { backgroundColor: 'rgba(13, 7, 4, 0)', duration: 0.8 }, '<');
+    .to(introOverlay, { 
+      backgroundColor: 'rgba(13, 7, 4, 0)', 
+      duration: 0.8,
+      onStart: () => {
+        // As soon as the curtains begin tearing, make the intro overlay click-through/scroll-through
+        if (introOverlay) introOverlay.style.pointerEvents = 'none';
+      }
+    }, '<');
 
   // Scene 3: Entering the Atelier & Royal Monogram Reveal through the Tear
   tl.to(glow, { opacity: 0.9, scale: 1.25, duration: 0.6, ease: 'power2.out' }, '-=0.75')
@@ -174,35 +193,49 @@ function initCinematicSareeIntro() {
     window.location.reload();
   };
 
-  // Allow tap anywhere on mobile to advance intro
-  introOverlay.addEventListener('click', (e) => {
-    if (e.target.id !== 'skip-intro-btn') {
-      window.skipCinematicIntro();
-    }
+  // Allow instant advance/dismiss on tap anywhere on mobile
+  ['touchstart', 'pointerdown', 'click'].forEach(evt => {
+    introOverlay.addEventListener(evt, (e) => {
+      if (e.target.id !== 'skip-intro-btn') {
+        window.skipCinematicIntro();
+      }
+    }, { passive: true });
   });
+
+  // Safety watchdog: automatically finish and remove intro overlay after 2.2 seconds maximum
+  setTimeout(() => {
+    finishCinematicIntro();
+  }, 2200);
 
   function finishCinematicIntro() {
     if (navLogo) navLogo.style.opacity = '1';
 
-    // Immediate complete unlock of vertical scrolling on mobile and desktop
+    // Completely clear all inline overflow properties on mobile and desktop
     document.body.style.overflow = '';
     document.documentElement.style.overflow = '';
-    document.body.style.overflowY = 'auto';
-    document.documentElement.style.overflowY = 'auto';
+    document.body.style.overflowY = '';
+    document.documentElement.style.overflowY = '';
+    document.body.style.removeProperty('overflow');
+    document.documentElement.style.removeProperty('overflow');
+    document.body.style.removeProperty('overflow-y');
+    document.documentElement.style.removeProperty('overflow-y');
 
-    // Disable pointer events immediately so touches pass through without delay
-    introOverlay.style.pointerEvents = 'none';
+    if (introOverlay) {
+      // Disable pointer events immediately so touches pass through with zero delay
+      introOverlay.style.pointerEvents = 'none';
+      introOverlay.style.touchAction = 'auto';
 
-    gsap.to(introOverlay, {
-      opacity: 0,
-      duration: 0.35,
-      onComplete: () => {
-        introOverlay.style.display = 'none';
-        if (introOverlay.parentNode) {
-          introOverlay.parentNode.removeChild(introOverlay);
+      gsap.to(introOverlay, {
+        opacity: 0,
+        duration: 0.3,
+        onComplete: () => {
+          introOverlay.style.display = 'none';
+          if (introOverlay.parentNode) {
+            introOverlay.parentNode.removeChild(introOverlay);
+          }
         }
-      }
-    });
+      });
+    }
   }
 }
 
@@ -215,6 +248,7 @@ function initLenis() {
 
   if (isTouchDevice) {
     window.lenis = null;
+    document.documentElement.classList.remove('lenis', 'lenis-smooth', 'lenis-stopped');
     return;
   }
 
@@ -585,8 +619,11 @@ function initCollectionsRunwayController() {
   track.addEventListener('scroll', updateRunwayState, { passive: true });
 }
 
-// ================= INTERACTIVE 3D PRODUCT CARD TILT (MOUSE & TOUCH) =================
+// ================= INTERACTIVE 3D PRODUCT CARD TILT (DESKTOP MOUSE ONLY) =================
 function initProductCard3DTilt() {
+  const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth < 768);
+  if (isTouchDevice) return; // Prevent touchmove performance drag & scroll stutter on mobile
+
   const cards = document.querySelectorAll('.product-card');
   cards.forEach(card => {
     if (card.dataset.tiltInitialized) return;
@@ -601,22 +638,6 @@ function initProductCard3DTilt() {
     });
 
     card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
-    });
-
-    // Mobile Touch Perspective Tilt
-    card.addEventListener('touchmove', (e) => {
-      if (!e.touches || e.touches.length === 0) return;
-      const rect = card.getBoundingClientRect();
-      const touch = e.touches[0];
-      const x = (touch.clientX - rect.left) / rect.width - 0.5;
-      const y = (touch.clientY - rect.top) / rect.height - 0.5;
-      if (x >= -0.5 && x <= 0.5 && y >= -0.5 && y <= 0.5) {
-        card.style.transform = `perspective(1000px) rotateX(${-y * 5}deg) rotateY(${x * 5}deg) translateY(-3px)`;
-      }
-    }, { passive: true });
-
-    card.addEventListener('touchend', () => {
       card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
     });
   });
