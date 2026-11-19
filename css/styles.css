@@ -271,45 +271,99 @@ body {
   box-shadow: 0 20px 40px -10px rgba(20, 11, 7, 0.12), 0 0 25px var(--gold-glow);
 }
 
-/* Horizontal Collection Runway (Pinned Vertical-to-Horizontal Motion) */
+/* ==========================================================================
+   CINEMATIC SAREE OPENING INTRO (SCENES 1 TO 5)
+   ========================================================================== */
+#cinematic-saree-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #140B07;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.intro-curtain {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50.5vw;
+  height: 100vh;
+  z-index: 10;
+  overflow: hidden;
+  will-change: transform;
+}
+
+.intro-curtain-left {
+  left: 0;
+  background: linear-gradient(135deg, rgba(20, 11, 7, 0.88), rgba(42, 23, 15, 0.82)), 
+              url('https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1200&q=85') center/cover;
+}
+
+.intro-curtain-right {
+  right: 0;
+  background: linear-gradient(225deg, rgba(20, 11, 7, 0.88), rgba(42, 23, 15, 0.82)), 
+              url('https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1200&q=85') center/cover;
+}
+
+.curtain-gold-border {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 14px;
+  background: linear-gradient(to bottom, #8F6929 0%, #ECCF96 25%, #C59B51 50%, #ECCF96 75%, #8F6929 100%);
+  background-size: 100% 200%;
+  animation: zariShimmer 3.5s ease-in-out infinite;
+}
+
+@keyframes zariShimmer {
+  0%, 100% { background-position: 0% 0%; }
+  50% { background-position: 0% 100%; }
+}
+
+/* Horizontal Collection Runway (Fluid Natural Glide, Zero Pinning Hijacking) */
 .runway-track {
   display: flex;
   flex-direction: row;
-  will-change: transform;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 0.5rem;
+}
+.runway-track::-webkit-scrollbar {
+  display: none;
 }
 
 .runway-panel {
   width: 82vw;
   max-width: 840px;
   flex-shrink: 0;
-  border-radius: 28px;
+  border-radius: 24px;
   background: var(--bg-cream);
   border: 1px solid rgba(197, 155, 81, 0.32);
-  box-shadow: 0 20px 48px -12px rgba(20, 11, 7, 0.12);
+  box-shadow: 0 16px 40px -10px rgba(20, 11, 7, 0.1);
+  scroll-snap-align: center;
   transition: border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 .runway-panel:hover {
   border-color: var(--gold-primary);
-  box-shadow: 0 25px 60px -15px rgba(20, 11, 7, 0.18), 0 0 25px rgba(197, 155, 81, 0.15);
+  box-shadow: 0 20px 50px -12px rgba(20, 11, 7, 0.16), 0 0 20px rgba(197, 155, 81, 0.15);
 }
 
 @media (max-width: 767px) {
-  .runway-track {
-    display: flex;
-    flex-direction: row;
-    flex-shrink: 0;
-    will-change: transform;
-    overflow: visible;
-    gap: 1.25rem;
-  }
   .runway-panel {
-    width: 86vw;
-    max-width: 420px;
+    width: 88vw;
+    max-width: 360px;
     padding: 1.15rem;
     border-radius: 20px;
     flex-shrink: 0;
     gap: 0.85rem;
+    scroll-snap-align: center;
   }
   .runway-panel .aspect-\[4\/5\] {
     aspect-ratio: 16 / 10 !important;
@@ -317,11 +371,11 @@ body {
     border-radius: 16px;
   }
   .runway-panel h3 {
-    font-size: 1.55rem !important;
+    font-size: 1.45rem !important;
     line-height: 1.15 !important;
   }
   .runway-panel p {
-    font-size: 0.78rem !important;
+    font-size: 0.76rem !important;
     line-height: 1.4 !important;
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -337,19 +391,22 @@ body {
   }
 }
 
-/* Product Card - Clean Editorial Aesthetic with 3D Spatial Perspective */
+/* Product Card - Clean Flipkart-style Two-Column Layout with Luxury KRUTI Aesthetic */
 .product-card {
-  border-radius: var(--radius-card);
-  background: var(--bg-cream);
-  border: 1px solid rgba(197, 155, 81, 0.2);
+  border-radius: 16px;
+  background: #FFFFFF;
+  border: 1px solid rgba(197, 155, 81, 0.22);
+  box-shadow: 0 4px 14px -4px rgba(20, 11, 7, 0.05);
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
   overflow: hidden;
-  transform-style: preserve-3d;
-  perspective: 1000px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .product-card:hover {
+  transform: translateY(-4px);
   border-color: var(--gold-primary);
-  box-shadow: 0 20px 45px -10px rgba(20, 11, 7, 0.14), 0 0 20px rgba(197, 155, 81, 0.12);
+  box-shadow: 0 16px 36px -8px rgba(20, 11, 7, 0.12), 0 0 18px rgba(197, 155, 81, 0.15);
 }
 
 /* Slide Drawers */
@@ -431,8 +488,8 @@ body {
   border-radius: 32px;
   overflow: hidden;
   background: linear-gradient(145deg, #180D08 0%, #2A170F 55%, #120905 100%);
-  border: 1px solid rgba(197, 155, 81, 0.38);
-  box-shadow: 0 30px 70px -15px rgba(18, 9, 5, 0.5), 0 0 30px rgba(197, 155, 81, 0.12);
+  border: 1.5px solid rgba(197, 155, 81, 0.45);
+  box-shadow: 0 30px 70px -15px rgba(18, 9, 5, 0.55), 0 0 35px rgba(197, 155, 81, 0.16);
 }
 
 .inquiry-editorial-card::before {
@@ -442,9 +499,34 @@ body {
   left: -60%;
   width: 220%;
   height: 220%;
-  background: radial-gradient(circle, rgba(197, 155, 81, 0.15) 0%, transparent 60%);
+  background: radial-gradient(circle, rgba(197, 155, 81, 0.18) 0%, transparent 60%);
   animation: rotateAura 24s linear infinite;
   pointer-events: none;
+}
+
+.inquiry-editorial-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse 80% 50% at 20% 30%, rgba(197, 155, 81, 0.14), transparent 70%),
+    radial-gradient(ellipse 60% 60% at 80% 70%, rgba(230, 203, 137, 0.12), transparent 70%);
+  background-size: 200% 200%;
+  animation: rollingSilkMesh 16s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes rollingSilkMesh {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes rotateAura {
@@ -502,63 +584,151 @@ body {
   color: var(--mocha-muted);
 }
 
-/* Inputs & Haute-Couture Form Elements */
-input:not([type="radio"]):not([type="checkbox"]), select, textarea, .luxury-input {
+/* ==========================================================================
+   HAUTE-COUTURE BESPOKE INPUT BARS & FORM ELEMENTS (KRUTI SIGNATURE)
+   ========================================================================== */
+
+/* Universal Reset for Inputs & Selects */
+input:not([type="radio"]):not([type="checkbox"]), select, textarea {
   display: block;
   width: 100%;
-  border-radius: var(--radius-input);
-  background: #FFFFFF;
-  border: 1.5px solid rgba(197, 155, 81, 0.38);
-  color: var(--espresso-dark);
+  border-radius: 14px;
+  background: linear-gradient(145deg, #FFFFFF 0%, #FAF7F2 100%);
+  border: 1.5px solid rgba(197, 155, 81, 0.42);
+  color: #1A0E08;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-weight: 500;
   line-height: 1.5;
   padding: 0.92rem 1.25rem;
   outline: none;
   transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 2px 8px -2px rgba(20, 11, 7, 0.04), inset 0 1px 2px rgba(255, 255, 255, 0.9);
+  box-shadow: 0 3px 12px -2px rgba(20, 11, 7, 0.05), inset 0 1px 2px rgba(255, 255, 255, 0.95);
   -webkit-appearance: none;
   appearance: none;
 }
 
-/* Luxury Input Field with Icon Accent */
+/* Luxury Input Field Wrap with Regal Seal Badge */
 .luxury-input-wrap {
   position: relative;
   width: 100%;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #FFFFFF 0%, #FAF7F2 100%);
+  border: 1.5px solid rgba(197, 155, 81, 0.42);
+  box-shadow: 0 3px 12px -2px rgba(20, 11, 7, 0.05), inset 0 1px 2px rgba(255, 255, 255, 0.95);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
 }
-.luxury-input-wrap .luxury-input {
-  padding-left: 2.75rem !important;
+
+.luxury-input-wrap:hover {
+  border-color: rgba(197, 155, 81, 0.78);
+  box-shadow: 0 6px 20px -3px rgba(197, 155, 81, 0.18), inset 0 1px 2px rgba(255, 255, 255, 0.95);
+  transform: translateY(-1px);
 }
-.luxury-input-wrap .input-icon {
+
+.luxury-input-wrap:focus-within {
+  border-color: #C59B51;
+  background: #FFFFFF;
+  box-shadow: 0 0 0 3.5px rgba(197, 155, 81, 0.22), 0 10px 28px -4px rgba(197, 155, 81, 0.25);
+  transform: translateY(-2px);
+}
+
+/* Left Seal Medallion Badge */
+.luxury-input-wrap .input-seal {
   position: absolute;
-  left: 0.95rem;
+  left: 0.65rem;
   top: 50%;
   transform: translateY(-50%);
-  width: 1.05rem;
-  height: 1.05rem;
-  color: rgba(197, 155, 81, 0.7);
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(197, 155, 81, 0.15) 0%, rgba(230, 203, 137, 0.08) 100%);
+  border: 1px solid rgba(197, 155, 81, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #C59B51;
   pointer-events: none;
-  transition: color 0.25s ease, transform 0.25s ease;
-}
-.luxury-input-wrap:focus-within .input-icon {
-  color: var(--gold-primary);
-  transform: translateY(-50%) scale(1.1);
+  transition: all 0.25s ease;
+  z-index: 2;
+  flex-shrink: 0;
 }
 
-input::placeholder, textarea::placeholder {
-  color: rgba(120, 95, 78, 0.52);
-  font-weight: 400;
-  letter-spacing: 0.01em;
+.luxury-input-wrap:focus-within .input-seal {
+  background: #C59B51;
+  color: #140B07;
+  border-color: #DFB86C;
+  box-shadow: 0 2px 8px rgba(197, 155, 81, 0.4);
+  transform: translateY(-50%) scale(1.06);
 }
 
-input:not([type="radio"]):not([type="checkbox"]):hover, select:hover, textarea:hover, .luxury-input:hover {
+/* Luxury Input Field Inside Wrap */
+.luxury-input-wrap .luxury-input {
+  width: 100%;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+  border-radius: 14px;
+  padding: 0.95rem 1.25rem 0.95rem 3.5rem !important;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #1A0E08;
+  line-height: 1.4;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Cross-browser Placeholder Styling */
+.luxury-input::placeholder,
+input::placeholder,
+textarea::placeholder {
+  color: rgba(135, 105, 82, 0.68) !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.015em !important;
+  font-style: normal !important;
+  opacity: 1 !important;
+}
+
+.luxury-input::-webkit-input-placeholder,
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: rgba(135, 105, 82, 0.68) !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.015em !important;
+  opacity: 1 !important;
+}
+
+.luxury-input:-moz-placeholder,
+input:-moz-placeholder,
+textarea:-moz-placeholder {
+  color: rgba(135, 105, 82, 0.68) !important;
+  opacity: 1 !important;
+}
+
+.luxury-input::-moz-placeholder,
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  color: rgba(135, 105, 82, 0.68) !important;
+  opacity: 1 !important;
+}
+
+.luxury-input:-ms-input-placeholder,
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  color: rgba(135, 105, 82, 0.68) !important;
+  opacity: 1 !important;
+}
+
+/* Hover and Focus States for Standalone Inputs */
+input:not([type="radio"]):not([type="checkbox"]):hover, select:hover, textarea:hover {
   border-color: rgba(197, 155, 81, 0.75);
-  background: #FFFFFF;
   box-shadow: 0 4px 14px -2px rgba(197, 155, 81, 0.15);
 }
 
-input:not([type="radio"]):not([type="checkbox"]):focus, select:focus, textarea:focus, .luxury-input:focus {
+input:not([type="radio"]):not([type="checkbox"]):focus, select:focus, textarea:focus {
   border-color: #C59B51;
   background: #FFFFFF;
   box-shadow: 0 0 0 3.5px rgba(197, 155, 81, 0.22), 0 8px 24px -4px rgba(197, 155, 81, 0.16);
@@ -575,10 +745,21 @@ select {
   cursor: pointer;
 }
 
-textarea {
-  border-radius: 12px;
+/* Textarea variant */
+.luxury-input-wrap.textarea-wrap {
+  align-items: flex-start;
+}
+.luxury-input-wrap.textarea-wrap .input-seal {
+  top: 1.15rem;
+  transform: none;
+}
+.luxury-input-wrap.textarea-wrap:focus-within .input-seal {
+  transform: scale(1.06);
+}
+.luxury-input-wrap.textarea-wrap .luxury-input {
+  padding-top: 1.05rem !important;
+  min-height: 110px;
   resize: vertical;
-  min-height: 105px;
 }
 
 /* Haute-Couture Search & Tracking Bars */
@@ -587,20 +768,22 @@ textarea {
   align-items: center;
   gap: 0.5rem;
   padding: 0.45rem 0.55rem 0.45rem 1.25rem;
-  background: #FFFFFF;
+  background: linear-gradient(145deg, #FFFFFF 0%, #FAF7F2 100%);
   border-radius: 14px;
-  border: 1.5px solid rgba(197, 155, 81, 0.4);
+  border: 1.5px solid rgba(197, 155, 81, 0.45);
   box-shadow: 0 4px 18px -4px rgba(20, 11, 7, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .luxury-search-bar:hover {
-  border-color: rgba(197, 155, 81, 0.7);
-  box-shadow: 0 6px 20px -4px rgba(197, 155, 81, 0.14);
+  border-color: rgba(197, 155, 81, 0.75);
+  box-shadow: 0 6px 20px -4px rgba(197, 155, 81, 0.16);
+  transform: translateY(-1px);
 }
 .luxury-search-bar:focus-within {
   border-color: #C59B51;
-  box-shadow: 0 0 0 3.5px rgba(197, 155, 81, 0.22), 0 8px 26px -4px rgba(197, 155, 81, 0.2);
-  transform: translateY(-1px);
+  background: #FFFFFF;
+  box-shadow: 0 0 0 3.5px rgba(197, 155, 81, 0.22), 0 8px 26px -4px rgba(197, 155, 81, 0.22);
+  transform: translateY(-2px);
 }
 .luxury-search-bar input {
   border: none !important;
@@ -608,8 +791,8 @@ textarea {
   box-shadow: none !important;
   padding: 0.55rem 0.5rem !important;
   border-radius: 0 !important;
-  font-size: 0.9rem;
-  color: var(--espresso-dark);
+  font-size: 0.92rem;
+  color: #1A0E08;
 }
 .luxury-search-bar input:focus {
   transform: none !important;
@@ -622,12 +805,11 @@ textarea {
   border: none !important;
   background: transparent !important;
   box-shadow: none !important;
-  padding: 0.5rem 1rem !important;
+  padding: 0.55rem 1rem !important;
   border-radius: 0 !important;
 }
 #catalog-search-input {
-  border-radius: 12px;
-  padding-left: 2.75rem;
+  border-radius: 14px;
   background: #FFFFFF;
 }
 

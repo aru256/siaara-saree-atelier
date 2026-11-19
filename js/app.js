@@ -4,7 +4,10 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Initialize Lenis Smooth Inertia Scrolling
+  // 0. Initialize Cinematic Saree Opening Intro (Scene 1 to Scene 5)
+  initCinematicSareeIntro();
+
+  // 1. Initialize Fluid Natural Scrolling
   initLenis();
 
   // 2. Initialize Lucide Icons
@@ -12,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     lucide.createIcons();
   }
 
-  // 3. Render Catalog & Best Sellers
+  // 3. Render Catalog & Best Sellers (Flipkart-style 2-Column Responsive Grid)
   renderProducts();
   renderBestSellers();
 
@@ -21,8 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
   updateWishlistUI();
   updateAuthUI();
 
-  // 5. Initialize GSAP ScrollTrigger Sequences
+  // 5. Initialize GSAP Scroll Sequences & Non-Intrusive Runway Controller
   initGSAPAnimations();
+  initCollectionsRunwayController();
 
   // 6. Global Store Listeners
   window.addEventListener('siaara_products_updated', () => {
@@ -34,57 +38,170 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('siaara_user_updated', () => updateAuthUI());
 });
 
-// ================= LENIS SMOOTH SCROLL =================
+// ================= CINEMATIC SAREE OPENING INTRO (SCENES 1 TO 5) =================
+function initCinematicSareeIntro() {
+  const introOverlay = document.getElementById('cinematic-saree-intro');
+  const curtainLeft = document.getElementById('intro-curtain-left');
+  const curtainRight = document.getElementById('intro-curtain-right');
+  const seam = document.getElementById('intro-seam');
+  const centerSeal = document.getElementById('intro-center-seal');
+  const travelingLogo = document.getElementById('intro-traveling-logo');
+  const glow = document.getElementById('intro-glow');
+  const navLogo = document.getElementById('navbar-brand-logo');
+
+  if (!introOverlay) return;
+
+  // Check if intro has already been viewed in this session or reduced-motion is requested
+  const alreadyShown = sessionStorage.getItem('kruti_intro_shown') === 'true';
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (alreadyShown || prefersReduced) {
+    introOverlay.style.display = 'none';
+    if (navLogo) navLogo.style.opacity = '1';
+    document.body.style.overflow = '';
+    return;
+  }
+
+  // Lock scrolling during intro
+  document.body.style.overflow = 'hidden';
+  if (navLogo) navLogo.style.opacity = '0';
+
+  // Position traveling logo in the exact center initially
+  gsap.set(travelingLogo, {
+    top: '50%',
+    left: '50%',
+    xPercent: -50,
+    yPercent: -50,
+    opacity: 0,
+    scale: 1.15
+  });
+
+  const tl = gsap.timeline({
+    defaults: { ease: 'power3.inOut' }
+  });
+
+  // Scene 1: Closed Saree with Liquid Gold Seam & Center Seal Breathing
+  tl.fromTo(centerSeal, 
+    { scale: 0.92, opacity: 0.85 }, 
+    { scale: 1.05, opacity: 1, duration: 0.5, ease: 'power2.out' }
+  );
+
+  // Scene 2: Saree Opens — Seam Separates & Silk Curtains Part to the Sides
+  tl.to(seam, { scaleX: 3.5, opacity: 1, duration: 0.25, ease: 'power2.in' })
+    .to(seam, { opacity: 0, scaleY: 0, duration: 0.35, ease: 'power2.out' })
+    .to(centerSeal, { scale: 1.35, opacity: 0, duration: 0.35, ease: 'power2.in' }, '<')
+    .to(curtainLeft, { xPercent: -103, duration: 1.15, ease: 'power3.inOut' }, '-=0.2')
+    .to(curtainRight, { xPercent: 103, duration: 1.15, ease: 'power3.inOut' }, '<')
+    .to(introOverlay, { backgroundColor: 'rgba(20, 11, 7, 0)', duration: 0.8 }, '<');
+
+  // Scene 3: Brand Logo Reveal — Majestic Monogram Basking in Gold Radiant Glow
+  tl.to(glow, { opacity: 0.85, scale: 1.25, duration: 0.6, ease: 'power2.out' }, '-=0.75')
+    .to(travelingLogo, { opacity: 1, scale: 1.0, duration: 0.6, ease: 'power2.out' }, '<+=0.1');
+
+  // Scene 4: Logo Moves to Navbar — Smoothly Flies to Exact Navbar Position
+  tl.add(() => {
+    if (!navLogo) {
+      finishCinematicIntro();
+      return;
+    }
+
+    const navRect = navLogo.getBoundingClientRect();
+    const curRect = travelingLogo.getBoundingClientRect();
+
+    // Exact pixel displacement to seamlessly join the navbar
+    const deltaX = navRect.left - curRect.left;
+    const deltaY = navRect.top - curRect.top;
+    const targetScale = navRect.height / curRect.height;
+
+    gsap.to(glow, { opacity: 0, duration: 0.45 });
+
+    gsap.to(travelingLogo, {
+      x: `+=${deltaX}`,
+      y: `+=${deltaY}`,
+      scale: targetScale,
+      transformOrigin: 'top left',
+      duration: 0.85,
+      ease: 'power3.inOut',
+      onComplete: finishCinematicIntro
+    });
+  }, '+=0.2');
+
+  window.skipCinematicIntro = function() {
+    tl.kill();
+    finishCinematicIntro();
+  };
+
+  window.replayCinematicIntro = function() {
+    sessionStorage.removeItem('kruti_intro_shown');
+    window.location.reload();
+  };
+
+  function finishCinematicIntro() {
+    sessionStorage.setItem('kruti_intro_shown', 'true');
+    if (navLogo) navLogo.style.opacity = '1';
+    gsap.to(introOverlay, {
+      opacity: 0,
+      duration: 0.35,
+      onComplete: () => {
+        introOverlay.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+    });
+  }
+}
+
+// ================= FLUID NATURAL SCROLL CONTROLLER (ZERO STICKY FRICTION) =================
 let lenis = null;
 
 function initLenis() {
   if (window.Lenis) {
-    lenis = new Lenis({
-      duration: 0.85, // Snappy, organic, lag-free responsiveness
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-      syncTouch: true,
-      smoothTouch: false,
-      touchMultiplier: 1.2
-    });
-
-    window.lenis = lenis;
-
-    // Direct scroll sync for ScrollTrigger on wheel AND touch
-    lenis.on('scroll', () => {
-      if (window.ScrollTrigger) ScrollTrigger.update();
-    });
-
-    // Unified single RAF loop via GSAP ticker - eliminates double RAF micro-stutter
-    if (window.gsap && window.ScrollTrigger) {
-      gsap.ticker.add((time) => {
-        lenis.raf(time * 1000);
+    try {
+      lenis = new Lenis({
+        duration: 0.75,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: 'vertical',
+        gestureOrientation: 'vertical',
+        smoothWheel: true,
+        smoothTouch: false, // 100% native mobile touch response
+        wheelMultiplier: 1.0,
+        touchMultiplier: 1.0
       });
-      gsap.ticker.lagSmoothing(0);
+
+      window.lenis = lenis;
+
+      lenis.on('scroll', () => {
+        if (window.ScrollTrigger) ScrollTrigger.update();
+      });
+
+      if (window.gsap) {
+        gsap.ticker.add((time) => {
+          lenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0);
+      }
+    } catch (e) {
+      console.warn('Lenis smooth scroll bypassed:', e);
     }
   }
 
-  // Always bind window scroll to ScrollTrigger for rock-solid mobile touch responsiveness
+  // Direct native scroll hook for instant responsiveness on mobile & desktop
   window.addEventListener('scroll', () => {
     if (window.ScrollTrigger) ScrollTrigger.update();
   }, { passive: true });
 }
 
-// ================= GSAP SCROLL ANIMATIONS =================
+// ================= GSAP SCROLL ANIMATIONS (NON-PINNED, NATURAL FLOW) =================
 function initGSAPAnimations() {
   if (!window.gsap || !window.ScrollTrigger) return;
 
   gsap.registerPlugin(ScrollTrigger);
 
-  // Critical for Mobile: Ignore browser address bar collapse/expand to avoid jerky jumps
   ScrollTrigger.config({
     ignoreMobileResize: true,
     autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load'
   });
 
-  // 1. Hero Entrance Sequence (Centered Monumental Opening)
+  // 1. Hero Entrance Sequence
   const heroTl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 1.0 } });
   heroTl.from('.hero-content > *', {
     y: 35,
@@ -93,7 +210,7 @@ function initGSAPAnimations() {
     delay: 0.15
   });
 
-  // 2. Hero Natural Scroll Parallax (Drifts up and gracefully dissolves into next section)
+  // 2. Hero Natural Scroll Parallax
   gsap.to('.hero-content', {
     y: -50,
     opacity: 0.15,
@@ -125,14 +242,14 @@ function initGSAPAnimations() {
   ScrollTrigger.batch('.product-card', {
     onEnter: (batch) => {
       gsap.from(batch, {
-        y: 40,
+        y: 30,
         opacity: 0,
-        stagger: 0.08,
-        duration: 0.85,
+        stagger: 0.06,
+        duration: 0.75,
         ease: 'power3.out'
       });
     },
-    start: 'top 88%',
+    start: 'top 90%',
     once: true
   });
 
@@ -247,56 +364,20 @@ function initGSAPAnimations() {
     });
   }
 
-  // 9. Horizontal Collection Runway (Pinned Vertical-to-Horizontal Runway Experience on PC & Mobile)
+  // 9. Horizontal Collection Runway Entrance (Natural Fluid Scroll, Zero Trapping)
   const runwaySection = document.getElementById('collections');
-  const runwayTrack = document.getElementById('runway-track');
-
-  if (runwaySection && runwayTrack) {
-    const isMobile = window.innerWidth < 768;
-    const getScrollDistance = () => -(runwayTrack.scrollWidth - window.innerWidth + (isMobile ? 24 : 80));
-
-    const runwayTween = gsap.to(runwayTrack, {
-      x: getScrollDistance,
-      ease: 'none'
-    });
-
-    const scrollDistanceMultiplier = isMobile ? 1200 : 1800;
-
-    ScrollTrigger.create({
-      trigger: runwaySection,
-      start: 'top top',
-      end: () => `+=${Math.max(scrollDistanceMultiplier, runwayTrack.scrollWidth - window.innerWidth + 200)}`,
-      pin: true,
-      pinSpacing: true,
-      anticipatePin: 1,
-      animation: runwayTween,
-      scrub: isMobile ? 0.6 : 1.0,
-      invalidateOnRefresh: true,
-      onUpdate: (self) => {
-        const p = self.progress;
-        const currentIdx = Math.min(5, Math.floor(p * 5) + 1);
-        const indexDisp = document.getElementById('runway-index-display');
-        if (indexDisp) indexDisp.textContent = '0' + currentIdx;
-        const progBar = document.getElementById('runway-progress-bar');
-        if (progBar) progBar.style.width = `${Math.max(20, p * 100)}%`;
-      }
-    });
-
-    // Counter-parallax on runway panel imagery for high-fashion spatial depth
-    gsap.utils.toArray('.runway-panel img').forEach((img) => {
-      gsap.fromTo(img,
-        { xPercent: isMobile ? 4 : 8 },
-        {
-          xPercent: isMobile ? -4 : -8,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: runwaySection,
-            start: 'top top',
-            end: () => `+=${Math.max(scrollDistanceMultiplier, runwayTrack.scrollWidth - window.innerWidth + 200)}`,
-            scrub: isMobile ? 0.6 : 1.2
-          }
-        }
-      );
+  if (runwaySection) {
+    gsap.from('#collections .runway-panel', {
+      scrollTrigger: {
+        trigger: runwaySection,
+        start: 'top 82%',
+        toggleActions: 'play none none none'
+      },
+      y: 40,
+      opacity: 0,
+      duration: 0.85,
+      stagger: 0.1,
+      ease: 'power3.out'
     });
   }
 
@@ -318,34 +399,65 @@ function initGSAPAnimations() {
     );
   });
 
-  // 11. Craftsmanship ScrollTrigger (Desktop Pinned Stage Storytelling, Mobile Active Scrub)
-  const pinWrap = document.getElementById('craftsmanship-pin-wrap');
-  if (pinWrap) {
-    const isDesktop = window.innerWidth >= 1024;
-    ScrollTrigger.create({
-      trigger: pinWrap,
-      start: isDesktop ? 'top 12%' : 'top 60%',
-      end: isDesktop ? '+=1600' : 'bottom 40%',
-      pin: isDesktop,
-      pinSpacing: isDesktop,
-      anticipatePin: 1,
-      scrub: 0.8,
-      onUpdate: (self) => {
-        const p = self.progress;
-        let idx = 0;
-        if (p > 0.75) idx = 3;
-        else if (p > 0.50) idx = 2;
-        else if (p > 0.25) idx = 1;
-        else idx = 0;
-        if (idx !== activeCraftIndex) {
-          setCraftStage(idx);
-        }
-      }
+  // 11. Craftsmanship Section (Natural Fluid Scroll, Pure Heritage Metier)
+  const craftWrap = document.getElementById('craftsmanship-pin-wrap');
+  if (craftWrap) {
+    gsap.from(craftWrap, {
+      scrollTrigger: {
+        trigger: craftWrap,
+        start: 'top 85%',
+        toggleActions: 'play none none none'
+      },
+      y: 35,
+      opacity: 0,
+      duration: 0.9,
+      ease: 'power3.out'
     });
   }
 
   // 12. Initialize Interactive 3D Product Card Tilt
   initProductCard3DTilt();
+}
+
+// ================= HORIZONTAL COLLECTION RUNWAY CONTROLLER =================
+function slideCollections(direction) {
+  const track = document.getElementById('runway-track');
+  if (!track) return;
+
+  const panel = track.querySelector('.runway-panel');
+  const panelWidth = panel ? panel.offsetWidth + 24 : 380;
+
+  track.scrollBy({
+    left: direction * panelWidth,
+    behavior: 'smooth'
+  });
+}
+
+function initCollectionsRunwayController() {
+  const track = document.getElementById('runway-track');
+  if (!track) return;
+
+  const updateRunwayState = () => {
+    const panels = track.querySelectorAll('.runway-panel');
+    if (!panels.length) return;
+
+    const scrollLeft = track.scrollLeft;
+    const totalScroll = track.scrollWidth - track.clientWidth;
+    const panelWidth = panels[0].offsetWidth + 24;
+
+    const currentIdx = Math.min(panels.length, Math.max(1, Math.round(scrollLeft / panelWidth) + 1));
+
+    const indexDisp = document.getElementById('runway-index-display');
+    if (indexDisp) indexDisp.textContent = '0' + currentIdx;
+
+    const progBar = document.getElementById('runway-progress-bar');
+    if (progBar && totalScroll > 0) {
+      const progressPercent = Math.min(100, Math.max(20, (scrollLeft / totalScroll) * 100));
+      progBar.style.width = `${progressPercent}%`;
+    }
+  };
+
+  track.addEventListener('scroll', updateRunwayState, { passive: true });
 }
 
 // ================= INTERACTIVE 3D PRODUCT CARD TILT (MOUSE & TOUCH) =================
@@ -522,10 +634,12 @@ function renderProducts() {
 
   container.innerHTML = products.map((product) => {
     const isWishlisted = StoreDB.isInWishlist(product.id);
+    const discountPercent = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
+
     return `
       <div class="product-card group flex flex-col justify-between">
         <div>
-          <!-- Image Container with Reveal Curtain -->
+          <!-- Image Container with Aspect Ratio & Reveal -->
           <div class="relative overflow-hidden aspect-[3/4] bg-brand-sand cursor-pointer img-curtain-wrap" onclick="openProductModal('${product.id}')">
             <img 
               src="${product.images[0]}" 
@@ -535,68 +649,68 @@ function renderProducts() {
             />
             
             <!-- Tag Badge -->
-            <span class="absolute top-3.5 left-3.5 badge-luxury bg-brand-dark/90 text-brand-gold-light text-[9px]">
+            <span class="absolute top-2.5 sm:top-3.5 left-2.5 sm:left-3.5 badge-luxury bg-brand-dark/90 text-brand-gold-light text-[8px] sm:text-[9px] px-2 py-0.5">
               ${product.tag}
             </span>
 
             <!-- Wishlist Button -->
             <button 
               onclick="event.stopPropagation(); toggleWishlistItem('${product.id}')" 
-              class="absolute top-3.5 right-3.5 w-8 h-8 rounded-full ${isWishlisted ? 'bg-brand-terracotta text-white' : 'bg-white/85 text-brand-mocha hover:bg-white'} flex items-center justify-center transition-all shadow-md"
+              class="absolute top-2.5 sm:top-3.5 right-2.5 sm:right-3.5 w-7 h-7 sm:w-8 sm:h-8 rounded-full ${isWishlisted ? 'bg-brand-terracotta text-white' : 'bg-white/90 text-brand-mocha hover:bg-white'} flex items-center justify-center transition-all shadow-md"
               title="Add to Wishlist"
             >
               <i data-lucide="heart" class="w-3.5 h-3.5 ${isWishlisted ? 'fill-current' : ''}"></i>
             </button>
 
-            <!-- Quick View Overlay Bar -->
-            <div class="absolute inset-x-3 bottom-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <button onclick="event.stopPropagation(); openProductModal('${product.id}')" class="w-full py-2.5 rounded-full bg-white/95 text-brand-dark font-medium text-[11px] shadow-lg hover:bg-brand-gold hover:text-brand-dark transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider">
+            <!-- Quick View Overlay Bar (Desktop) -->
+            <div class="hidden sm:block absolute inset-x-3 bottom-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <button onclick="event.stopPropagation(); openProductModal('${product.id}')" class="w-full py-2 rounded-full bg-white/95 text-brand-dark font-medium text-[11px] shadow-lg hover:bg-brand-gold hover:text-brand-dark transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider">
                 <i data-lucide="eye" class="w-3.5 h-3.5"></i> Quick View
               </button>
             </div>
           </div>
 
-          <!-- Product Details -->
-          <div class="p-4 sm:p-5">
-            <div class="flex items-center justify-between text-[10px] text-brand-mocha mb-1 font-semibold uppercase tracking-widest">
-              <span>${product.collectionName}</span>
-              <span class="flex items-center gap-1 text-brand-gold">
-                <i data-lucide="star" class="w-3 h-3 fill-current"></i> ${product.rating}
+          <!-- Product Details (Compact, Two-Column Optimized) -->
+          <div class="p-3 sm:p-4 pb-2">
+            <div class="flex items-center justify-between text-[9px] sm:text-[10px] text-brand-mocha mb-1 font-semibold uppercase tracking-wider">
+              <span class="text-brand-gold font-bold">${product.collectionName}</span>
+              <span class="flex items-center gap-0.5 text-amber-700 font-bold bg-amber-50 px-1.5 py-0.5 rounded text-[9px]">
+                <i data-lucide="star" class="w-2.5 h-2.5 fill-current text-amber-500"></i> ${product.rating}
               </span>
             </div>
 
-            <h3 onclick="openProductModal('${product.id}')" class="font-cormorant text-lg font-bold text-brand-espresso hover:text-brand-gold transition-colors cursor-pointer line-clamp-1 leading-snug">
+            <h3 onclick="openProductModal('${product.id}')" class="font-cormorant text-sm sm:text-base font-bold text-brand-espresso hover:text-brand-gold transition-colors cursor-pointer truncate leading-snug" title="${product.name}">
               ${product.name}
             </h3>
 
-            <p class="text-[11px] text-brand-mocha mt-1 line-clamp-2 font-light">
-              ${product.description}
-            </p>
-
-            <!-- Color Swatch -->
-            <div class="flex items-center gap-2 mt-3 text-[10px] text-brand-mocha uppercase tracking-wider">
-              <span class="inline-block w-3 h-3 rounded-full border border-brand-sand shadow-sm" style="background-color: ${product.colorHex}"></span>
-              <span>${product.color}</span>
+            <!-- Color Swatch Indicator -->
+            <div class="flex items-center gap-1.5 mt-1 text-[9px] sm:text-[10px] text-brand-mocha uppercase">
+              <span class="inline-block w-2.5 h-2.5 rounded-full border border-brand-sand shadow-xs" style="background-color: ${product.colorHex}"></span>
+              <span class="truncate">${product.color}</span>
             </div>
           </div>
         </div>
 
-        <!-- Price & Action Button -->
-        <div class="p-4 sm:p-5 pt-0 border-hairline-t flex items-center justify-between mt-auto">
-          <div>
-            <span class="text-[11px] text-brand-mocha/70 line-through block leading-none">
+        <!-- Price & Action Button (Flipkart Shopping Standard) -->
+        <div class="p-3 sm:p-4 pt-2 border-t border-brand-gold/15 flex items-end justify-between mt-auto gap-2">
+          <div class="flex flex-col">
+            <div class="flex items-center gap-1.5">
+              <span class="font-cormorant text-base sm:text-lg font-bold text-brand-espresso leading-none">
+                ${Currency.format(product.price)}
+              </span>
+              ${discountPercent > 0 ? `<span class="text-[9px] sm:text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1 py-0.2 rounded leading-none">${discountPercent}% OFF</span>` : ''}
+            </div>
+            <span class="text-[10px] sm:text-[11px] text-brand-mocha/60 line-through mt-0.5 leading-none">
               ${Currency.format(product.originalPrice)}
-            </span>
-            <span class="font-cormorant text-xl font-bold text-brand-espresso">
-              ${Currency.format(product.price)}
             </span>
           </div>
 
           <button 
             onclick="handleAddToCart('${product.id}')" 
-            class="px-3.5 py-1.5 rounded-full bg-brand-dark hover:bg-brand-gold hover:text-brand-dark text-brand-sand text-[11px] font-semibold uppercase tracking-wider transition-all flex items-center gap-1.5 shadow"
+            class="px-2.5 sm:px-3.5 py-1.5 rounded-full bg-brand-dark hover:bg-brand-gold hover:text-brand-dark text-brand-sand text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider transition-all flex items-center gap-1 shadow-sm shrink-0"
+            title="Add to Shopping Bag"
           >
-            <i data-lucide="shopping-bag" class="w-3.5 h-3.5 text-brand-gold group-hover:text-brand-dark"></i>
+            <i data-lucide="shopping-bag" class="w-3 h-3 text-brand-gold"></i>
             <span>Add</span>
           </button>
         </div>
@@ -608,35 +722,60 @@ function renderProducts() {
   initProductCard3DTilt();
 }
 
-// ================= RENDER BEST SELLERS =================
+// ================= RENDER BEST SELLERS (FLIPKART-STYLE 2-COLUMN LUXURY) =================
 function renderBestSellers() {
   const container = document.getElementById('bestsellers-grid');
   if (!container) return;
 
   const products = StoreDB.getProducts().filter(p => p.isBestSeller).slice(0, 4);
 
-  container.innerHTML = products.map((product) => `
-    <div class="product-card group flex flex-col justify-between">
-      <div class="relative overflow-hidden aspect-[3/4] bg-brand-sand cursor-pointer img-curtain-wrap" onclick="openProductModal('${product.id}')">
-        <img src="${product.images[0]}" alt="${product.name}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-        <span class="absolute top-3.5 left-3.5 badge-luxury bg-brand-gold text-brand-dark text-[9px] font-bold">
-          Best Seller
-        </span>
-      </div>
-      <div class="p-4">
-        <span class="text-[10px] uppercase tracking-widest text-brand-gold font-bold">${product.collectionName}</span>
-        <h4 onclick="openProductModal('${product.id}')" class="font-cormorant text-lg font-bold text-brand-espresso hover:text-brand-gold transition-colors cursor-pointer truncate mt-0.5">
-          ${product.name}
-        </h4>
-        <div class="flex items-center justify-between mt-3 pt-3 border-hairline-t">
-          <span class="font-cormorant text-xl font-bold text-brand-gold">${Currency.format(product.price)}</span>
-          <button onclick="handleAddToCart('${product.id}')" class="btn-luxury-primary !py-1.5 !px-3.5 !text-[10px]">
-            Add to Bag
+  container.innerHTML = products.map((product) => {
+    const isWishlisted = StoreDB.isInWishlist(product.id);
+    const discountPercent = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
+
+    return `
+      <div class="product-card group flex flex-col justify-between">
+        <div>
+          <div class="relative overflow-hidden aspect-[3/4] bg-brand-sand cursor-pointer img-curtain-wrap" onclick="openProductModal('${product.id}')">
+            <img src="${product.images[0]}" alt="${product.name}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+            <span class="absolute top-2.5 sm:top-3.5 left-2.5 sm:left-3.5 badge-luxury bg-brand-gold text-brand-dark text-[8px] sm:text-[9px] px-2 py-0.5 font-bold">
+              Best Seller
+            </span>
+            <button 
+              onclick="event.stopPropagation(); toggleWishlistItem('${product.id}')" 
+              class="absolute top-2.5 sm:top-3.5 right-2.5 sm:right-3.5 w-7 h-7 sm:w-8 sm:h-8 rounded-full ${isWishlisted ? 'bg-brand-terracotta text-white' : 'bg-white/90 text-brand-mocha hover:bg-white'} flex items-center justify-center transition-all shadow-md"
+              title="Add to Wishlist"
+            >
+              <i data-lucide="heart" class="w-3.5 h-3.5 ${isWishlisted ? 'fill-current' : ''}"></i>
+            </button>
+          </div>
+          <div class="p-3 sm:p-4 pb-2">
+            <span class="text-[9px] sm:text-[10px] uppercase tracking-widest text-brand-gold font-bold block mb-1">${product.collectionName}</span>
+            <h4 onclick="openProductModal('${product.id}')" class="font-cormorant text-sm sm:text-base font-bold text-brand-espresso hover:text-brand-gold transition-colors cursor-pointer truncate mt-0.5">
+              ${product.name}
+            </h4>
+          </div>
+        </div>
+        <div class="p-3 sm:p-4 pt-2 border-t border-brand-gold/15 flex items-end justify-between mt-auto gap-2">
+          <div class="flex flex-col">
+            <div class="flex items-center gap-1.5">
+              <span class="font-cormorant text-base sm:text-lg font-bold text-brand-espresso leading-none">
+                ${Currency.format(product.price)}
+              </span>
+              ${discountPercent > 0 ? `<span class="text-[9px] sm:text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1 py-0.2 rounded leading-none">${discountPercent}% OFF</span>` : ''}
+            </div>
+            <span class="text-[10px] sm:text-[11px] text-brand-mocha/60 line-through mt-0.5 leading-none">
+              ${Currency.format(product.originalPrice)}
+            </span>
+          </div>
+          <button onclick="handleAddToCart('${product.id}')" class="px-2.5 sm:px-3.5 py-1.5 rounded-full bg-brand-dark hover:bg-brand-gold hover:text-brand-dark text-brand-sand text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider transition-all flex items-center gap-1 shadow-sm shrink-0">
+            <i data-lucide="shopping-bag" class="w-3 h-3 text-brand-gold"></i>
+            <span>Add</span>
           </button>
         </div>
       </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 
   if (window.lucide) lucide.createIcons();
   initProductCard3DTilt();
@@ -670,6 +809,7 @@ function openSearchModal() {
   const modal = document.getElementById('search-modal');
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
+  if (window.lucide) lucide.createIcons();
   const input = document.getElementById('catalog-search-input');
   if (input) {
     input.focus();
@@ -942,8 +1082,12 @@ function openProductModal(productId) {
         </h3>
 
         <div class="flex items-center gap-2 mt-1 text-xs text-brand-gold">
-          <span class="flex items-center">
-            ${'<i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>'.repeat(5)}
+          <span class="flex items-center text-amber-500">
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
           </span>
           <span class="text-brand-mocha font-light">(${product.reviewsCount} Connoisseur Reviews)</span>
         </div>
@@ -1064,6 +1208,7 @@ function openCheckoutModal() {
 
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
+  if (window.lucide) lucide.createIcons();
 }
 
 function closeCheckoutModal() {
@@ -1243,6 +1388,7 @@ function switchInquiryTab(tab) {
     tabMsg.classList.remove('bg-brand-dark', 'text-brand-sand', 'shadow-sm');
     tabMsg.classList.add('text-brand-mocha');
   }
+  if (window.lucide) lucide.createIcons();
 }
 
 function handleContactSubmit(e) {
@@ -1335,6 +1481,7 @@ function openPolicyModal(policyKey) {
   const modal = document.getElementById('policy-modal');
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
+  if (window.lucide) lucide.createIcons();
 }
 
 function closePolicyModal() {
@@ -1347,6 +1494,7 @@ function openAuthModal() {
   const modal = document.getElementById('auth-modal');
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
+  if (window.lucide) lucide.createIcons();
 }
 
 function closeAuthModal() {
@@ -1375,6 +1523,7 @@ function switchAuthTab(tab) {
     tabLogin.classList.remove('bg-brand-dark', 'text-brand-sand');
     tabLogin.classList.add('text-brand-mocha');
   }
+  if (window.lucide) lucide.createIcons();
 }
 
 function handleLogin(e) {

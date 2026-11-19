@@ -47,6 +47,50 @@
 </head>
 <body class="bg-brand-beige text-brand-espresso antialiased selection:bg-brand-gold selection:text-brand-dark relative">
 
+  <!-- ================= CINEMATIC SAREE OPENING INTRO (SCENES 1 TO 5) ================= -->
+  <div id="cinematic-saree-intro" class="fixed inset-0 z-[120] pointer-events-auto overflow-hidden bg-[#140B07] flex items-center justify-center">
+    
+    <!-- Left Silk Saree Drape Panel with Liquid Gold Antique Zari Border -->
+    <div id="intro-curtain-left" class="intro-curtain intro-curtain-left">
+      <div class="curtain-gold-border right-0 border-r border-[#ECCF96]/80 shadow-[4px_0_24px_rgba(197,155,81,0.6)]"></div>
+    </div>
+
+    <!-- Right Silk Saree Drape Panel with Liquid Gold Antique Zari Border -->
+    <div id="intro-curtain-right" class="intro-curtain intro-curtain-right">
+      <div class="curtain-gold-border left-0 border-l border-[#ECCF96]/80 shadow-[-4px_0_24px_rgba(197,155,81,0.6)]"></div>
+    </div>
+
+    <!-- Central Radiant Gold Brocade Seam & Zari Thread -->
+    <div id="intro-seam" class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-1 sm:w-1.5 bg-gradient-to-b from-transparent via-[#ECCF96] to-transparent z-20 pointer-events-none shadow-[0_0_25px_#ECCF96]"></div>
+    
+    <!-- Central Royal Loom Seal (Flashes as Seam Opens) -->
+    <div id="intro-center-seal" class="absolute z-25 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-[#ECCF96] via-[#C59B51] to-[#382319] flex items-center justify-center text-brand-dark font-rozha text-2xl sm:text-3xl font-bold shadow-[0_0_40px_rgba(197,155,81,0.85)] border-2 border-[#ECCF96] pointer-events-none">
+      क
+    </div>
+
+    <!-- Radiant Ambient Light Aura behind Traveling Logo -->
+    <div id="intro-glow" class="absolute w-80 sm:w-96 h-80 sm:h-96 rounded-full bg-gradient-to-r from-[#ECCF96]/35 via-[#C59B51]/25 to-transparent blur-3xl z-15 pointer-events-none opacity-0"></div>
+
+    <!-- Traveling Brand Monogram (Smoothly Journeys from Center to Navbar) -->
+    <div id="intro-traveling-logo" class="fixed z-30 flex items-center gap-3 sm:gap-4 pointer-events-none opacity-0 will-change-transform">
+      <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-brand-gold-light via-brand-gold to-brand-mocha flex items-center justify-center text-brand-dark font-rozha font-bold text-2xl sm:text-3xl shadow-2xl border-2 border-[#ECCF96]">
+        क
+      </div>
+      <div class="flex flex-col text-left">
+        <div class="flex items-baseline gap-1.5 sm:gap-2">
+          <span class="font-rozha text-2xl sm:text-3xl font-bold text-brand-espresso tracking-wide leading-none">कल्रा</span>
+          <span class="font-cinzel text-sm sm:text-base tracking-[0.2em] font-bold text-brand-gold">KRUTI</span>
+        </div>
+        <span class="text-[9px] sm:text-[10px] tracking-[0.32em] text-brand-mocha uppercase mt-0.5 font-medium">by Vyara · Atelier</span>
+      </div>
+    </div>
+
+    <!-- Skip Intro Button -->
+    <button id="skip-intro-btn" onclick="skipCinematicIntro()" class="absolute bottom-6 right-6 z-40 px-3.5 py-1.5 rounded-full bg-black/50 backdrop-blur-md text-brand-sand/80 hover:text-white hover:bg-black/80 text-[10px] uppercase tracking-widest border border-brand-gold/30 transition-all">
+      Skip Intro
+    </button>
+  </div>
+
   <!-- ================= PERSISTENT AMBIENT LIGHT MESH (NATURAL SCROLL TRANSITIONS) ================= -->
   <div class="ambient-bg-layer" aria-hidden="true">
     <div class="ambient-orb ambient-orb-gold" id="ambient-orb-1"></div>
@@ -78,7 +122,7 @@
     <nav class="glass-nav py-3 px-4 sm:px-7 rounded-full flex items-center justify-between transition-all duration-300">
       
       <!-- Brand Seal & Monogram -->
-      <a href="#home" class="flex items-center gap-2.5 sm:gap-3.5 group">
+      <a href="#home" id="navbar-brand-logo" class="flex items-center gap-2.5 sm:gap-3.5 group">
         <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-brand-gold-light via-brand-gold to-brand-mocha flex items-center justify-center text-brand-dark font-rozha font-bold text-lg shadow-md group-hover:scale-105 transition-transform border border-brand-sand/60">
           क
         </div>
@@ -302,14 +346,14 @@
     </div>
   </section>
 
-  <!-- ================= D. HORIZONTAL COLLECTION RUNWAY (CINEMATIC PINNED SCROLL) ================= -->
-  <section id="collections" class="relative overflow-hidden border-hairline-t bg-brand-cream/40">
+  <!-- ================= D. HORIZONTAL COLLECTION RUNWAY (NATURAL FLUID GLIDE) ================= -->
+  <section id="collections" class="relative overflow-hidden border-hairline-t bg-brand-cream/40 py-16 sm:py-24">
     
-    <!-- Pinned Runway Viewport Container -->
-    <div id="runway-pin-container" class="relative min-h-[92vh] sm:min-h-screen flex flex-col justify-between py-10 sm:py-14 overflow-hidden">
+    <!-- Runway Container (Zero Pin Hijacking, 100% Fluid Vertical Scroll) -->
+    <div id="runway-container" class="relative max-w-7xl mx-auto flex flex-col justify-between">
       
       <!-- Runway Header Bar -->
-      <div class="px-4 sm:px-12 max-w-7xl w-full mx-auto flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-4 sm:mb-6 z-10">
+      <div class="px-4 sm:px-8 w-full flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 z-10">
         <div>
           <div class="badge-luxury badge-gold mb-2.5">
             <i data-lucide="crown" class="w-3.5 h-3.5 text-brand-gold"></i>
@@ -319,19 +363,28 @@
             The Five Signature <span class="font-italiana italic text-gold-gradient font-normal">Weaves</span>
           </h2>
         </div>
-        <div class="flex items-center gap-5 text-xs text-brand-mocha">
-          <span class="hidden sm:inline font-light tracking-wider uppercase text-[11px]">Scroll vertically to travel the runway</span>
-          <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-sand/70 border border-brand-gold/30">
+        
+        <!-- Controls: Counter & Luxury Gliding Arrows -->
+        <div class="flex items-center gap-3 sm:gap-4 text-xs text-brand-mocha">
+          <div class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-brand-sand/70 border border-brand-gold/30 shadow-sm">
             <span id="runway-index-display" class="font-cinzel text-sm sm:text-base font-bold text-brand-espresso">01</span>
             <span class="text-brand-gold font-bold">/</span>
             <span class="text-brand-mocha/70 text-xs">05</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <button onclick="slideCollections(-1)" title="Previous Weave" class="w-9 h-9 rounded-full bg-white hover:bg-brand-gold hover:text-brand-dark text-brand-espresso border border-brand-gold/30 flex items-center justify-center transition-all shadow-sm">
+              <i data-lucide="chevron-left" class="w-4 h-4"></i>
+            </button>
+            <button onclick="slideCollections(1)" title="Next Weave" class="w-9 h-9 rounded-full bg-white hover:bg-brand-gold hover:text-brand-dark text-brand-espresso border border-brand-gold/30 flex items-center justify-center transition-all shadow-sm">
+              <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </button>
           </div>
         </div>
       </div>
 
       <!-- Horizontal Track Viewport Layer -->
-      <div class="relative w-full overflow-hidden flex-1 flex items-center">
-        <div id="runway-track" class="runway-track flex gap-6 sm:gap-10 px-4 sm:px-12 will-change-transform">
+      <div class="relative w-full overflow-hidden flex-1 flex items-center py-2">
+        <div id="runway-track" class="runway-track flex gap-6 sm:gap-8 px-4 sm:px-8 overflow-x-auto scroll-smooth scrollbar-none snap-x snap-mandatory will-change-transform">
           
           <!-- Runway Panel 1: Tissue Silk -->
           <div class="runway-panel p-6 sm:p-10 flex flex-col md:flex-row gap-6 sm:gap-10 items-center justify-between">
@@ -522,9 +575,9 @@
       </div>
 
       <!-- Runway Footer Progress Bar -->
-      <div class="px-4 sm:px-12 max-w-7xl w-full mx-auto mt-4 sm:mt-6 z-10 flex items-center justify-between gap-6">
+      <div class="px-4 sm:px-8 w-full mx-auto mt-6 z-10 flex items-center justify-between gap-6">
         <div class="flex-1 bg-brand-sand/70 h-1.5 rounded-full overflow-hidden border border-brand-gold/20">
-          <div id="runway-progress-bar" class="bg-gradient-to-r from-brand-gold via-brand-gold-light to-brand-gold h-full rounded-full transition-all duration-150" style="width: 20%;"></div>
+          <div id="runway-progress-bar" class="bg-gradient-to-r from-brand-gold via-brand-gold-light to-brand-gold h-full rounded-full transition-all duration-300" style="width: 20%;"></div>
         </div>
         <a href="#shop" class="btn-luxury-outline !py-2 !px-5 !text-[11px] shrink-0">
           <span>View All Atelier Sarees</span>
@@ -575,19 +628,19 @@
       </div>
     </div>
 
-    <!-- Saree Cards Grid -->
-    <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
+    <!-- Saree Cards Grid (Two Products Per Row on Mobile, Four Columns on Desktop) -->
+    <div id="products-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
       <!-- Populated dynamically via store-data.js & app.js -->
     </div>
   </section>
 
-  <!-- ================= F. CRAFTSMANSHIP (CINEMATIC PINNED SCROLL STORYTELLING) ================= -->
+  <!-- ================= F. CRAFTSMANSHIP (HERITAGE METIER STORYTELLING) ================= -->
   <section id="craftsmanship" class="py-20 sm:py-28 px-4 sm:px-8 max-w-7xl mx-auto border-hairline-t">
     
     <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
       <div class="badge-luxury badge-espresso mb-3">
         <i data-lucide="scissors" class="w-3.5 h-3.5 text-brand-gold"></i>
-        <span>Generational Métier · Pinned Storytelling</span>
+        <span>Generational Métier · Pure Handloom Craftsmanship</span>
       </div>
       <h2 class="font-cormorant text-4xl sm:text-6xl font-normal text-brand-espresso">
         The Anatomy of a <span class="font-italiana italic text-gold-gradient font-normal">Masterpiece</span>
@@ -714,7 +767,7 @@
       </a>
     </div>
 
-    <div id="bestsellers-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
+    <div id="bestsellers-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
       <!-- Populated dynamically -->
     </div>
   </section>
@@ -815,8 +868,10 @@
 
       <!-- Tracking Search Form -->
       <form onsubmit="handleTrackOrder(event)" class="max-w-md mx-auto luxury-search-bar mb-6">
-        <i data-lucide="search" class="w-4 h-4 text-brand-gold shrink-0"></i>
-        <input type="text" id="track-order-input" placeholder="e.g. KLA-88342 or 9948033211" class="w-full text-xs sm:text-sm text-brand-espresso font-medium" required />
+        <div class="input-seal !static !transform-none !w-8 !h-8 !rounded-lg shrink-0">
+          <i data-lucide="search" class="w-4 h-4"></i>
+        </div>
+        <input type="text" id="track-order-input" placeholder="e.g. KLA-88342 or 9948033211" class="w-full text-xs sm:text-sm text-brand-espresso font-medium !pl-2" required />
         <button type="submit" class="btn-luxury-primary !py-2.5 !px-6 !text-xs shrink-0">
           <span>Track</span>
           <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
@@ -895,8 +950,19 @@
         </div>
 
         <!-- Right Form Column: Haute-Couture Inquiry Bar & Booking Suite -->
-        <div class="lg:col-span-7 p-6 sm:p-10 rounded-[28px] bg-gradient-to-b from-white/95 to-[#FAF7F2]/95 backdrop-blur-xl text-brand-espresso border border-brand-gold/40 shadow-2xl relative overflow-hidden">
+        <div class="lg:col-span-7 p-6 sm:p-10 rounded-[28px] bg-gradient-to-b from-[#FFFDF9]/95 via-[#FAF6EE]/95 to-[#F5EFE4]/95 backdrop-blur-xl text-brand-espresso border border-brand-gold/40 shadow-2xl relative overflow-hidden">
           
+          <!-- Private Salon Header -->
+          <div class="flex items-center justify-between pb-4 mb-6 border-hairline-b">
+            <div>
+              <span class="text-[10px] uppercase tracking-[0.25em] text-brand-gold font-bold block">Private Salon Desk</span>
+              <h3 class="font-cormorant text-2xl font-bold text-brand-espresso">Haute-Couture Consultation</h3>
+            </div>
+            <span class="text-[10px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-300/60 px-3 py-1 rounded-full flex items-center gap-1.5 shadow-sm">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Concierge Active
+            </span>
+          </div>
+
           <!-- Inquiry Tabs -->
           <div class="flex gap-2 p-1.5 bg-brand-sand/70 rounded-xl mb-6 text-xs font-semibold uppercase tracking-wider border border-brand-gold/25">
             <button onclick="switchInquiryTab('message')" id="inquiry-tab-msg" class="w-1/2 py-2.5 rounded-lg bg-brand-dark text-brand-sand transition-all shadow-sm">
@@ -908,25 +974,35 @@
           </div>
 
           <!-- Tab 1: General Inquiry Form -->
-          <form id="inquiry-msg-form" onsubmit="handleContactSubmit(event)" class="space-y-4">
+          <form id="inquiry-msg-form" onsubmit="handleContactSubmit(event)" class="space-y-4 sm:space-y-5">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label class="block text-[11px] font-semibold text-brand-espresso uppercase tracking-wider mb-1.5 flex items-center justify-between">
-                  <span>Your Full Name</span>
-                  <span class="text-brand-gold text-[10px] lowercase font-normal italic">required</span>
+                  <span class="flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-gold"></span>
+                    <span>Your Full Name</span>
+                  </span>
+                  <span class="text-brand-gold text-[10px] font-semibold tracking-wider">REQUIRED</span>
                 </label>
                 <div class="luxury-input-wrap">
-                  <i data-lucide="user" class="input-icon"></i>
+                  <div class="input-seal">
+                    <i data-lucide="user" class="w-4 h-4"></i>
+                  </div>
                   <input type="text" id="contact-name" placeholder="Priyanka Sen" class="luxury-input" required />
                 </div>
               </div>
               <div>
                 <label class="block text-[11px] font-semibold text-brand-espresso uppercase tracking-wider mb-1.5 flex items-center justify-between">
-                  <span>Mobile / WhatsApp</span>
-                  <span class="text-brand-gold text-[10px] lowercase font-normal italic">required</span>
+                  <span class="flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-gold"></span>
+                    <span>Mobile / WhatsApp</span>
+                  </span>
+                  <span class="text-brand-gold text-[10px] font-semibold tracking-wider">REQUIRED</span>
                 </label>
                 <div class="luxury-input-wrap">
-                  <i data-lucide="phone" class="input-icon"></i>
+                  <div class="input-seal">
+                    <i data-lucide="phone" class="w-4 h-4"></i>
+                  </div>
                   <input type="tel" id="contact-phone" placeholder="+91 98200 12345" class="luxury-input" required />
                 </div>
               </div>
@@ -935,21 +1011,31 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label class="block text-[11px] font-semibold text-brand-espresso uppercase tracking-wider mb-1.5 flex items-center justify-between">
-                  <span>Email Address</span>
-                  <span class="text-brand-gold text-[10px] lowercase font-normal italic">required</span>
+                  <span class="flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-gold"></span>
+                    <span>Email Address</span>
+                  </span>
+                  <span class="text-brand-gold text-[10px] font-semibold tracking-wider">REQUIRED</span>
                 </label>
                 <div class="luxury-input-wrap">
-                  <i data-lucide="mail" class="input-icon"></i>
+                  <div class="input-seal">
+                    <i data-lucide="mail" class="w-4 h-4"></i>
+                  </div>
                   <input type="email" id="contact-email" placeholder="priyanka@example.com" class="luxury-input" required />
                 </div>
               </div>
               <div>
                 <label class="block text-[11px] font-semibold text-brand-espresso uppercase tracking-wider mb-1.5 flex items-center justify-between">
-                  <span>Weave of Interest</span>
-                  <span class="text-brand-gold text-[10px] lowercase font-normal italic">selection</span>
+                  <span class="flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-gold"></span>
+                    <span>Weave of Interest</span>
+                  </span>
+                  <span class="text-brand-gold text-[10px] font-semibold tracking-wider">SELECTION</span>
                 </label>
                 <div class="luxury-input-wrap">
-                  <i data-lucide="sparkles" class="input-icon"></i>
+                  <div class="input-seal">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                  </div>
                   <select id="contact-subject" class="luxury-input">
                     <option value="Tissue Silk Metallic Weave">Tissue Silk Metallic Weave</option>
                     <option value="Banarasi Kadwa Heirloom">Banarasi Kadwa Heirloom</option>
@@ -963,12 +1049,17 @@
 
             <div>
               <label class="block text-[11px] font-semibold text-brand-espresso uppercase tracking-wider mb-1.5 flex items-center justify-between">
-                <span>Your Inquiry / Message</span>
-                <span class="text-brand-gold text-[10px] lowercase font-normal italic">required</span>
+                <span class="flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-brand-gold"></span>
+                  <span>Your Inquiry / Message</span>
+                </span>
+                <span class="text-brand-gold text-[10px] font-semibold tracking-wider">REQUIRED</span>
               </label>
-              <div class="luxury-input-wrap">
-                <i data-lucide="message-square" class="input-icon !top-6"></i>
-                <textarea id="contact-message" rows="3" placeholder="Describe your preferred shade, wedding occasion, or custom requirements..." class="luxury-input !pl-11" required></textarea>
+              <div class="luxury-input-wrap textarea-wrap">
+                <div class="input-seal">
+                  <i data-lucide="message-square" class="w-4 h-4"></i>
+                </div>
+                <textarea id="contact-message" rows="3" placeholder="Describe your preferred shade, wedding occasion, or custom requirements..." class="luxury-input" required></textarea>
               </div>
             </div>
 
@@ -979,25 +1070,35 @@
           </form>
 
           <!-- Tab 2: Virtual Styling Drape Booking Form -->
-          <form id="inquiry-style-form" onsubmit="handleBookingSubmit(event)" class="space-y-4 hidden">
+          <form id="inquiry-style-form" onsubmit="handleBookingSubmit(event)" class="space-y-4 sm:space-y-5 hidden">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label class="block text-[11px] font-semibold text-brand-espresso uppercase tracking-wider mb-1.5 flex items-center justify-between">
-                  <span>Full Name</span>
-                  <span class="text-brand-gold text-[10px] lowercase font-normal italic">required</span>
+                  <span class="flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-gold"></span>
+                    <span>Full Name</span>
+                  </span>
+                  <span class="text-brand-gold text-[10px] font-semibold tracking-wider">REQUIRED</span>
                 </label>
                 <div class="luxury-input-wrap">
-                  <i data-lucide="user" class="input-icon"></i>
+                  <div class="input-seal">
+                    <i data-lucide="user" class="w-4 h-4"></i>
+                  </div>
                   <input type="text" id="style-name" placeholder="Ananya Deshmukh" class="luxury-input" required />
                 </div>
               </div>
               <div>
                 <label class="block text-[11px] font-semibold text-brand-espresso uppercase tracking-wider mb-1.5 flex items-center justify-between">
-                  <span>WhatsApp Video Number</span>
-                  <span class="text-brand-gold text-[10px] lowercase font-normal italic">required</span>
+                  <span class="flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-gold"></span>
+                    <span>WhatsApp Video Number</span>
+                  </span>
+                  <span class="text-brand-gold text-[10px] font-semibold tracking-wider">REQUIRED</span>
                 </label>
                 <div class="luxury-input-wrap">
-                  <i data-lucide="phone" class="input-icon"></i>
+                  <div class="input-seal">
+                    <i data-lucide="phone" class="w-4 h-4"></i>
+                  </div>
                   <input type="tel" id="style-phone" placeholder="+91 99480 33211" class="luxury-input" required />
                 </div>
               </div>
@@ -1006,21 +1107,31 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label class="block text-[11px] font-semibold text-brand-espresso uppercase tracking-wider mb-1.5 flex items-center justify-between">
-                  <span>Preferred Date</span>
-                  <span class="text-brand-gold text-[10px] lowercase font-normal italic">required</span>
+                  <span class="flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-gold"></span>
+                    <span>Preferred Date</span>
+                  </span>
+                  <span class="text-brand-gold text-[10px] font-semibold tracking-wider">REQUIRED</span>
                 </label>
                 <div class="luxury-input-wrap">
-                  <i data-lucide="calendar" class="input-icon"></i>
+                  <div class="input-seal">
+                    <i data-lucide="calendar" class="w-4 h-4"></i>
+                  </div>
                   <input type="date" id="style-date" class="luxury-input" required />
                 </div>
               </div>
               <div>
                 <label class="block text-[11px] font-semibold text-brand-espresso uppercase tracking-wider mb-1.5 flex items-center justify-between">
-                  <span>Preferred Time</span>
-                  <span class="text-brand-gold text-[10px] lowercase font-normal italic">selection</span>
+                  <span class="flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-gold"></span>
+                    <span>Preferred Time</span>
+                  </span>
+                  <span class="text-brand-gold text-[10px] font-semibold tracking-wider">SELECTION</span>
                 </label>
                 <div class="luxury-input-wrap">
-                  <i data-lucide="clock" class="input-icon"></i>
+                  <div class="input-seal">
+                    <i data-lucide="clock" class="w-4 h-4"></i>
+                  </div>
                   <select id="style-time" class="luxury-input">
                     <option>11:00 AM IST</option>
                     <option>02:30 PM IST</option>
@@ -1033,11 +1144,16 @@
 
             <div>
               <label class="block text-[11px] font-semibold text-brand-espresso uppercase tracking-wider mb-1.5 flex items-center justify-between">
-                <span>Styling Focus</span>
-                <span class="text-brand-gold text-[10px] lowercase font-normal italic">selection</span>
+                <span class="flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-brand-gold"></span>
+                  <span>Styling Focus</span>
+                </span>
+                <span class="text-brand-gold text-[10px] font-semibold tracking-wider">SELECTION</span>
               </label>
               <div class="luxury-input-wrap">
-                <i data-lucide="sparkles" class="input-icon"></i>
+                <div class="input-seal">
+                  <i data-lucide="sparkles" class="w-4 h-4"></i>
+                </div>
                 <select id="style-service" class="luxury-input">
                   <option>Bridal Trousseau Curation</option>
                   <option>Banarasi vs Kanjivaram Comparison</option>
@@ -1074,8 +1190,10 @@
     </p>
 
     <form onsubmit="handleNewsletter(event)" class="mt-8 max-w-md mx-auto luxury-search-bar">
-      <i data-lucide="mail" class="w-4 h-4 text-brand-gold shrink-0"></i>
-      <input type="email" id="newsletter-email" placeholder="Enter your email address" class="w-full text-xs text-brand-espresso font-medium" required />
+      <div class="input-seal !static !transform-none !w-8 !h-8 !rounded-lg shrink-0">
+        <i data-lucide="mail" class="w-4 h-4"></i>
+      </div>
+      <input type="email" id="newsletter-email" placeholder="Enter your email address" class="w-full text-xs text-brand-espresso font-medium !pl-2" required />
       <button type="submit" class="btn-luxury-primary !py-2.5 !px-6 !text-xs shrink-0">
         <span>Subscribe</span>
         <i data-lucide="sparkles" class="w-3.5 h-3.5 text-brand-gold"></i>
@@ -1230,7 +1348,9 @@
       </div>
 
       <div class="luxury-input-wrap mb-6">
-        <i data-lucide="search" class="input-icon"></i>
+        <div class="input-seal">
+          <i data-lucide="search" class="w-4 h-4"></i>
+        </div>
         <input type="text" id="catalog-search-input" oninput="handleSearchQuery(this.value)" placeholder="Search by weave, color, or motif (e.g. Kadwa, Tissue, Gold)..." class="luxury-input" />
       </div>
 
@@ -1330,14 +1450,34 @@
             Shipping & Customer Information
           </h4>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <input type="text" id="order-customer-name" placeholder="Full Name *" class="w-full text-xs" required />
-            <input type="tel" id="order-customer-phone" placeholder="Mobile / WhatsApp Number *" class="w-full text-xs" required />
+            <div class="luxury-input-wrap">
+              <div class="input-seal">
+                <i data-lucide="user" class="w-4 h-4"></i>
+              </div>
+              <input type="text" id="order-customer-name" placeholder="Full Name *" class="luxury-input !text-xs" required />
+            </div>
+            <div class="luxury-input-wrap">
+              <div class="input-seal">
+                <i data-lucide="phone" class="w-4 h-4"></i>
+              </div>
+              <input type="tel" id="order-customer-phone" placeholder="Mobile / WhatsApp Number *" class="luxury-input !text-xs" required />
+            </div>
           </div>
           <div class="mt-3">
-            <input type="email" id="order-customer-email" placeholder="Email Address for Tracking Invoice *" class="w-full text-xs" required />
+            <div class="luxury-input-wrap">
+              <div class="input-seal">
+                <i data-lucide="mail" class="w-4 h-4"></i>
+              </div>
+              <input type="email" id="order-customer-email" placeholder="Email Address for Tracking Invoice *" class="luxury-input !text-xs" required />
+            </div>
           </div>
           <div class="mt-3">
-            <textarea id="order-customer-address" rows="2" placeholder="Complete Delivery Address (House/Villa, Street, City, State, Pincode) *" class="w-full text-xs" required></textarea>
+            <div class="luxury-input-wrap textarea-wrap">
+              <div class="input-seal">
+                <i data-lucide="map-pin" class="w-4 h-4"></i>
+              </div>
+              <textarea id="order-customer-address" rows="2" placeholder="Complete Delivery Address (House/Villa, Street, City, State, Pincode) *" class="luxury-input !text-xs" required></textarea>
+            </div>
           </div>
         </div>
 
@@ -1483,11 +1623,21 @@
       <form id="login-form" onsubmit="handleLogin(event)" class="space-y-4">
         <div>
           <label class="block text-xs font-semibold text-brand-espresso mb-1">Email / Phone *</label>
-          <input type="text" id="login-email" placeholder="priyanka.reddy@outlook.com" class="w-full text-xs" required />
+          <div class="luxury-input-wrap">
+            <div class="input-seal">
+              <i data-lucide="mail" class="w-4 h-4"></i>
+            </div>
+            <input type="text" id="login-email" placeholder="priyanka.reddy@outlook.com" class="luxury-input !text-xs" required />
+          </div>
         </div>
         <div>
           <label class="block text-xs font-semibold text-brand-espresso mb-1">Password *</label>
-          <input type="password" id="login-password" placeholder="••••••••" class="w-full text-xs" required />
+          <div class="luxury-input-wrap">
+            <div class="input-seal">
+              <i data-lucide="lock" class="w-4 h-4"></i>
+            </div>
+            <input type="password" id="login-password" placeholder="••••••••" class="luxury-input !text-xs" required />
+          </div>
         </div>
         <button type="submit" class="btn-luxury-primary w-full !text-xs !py-3 font-bold tracking-widest uppercase">
           Enter Atelier Portal
@@ -1497,19 +1647,39 @@
       <form id="register-form" onsubmit="handleRegister(event)" class="space-y-4 hidden">
         <div>
           <label class="block text-xs font-semibold text-brand-espresso mb-1">Full Name *</label>
-          <input type="text" id="reg-name" placeholder="Priyanka Reddy" class="w-full text-xs" required />
+          <div class="luxury-input-wrap">
+            <div class="input-seal">
+              <i data-lucide="user" class="w-4 h-4"></i>
+            </div>
+            <input type="text" id="reg-name" placeholder="Priyanka Reddy" class="luxury-input !text-xs" required />
+          </div>
         </div>
         <div>
           <label class="block text-xs font-semibold text-brand-espresso mb-1">Mobile / WhatsApp *</label>
-          <input type="tel" id="reg-phone" placeholder="+91 99480 33211" class="w-full text-xs" required />
+          <div class="luxury-input-wrap">
+            <div class="input-seal">
+              <i data-lucide="phone" class="w-4 h-4"></i>
+            </div>
+            <input type="tel" id="reg-phone" placeholder="+91 99480 33211" class="luxury-input !text-xs" required />
+          </div>
         </div>
         <div>
           <label class="block text-xs font-semibold text-brand-espresso mb-1">Email Address *</label>
-          <input type="email" id="reg-email" placeholder="priyanka.reddy@outlook.com" class="w-full text-xs" required />
+          <div class="luxury-input-wrap">
+            <div class="input-seal">
+              <i data-lucide="mail" class="w-4 h-4"></i>
+            </div>
+            <input type="email" id="reg-email" placeholder="priyanka.reddy@outlook.com" class="luxury-input !text-xs" required />
+          </div>
         </div>
         <div>
           <label class="block text-xs font-semibold text-brand-espresso mb-1">Password *</label>
-          <input type="password" id="reg-password" placeholder="••••••••" class="w-full text-xs" required />
+          <div class="luxury-input-wrap">
+            <div class="input-seal">
+              <i data-lucide="lock" class="w-4 h-4"></i>
+            </div>
+            <input type="password" id="reg-password" placeholder="••••••••" class="luxury-input !text-xs" required />
+          </div>
         </div>
         <button type="submit" class="btn-luxury-primary w-full !text-xs !py-3 font-bold tracking-widest uppercase">
           Create Account
