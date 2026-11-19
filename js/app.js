@@ -461,7 +461,7 @@ function initGSAPAnimations() {
     });
   }
 
-  // 9. Horizontal Collection Runway (Vertical Wheel Drives Horizontal Scroll, then Continues Vertically)
+  // 9. Horizontal Collection Runway (Vertical Scroll Drives Horizontal Runway on PC and Mobile)
   const collectionsSection = document.getElementById('collections');
   const runwayTrack = document.getElementById('runway-track');
 
@@ -507,20 +507,44 @@ function initGSAPAnimations() {
         };
       },
 
-      // Mobile (max-width: 767px): Native Touch Glide with Snap (Zero Trapping, Fluid Vertical Flow)
+      // Mobile (max-width: 767px): Vertical Swipe Glides Through Horizontal Weaves, then Continues Down
       "(max-width: 767px)": function() {
-        gsap.from(runwayTrack.querySelectorAll('.runway-panel'), {
+        const getMobileScrollDistance = () => {
+          return Math.max(300, runwayTrack.scrollWidth - window.innerWidth + 36);
+        };
+
+        const mobileTween = gsap.to(runwayTrack, {
+          x: () => -getMobileScrollDistance(),
+          ease: "none",
           scrollTrigger: {
+            id: 'runway-pin',
             trigger: collectionsSection,
-            start: 'top 85%',
-            toggleActions: 'play none none none'
-          },
-          y: 25,
-          opacity: 0,
-          duration: 0.7,
-          stagger: 0.1,
-          ease: 'power2.out'
+            pin: true,
+            anticipatePin: 1,
+            scrub: 0.5,
+            start: "top top",
+            end: () => `+=${getMobileScrollDistance()}`,
+            invalidateOnRefresh: true,
+            onUpdate: (self) => {
+              const panels = runwayTrack.querySelectorAll('.runway-panel');
+              const totalPanels = panels.length || 5;
+              const currentIdx = Math.min(totalPanels, Math.max(1, Math.round(self.progress * (totalPanels - 1)) + 1));
+              const indexDisp = document.getElementById('runway-index-display');
+              if (indexDisp) indexDisp.textContent = '0' + currentIdx;
+
+              const progBar = document.getElementById('runway-progress-bar');
+              if (progBar) {
+                const percent = Math.min(100, Math.max(20, self.progress * 100));
+                progBar.style.width = `${percent}%`;
+              }
+            }
+          }
         });
+
+        return () => {
+          mobileTween.kill();
+          gsap.set(runwayTrack, { clearProps: 'all' });
+        };
       }
     });
   }
@@ -569,11 +593,11 @@ function slideCollections(direction) {
   const collectionsSection = document.getElementById('collections');
   if (!track) return;
 
-  if (window.innerWidth >= 768 && window.ScrollTrigger) {
+  if (window.ScrollTrigger) {
     const st = ScrollTrigger.getById('runway-pin');
     if (st) {
       const step = (st.end - st.start) / 4;
-      const targetScroll = window.scrollY + direction * step;
+      const targetScroll = Math.max(st.start, Math.min(st.end, window.scrollY + direction * step));
       if (window.lenis) {
         window.lenis.scrollTo(targetScroll, { duration: 0.6 });
       } else {
@@ -932,14 +956,12 @@ function filterByCollection(collectionKey) {
   currentCollectionFilter = collectionKey;
 
   document.querySelectorAll('.filter-tab-btn').forEach(btn => {
-    btn.classList.remove('bg-brand-dark', 'text-brand-sand', 'shadow');
-    btn.classList.add('bg-brand-sand/70', 'text-brand-espresso');
+    btn.classList.remove('active');
   });
 
   const activeTab = document.getElementById(`tab-${collectionKey}`);
   if (activeTab) {
-    activeTab.classList.remove('bg-brand-sand/70', 'text-brand-espresso');
-    activeTab.classList.add('bg-brand-dark', 'text-brand-sand', 'shadow');
+    activeTab.classList.add('active');
   }
 
   renderProducts();
