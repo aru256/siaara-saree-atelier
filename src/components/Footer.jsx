@@ -23,16 +23,14 @@ export default function Footer() {
                   className="w-full h-full object-contain"
                 />
               </div>
-              <div className="flex flex-col text-left">
-                <div className="flex items-baseline leading-none">
-                  <span className="font-tillana text-lg sm:text-2xl font-bold text-[#E4C58B]">कला</span>
-                  <span className="font-cinzel text-base sm:text-xl font-bold tracking-[0.14em] text-[#E4C58B] -ml-0.5">KRUTI</span>
-                </div>
-                <span className="font-cinzel text-[10px] sm:text-xs text-[#C59B51] font-semibold tracking-wider uppercase -mt-0.5">
-                  By Vyara
-                </span>
-                <span className="font-italiana italic text-[11px] text-[#E4C58B]/90 tracking-wide mt-0.5">
-                  Threads of culture, Beads of joy
+              <div className="flex flex-col text-left justify-center">
+                <img 
+                  src="assets/klakruti-by-vyara-light.png" 
+                  alt="कलाKruti BY VYARA" 
+                  className="h-8 sm:h-10 w-auto object-contain filter drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)]"
+                />
+                <span className="font-italiana italic text-[11px] text-[#E4C58B]/90 tracking-wide mt-1">
+                  Threads of Culture, Beads of Joy
                 </span>
               </div>
             </div>

@@ -98,8 +98,8 @@ function initCinematicSareeIntro() {
   });
 
   // Scene 1: Closed Parchment with Center Royal Loom Seal Breathing
-  tl.fromTo(centerSeal, 
-    { scale: 0.9, opacity: 0.88 }, 
+  tl.fromTo(centerSeal,
+    { scale: 0.9, opacity: 0.88 },
     { scale: 1.05, opacity: 1, duration: 0.25, ease: 'power2.out' }
   );
 
@@ -117,22 +117,22 @@ function initCinematicSareeIntro() {
   }
 
   tl.to(centerSeal, { scale: 1.45, opacity: 0, duration: 0.25, ease: 'power2.in' }, '<+=0.04')
-    .to(curtainLeft, { 
-      xPercent: isMobile ? -112 : -116, 
-      rotateZ: isMobile ? -3 : -4.5, 
-      rotateY: isMobile ? -14 : -22, 
-      duration: 0.65, 
-      ease: 'power3.inOut' 
+    .to(curtainLeft, {
+      xPercent: isMobile ? -112 : -116,
+      rotateZ: isMobile ? -3 : -4.5,
+      rotateY: isMobile ? -14 : -22,
+      duration: 0.65,
+      ease: 'power3.inOut'
     }, '<')
-    .to(curtainRight, { 
-      xPercent: isMobile ? 112 : 116, 
-      rotateZ: isMobile ? 3 : 4.5, 
-      rotateY: isMobile ? 14 : 22, 
-      duration: 0.65, 
-      ease: 'power3.inOut' 
+    .to(curtainRight, {
+      xPercent: isMobile ? 112 : 116,
+      rotateZ: isMobile ? 3 : 4.5,
+      rotateY: isMobile ? 14 : 22,
+      duration: 0.65,
+      ease: 'power3.inOut'
     }, '<')
-    .to(introOverlay, { 
-      backgroundColor: 'rgba(13, 7, 4, 0)', 
+    .to(introOverlay, {
+      backgroundColor: 'rgba(13, 7, 4, 0)',
       duration: 0.5,
       onStart: () => {
         // As soon as the curtains begin tearing, make the intro overlay click-through/scroll-through
@@ -187,12 +187,12 @@ function initCinematicSareeIntro() {
     });
   }, '+=0.1');
 
-  window.skipCinematicIntro = function() {
+  window.skipCinematicIntro = function () {
     tl.kill();
     finishCinematicIntro();
   };
 
-  window.replayCinematicIntro = function() {
+  window.replayCinematicIntro = function () {
     window.location.reload();
   };
 
@@ -1022,7 +1022,7 @@ function handleSearchQuery(query) {
   const cleanQuery = query.toLowerCase().trim();
   const products = StoreDB.getProducts();
 
-  const results = products.filter(p => 
+  const results = products.filter(p =>
     p.name.toLowerCase().includes(cleanQuery) ||
     p.collectionName.toLowerCase().includes(cleanQuery) ||
     p.color.toLowerCase().includes(cleanQuery) ||
@@ -1522,11 +1522,11 @@ function renderTrackResult(order, query) {
           </div>
 
           ${stages.map((stage, idx) => {
-            const isCompleted = idx < currentStageIdx;
-            const isCurrent = idx === currentStageIdx;
-            const isPending = idx > currentStageIdx;
+    const isCompleted = idx < currentStageIdx;
+    const isCurrent = idx === currentStageIdx;
+    const isPending = idx > currentStageIdx;
 
-            return `
+    return `
               <div class="flex flex-col items-center text-center z-10">
                 <div class="stepper-circle ${isCompleted ? 'completed' : (isCurrent ? 'active' : 'pending')} mb-2">
                   ${isCompleted ? '<i data-lucide="check" class="w-3.5 h-3.5"></i>' : (idx + 1)}
@@ -1536,7 +1536,7 @@ function renderTrackResult(order, query) {
                 </span>
               </div>
             `;
-          }).join('')}
+  }).join('')}
         </div>
       </div>
 
@@ -1652,7 +1652,7 @@ const POLICY_TEXTS = {
     title: 'Privacy & Security Policy',
     content: `
       <h4 class="font-cormorant text-lg font-bold text-brand-espresso">1. Information We Collect</h4>
-      <p>कल्रा KRUTI by Vyara collects only the essential customer information required to handcraft, book, and deliver your orders safely: recipient name, telephone/WhatsApp number, delivery destination, and billing coordinates.</p>
+      <p>कला KRUTI by Vyara collects only the essential customer information required to handcraft, book, and deliver your orders safely: recipient name, telephone/WhatsApp number, delivery destination, and billing coordinates.</p>
 
       <h4 class="font-cormorant text-lg font-bold text-brand-espresso mt-3">2. Payment Security & Encryption</h4>
       <p>We do not store complete credit card or debit card numbers on our local databases. All digital transactions are processed through RBI-compliant, 256-bit SSL encrypted payment gateways.</p>
@@ -1741,7 +1741,7 @@ function handleRegister(e) {
   const user = { name, phone, email, address: '' };
   StoreDB.saveCurrentUser(user);
   closeAuthModal();
-  alert(`Registration complete! Welcome to कल्रा KRUTI by Vyara, ${name}!`);
+  alert(`Registration complete! Welcome to कला KRUTI by Vyara, ${name}!`);
 }
 
 function updateAuthUI() {

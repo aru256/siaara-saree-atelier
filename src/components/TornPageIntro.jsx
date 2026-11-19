@@ -161,29 +161,23 @@ export default function TornPageIntro({ onComplete }) {
           <div className="absolute inset-0 bg-[#C59B51]/25 blur-2xl rounded-full scale-125 pointer-events-none" />
           <img 
             src="assets/brand-lotus-gold.png" 
-            alt="कला KRUTI Emblem" 
+            alt="कलाKruti Emblem" 
             className="w-24 sm:w-36 h-auto object-contain drop-shadow-[0_0_25px_rgba(228,197,139,0.7)]"
           />
         </div>
 
-        {/* Brand Name: कला in stylish Tillana with curved ल, KRUTI in English with ZERO GAP */}
-        <h2 className="flex items-baseline justify-center leading-none">
-          <span className="font-tillana text-3xl sm:text-5xl font-bold text-[#E4C58B]">
-            कला
-          </span>
-          <span className="font-cinzel text-2xl sm:text-4xl font-bold text-[#F8F5EE] tracking-[0.14em] -ml-0.5">
-            KRUTI
-          </span>
-        </h2>
+        {/* Brand Wordmark: Exact कलाKruti with BY VYARA in Copperplate sliding under Kruti */}
+        <div className="flex flex-col items-center justify-center">
+          <img 
+            src="assets/klakruti-by-vyara-light.png" 
+            alt="कलाKruti BY VYARA" 
+            className="w-56 sm:w-80 h-auto object-contain drop-shadow-[0_0_30px_rgba(250,247,242,0.6)]"
+          />
+        </div>
 
-        {/* By Vyara (Directly Underneath) */}
-        <span className="font-cinzel text-xs sm:text-sm font-semibold tracking-[0.25em] text-[#C59B51] uppercase mt-1 sm:mt-1.5">
-          By Vyara
-        </span>
-
-        {/* Tagline: Threads of culture, Beads of joy */}
-        <span className="font-italiana italic text-xs sm:text-sm text-[#E4C58B]/95 tracking-wider mt-2 sm:mt-2.5 drop-shadow-sm">
-          Threads of culture, Beads of joy
+        {/* Tagline: Threads of Culture, Beads of Joy */}
+        <span className="font-italiana italic text-xs sm:text-base text-[#E4C58B]/95 tracking-wider mt-3 sm:mt-4 drop-shadow-sm">
+          Threads of Culture, Beads of Joy
         </span>
       </div>
 
