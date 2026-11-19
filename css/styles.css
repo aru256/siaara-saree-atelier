@@ -289,69 +289,82 @@ body {
    CINEMATIC TORN-PAGE INTRO (HAUTE-COUTURE TEARING SEQUENCE)
    ========================================================================== */
 
+/* ==========================================================================
+   CINEMATIC TORN-PAGE INTRO (HAUTE-COUTURE ORGANIC RIP SEQUENCE)
+   ========================================================================== */
+
 #cinematic-saree-intro {
-  perspective: 1400px;
+  perspective: 1200px;
+  -webkit-perspective: 1200px;
+  touch-action: none;
 }
 
 .intro-curtain {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: calc(50vw + 24px);
+  width: calc(50vw + 30px);
   height: 100vh;
+  height: 100dvh;
   z-index: 10;
   overflow: visible;
   will-change: transform, opacity;
-  box-shadow: 0 0 60px rgba(0, 0, 0, 0.9);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  box-shadow: 0 0 70px rgba(0, 0, 0, 0.95);
 }
 
-/* Left Page with Realistic Deckled Torn Paper / Raw Silk Edge */
+/* Left Page Half: Real Organic Uneven Deckled Paper / Silk Rip */
 .intro-curtain-left {
   left: 0;
   transform-origin: top left;
   background: 
-    linear-gradient(135deg, rgba(20, 11, 7, 0.94), rgba(42, 23, 15, 0.9)),
-    radial-gradient(circle at 100% 50%, rgba(197, 155, 81, 0.28), transparent 60%),
+    linear-gradient(135deg, rgba(16, 9, 5, 0.96), rgba(38, 20, 13, 0.92)),
+    radial-gradient(circle at 100% 50%, rgba(197, 155, 81, 0.28), transparent 65%),
     url('https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1400&q=85') center/cover;
   clip-path: polygon(
     0% 0%, 
     100% 0%, 
-    98.2% 4%, 100% 8%, 97.8% 12%, 99.6% 16%, 98.1% 20%, 100% 24%, 
-    97.5% 28%, 99.8% 32%, 98.3% 36%, 100% 40%, 97.6% 44%, 99.5% 48%, 
-    98% 52%, 100% 56%, 97.4% 60%, 99.7% 64%, 98.2% 68%, 100% 72%, 
-    97.5% 76%, 99.6% 80%, 98% 84%, 100% 88%, 97.7% 92%, 99.8% 96%, 100% 100%, 
+    99.4% 1.8%, 97.6% 3.2%, 98.9% 5.1%, 95.8% 7.4%, 98.2% 9.8%, 99.6% 12.1%, 
+    97.0% 14.3%, 96.1% 16.2%, 98.7% 18.4%, 99.5% 21.0%, 95.3% 23.8%, 97.4% 26.5%, 
+    99.2% 29.8%, 96.5% 32.7%, 98.6% 35.9%, 100% 39.2%, 95.1% 42.8%, 97.0% 45.9%, 
+    99.7% 48.8%, 96.6% 51.7%, 98.4% 54.9%, 95.7% 57.8%, 99.3% 60.9%, 97.9% 63.8%, 
+    96.2% 66.7%, 98.8% 70.1%, 99.9% 72.8%, 95.4% 76.2%, 98.0% 79.7%, 99.4% 82.6%, 
+    96.8% 85.8%, 98.3% 88.9%, 95.6% 91.8%, 99.1% 94.7%, 97.4% 97.2%, 100% 100%, 
     0% 100%
   );
-  filter: drop-shadow(8px 0 24px rgba(0, 0, 0, 0.85));
+  filter: drop-shadow(12px 0 28px rgba(0, 0, 0, 0.9));
 }
 
-/* Right Page with Matching Inverse Deckled Torn Paper Edge */
+/* Right Page Half: Matching Asymmetric Deckled Paper / Silk Rip */
 .intro-curtain-right {
   right: 0;
   transform-origin: top right;
   background: 
-    linear-gradient(225deg, rgba(20, 11, 7, 0.94), rgba(42, 23, 15, 0.9)),
-    radial-gradient(circle at 0% 50%, rgba(197, 155, 81, 0.28), transparent 60%),
+    linear-gradient(225deg, rgba(16, 9, 5, 0.96), rgba(38, 20, 13, 0.92)),
+    radial-gradient(circle at 0% 50%, rgba(197, 155, 81, 0.28), transparent 65%),
     url('https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1400&q=85') center/cover;
   clip-path: polygon(
-    1.8% 0%, 100% 0%, 100% 100%, 0% 100%, 
-    2.3% 96%, 0.2% 92%, 2% 88%, 0.4% 84%, 2.5% 80%, 0% 76%, 
-    1.8% 72%, 0.3% 68%, 2.6% 64%, 0% 60%, 2% 56%, 0.5% 52%, 
-    2.4% 48%, 0% 44%, 1.7% 40%, 0.2% 36%, 2.5% 32%, 0% 28%, 
-    1.9% 24%, 0.4% 20%, 2.2% 16%, 0% 12%, 1.8% 8%, 0% 4%
+    0.6% 0%, 100% 0%, 100% 100%, 0% 100%, 
+    2.6% 97.2%, 0.9% 94.7%, 4.4% 91.8%, 1.7% 88.9%, 3.2% 85.8%, 0.6% 82.6%, 
+    2.0% 79.7%, 4.6% 76.2%, 0.1% 72.8%, 1.2% 70.1%, 3.8% 66.7%, 2.1% 63.8%, 
+    0.7% 60.9%, 4.3% 57.8%, 1.6% 54.9%, 3.4% 51.7%, 0.3% 48.8%, 3.0% 45.9%, 
+    4.9% 42.8%, 0% 39.2%, 1.4% 35.9%, 3.5% 32.7%, 0.8% 29.8%, 2.6% 26.5%, 
+    4.7% 23.8%, 0.5% 21.0%, 1.3% 18.4%, 3.9% 16.2%, 3.0% 14.3%, 0.4% 12.1%, 
+    1.8% 9.8%, 4.2% 7.4%, 1.1% 5.1%, 2.4% 3.2%, 0.6% 1.8%
   );
-  filter: drop-shadow(-8px 0 24px rgba(0, 0, 0, 0.85));
+  filter: drop-shadow(-12px 0 28px rgba(0, 0, 0, 0.9));
 }
 
-/* Deckled Torn Paper Fringe Highlight */
-.torn-paper-edge {
+/* Organic Deckled Paper Pulp & Zari Fringe */
+.deckled-tear-fiber {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 6px;
-  background: linear-gradient(to bottom, #FFFFFF 0%, #ECCF96 50%, #C59B51 100%);
-  opacity: 0.85;
-  filter: blur(0.5px);
+  width: 7px;
+  background: linear-gradient(to bottom, #FFFFFF 0%, #F5E8CB 20%, #ECCF96 50%, #C59B51 80%, #FFFFFF 100%);
+  opacity: 0.9;
+  filter: blur(0.4px);
   pointer-events: none;
 }
 
@@ -370,24 +383,24 @@ body {
   50% { background-position: 0% 100%; }
 }
 
-/* Master Site Wrapper for Smooth Intro Page Reveal */
-#main-site-wrapper {
-  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), 
-              filter 0.85s cubic-bezier(0.16, 1, 0.3, 1), 
-              opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, filter, opacity;
+/* Atmospheric Reveal Backdrop inside Intro (Zero Stacking Interference with Native Site) */
+#intro-reveal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(13, 7, 4, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), backdrop-filter 0.8s ease;
+  will-change: opacity, backdrop-filter;
+  pointer-events: none;
+  z-index: 5;
 }
 
-#main-site-wrapper.intro-locked {
-  transform: scale(0.96);
-  filter: blur(8px);
-  opacity: 0.6;
-}
-
-#main-site-wrapper.intro-revealed {
-  transform: scale(1);
-  filter: blur(0px);
-  opacity: 1;
+#intro-reveal-backdrop.revealed {
+  opacity: 0 !important;
+  backdrop-filter: blur(0px) !important;
+  -webkit-backdrop-filter: blur(0px) !important;
 }
 
 /* Horizontal Collection Runway (Fluid Natural Glide, Zero Pinning Hijacking) */
@@ -413,10 +426,12 @@ body {
 
 @media (max-width: 767px) {
   .runway-track {
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
+    overflow-x: auto !important;
+    scroll-behavior: smooth !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    touch-action: pan-x pan-y !important;
+    overscroll-behavior-y: auto !important;
   }
 }
 

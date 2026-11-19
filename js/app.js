@@ -49,29 +49,24 @@ function initCinematicSareeIntro() {
   const travelingLogo = document.getElementById('intro-traveling-logo');
   const glow = document.getElementById('intro-glow');
   const navLogo = document.getElementById('navbar-brand-logo');
-  const mainSiteWrapper = document.getElementById('main-site-wrapper');
+  const revealBackdrop = document.getElementById('intro-reveal-backdrop');
 
   if (!introOverlay) return;
 
-  // Check if intro has already been viewed in this session or reduced-motion is requested
-  const alreadyShown = sessionStorage.getItem('kruti_intro_shown') === 'true';
+  // Check if reduced motion is requested
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if (alreadyShown || prefersReduced) {
+  if (prefersReduced) {
     introOverlay.style.display = 'none';
     if (navLogo) navLogo.style.opacity = '1';
-    if (mainSiteWrapper) {
-      mainSiteWrapper.classList.remove('intro-locked');
-      mainSiteWrapper.classList.add('intro-revealed');
-    }
     document.body.style.overflow = '';
     return;
   }
 
-  // Lock scrolling during intro and initialize main site in atmospheric preview state
+  // Lock scrolling during intro
   document.body.style.overflow = 'hidden';
   if (navLogo) navLogo.style.opacity = '0';
-  if (mainSiteWrapper) mainSiteWrapper.classList.add('intro-locked');
+
+  const isMobile = window.innerWidth < 768;
 
   // Position traveling logo in the exact center initially
   gsap.set(travelingLogo, {
@@ -80,7 +75,7 @@ function initCinematicSareeIntro() {
     xPercent: -50,
     yPercent: -50,
     opacity: 0,
-    scale: 1.15
+    scale: isMobile ? 1.05 : 1.15
   });
 
   const tl = gsap.timeline({
@@ -89,7 +84,7 @@ function initCinematicSareeIntro() {
 
   // Scene 1: Closed Parchment with Center Royal Loom Seal Breathing
   tl.fromTo(centerSeal, 
-    { scale: 0.9, opacity: 0.85 }, 
+    { scale: 0.9, opacity: 0.88 }, 
     { scale: 1.06, opacity: 1, duration: 0.45, ease: 'power2.out' }
   );
 
@@ -97,33 +92,35 @@ function initCinematicSareeIntro() {
   if (tearTracer) {
     tl.to(tearTracer, {
       height: '100%',
-      duration: 0.35,
+      duration: 0.3,
       ease: 'power2.in'
-    }, '-=0.15');
+    }, '-=0.1');
   }
 
-  tl.to(centerSeal, { scale: 1.5, opacity: 0, duration: 0.35, ease: 'power2.in' }, '<+=0.1')
+  if (revealBackdrop) {
+    tl.to(revealBackdrop, { opacity: 1, duration: 0.3 }, '<');
+  }
+
+  tl.to(centerSeal, { scale: 1.45, opacity: 0, duration: 0.35, ease: 'power2.in' }, '<+=0.05')
     .to(curtainLeft, { 
-      xPercent: -115, 
-      rotateZ: -4.5, 
-      rotateY: -22, 
-      scale: 0.97, 
-      duration: 1.25, 
+      xPercent: isMobile ? -112 : -116, 
+      rotateZ: isMobile ? -3 : -4.5, 
+      rotateY: isMobile ? -14 : -22, 
+      duration: 1.2, 
       ease: 'power3.inOut' 
     }, '<')
     .to(curtainRight, { 
-      xPercent: 115, 
-      rotateZ: 4.5, 
-      rotateY: 22, 
-      scale: 0.97, 
-      duration: 1.25, 
+      xPercent: isMobile ? 112 : 116, 
+      rotateZ: isMobile ? 3 : 4.5, 
+      rotateY: isMobile ? 14 : 22, 
+      duration: 1.2, 
       ease: 'power3.inOut' 
     }, '<')
-    .to(introOverlay, { backgroundColor: 'rgba(13, 7, 4, 0)', duration: 0.9 }, '<');
+    .to(introOverlay, { backgroundColor: 'rgba(13, 7, 4, 0)', duration: 0.8 }, '<');
 
   // Scene 3: Entering the Atelier & Royal Monogram Reveal through the Tear
-  tl.to(glow, { opacity: 0.9, scale: 1.3, duration: 0.65, ease: 'power2.out' }, '-=0.8')
-    .to(travelingLogo, { opacity: 1, scale: 1.0, duration: 0.65, ease: 'power2.out' }, '<+=0.08');
+  tl.to(glow, { opacity: 0.9, scale: 1.25, duration: 0.6, ease: 'power2.out' }, '-=0.75')
+    .to(travelingLogo, { opacity: 1, scale: 1.0, duration: 0.6, ease: 'power2.out' }, '<+=0.08');
 
   // Scene 4: Logo Sets into Navbar & Smooth Transition Reveals the Website
   tl.add(() => {
@@ -135,17 +132,26 @@ function initCinematicSareeIntro() {
     const navRect = navLogo.getBoundingClientRect();
     const curRect = travelingLogo.getBoundingClientRect();
 
-    // Exact pixel displacement to seamlessly join the navbar
-    const deltaX = navRect.left - curRect.left;
-    const deltaY = navRect.top - curRect.top;
-    const targetScale = navRect.height / curRect.height;
+    let deltaX = navRect.left - curRect.left;
+    let deltaY = navRect.top - curRect.top;
+    let targetScale = (curRect.height > 0) ? (navRect.height / curRect.height) : 0.7;
 
-    gsap.to(glow, { opacity: 0, duration: 0.45 });
+    // Safety fallback on mobile if nav is scrolled or zero
+    if (navRect.width === 0 || navRect.height === 0) {
+      deltaX = 20 - (window.innerWidth / 2);
+      deltaY = 24 - (window.innerHeight / 2);
+      targetScale = 0.7;
+    }
 
-    // Smooth page reveal transition begins simultaneously as the logo flies to set into the navbar
-    if (mainSiteWrapper) {
-      mainSiteWrapper.classList.remove('intro-locked');
-      mainSiteWrapper.classList.add('intro-revealed');
+    gsap.to(glow, { opacity: 0, duration: 0.4 });
+
+    if (revealBackdrop) {
+      gsap.to(revealBackdrop, {
+        opacity: 0,
+        backdropFilter: 'blur(0px)',
+        duration: 0.75,
+        ease: 'power2.out'
+      });
     }
 
     gsap.to(travelingLogo, {
@@ -165,23 +171,36 @@ function initCinematicSareeIntro() {
   };
 
   window.replayCinematicIntro = function() {
-    sessionStorage.removeItem('kruti_intro_shown');
     window.location.reload();
   };
 
-  function finishCinematicIntro() {
-    sessionStorage.setItem('kruti_intro_shown', 'true');
-    if (navLogo) navLogo.style.opacity = '1';
-    if (mainSiteWrapper) {
-      mainSiteWrapper.classList.remove('intro-locked');
-      mainSiteWrapper.classList.add('intro-revealed');
+  // Allow tap anywhere on mobile to advance intro
+  introOverlay.addEventListener('click', (e) => {
+    if (e.target.id !== 'skip-intro-btn') {
+      window.skipCinematicIntro();
     }
+  });
+
+  function finishCinematicIntro() {
+    if (navLogo) navLogo.style.opacity = '1';
+
+    // Immediate complete unlock of vertical scrolling on mobile and desktop
+    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
+    document.body.style.overflowY = 'auto';
+    document.documentElement.style.overflowY = 'auto';
+
+    // Disable pointer events immediately so touches pass through without delay
+    introOverlay.style.pointerEvents = 'none';
+
     gsap.to(introOverlay, {
       opacity: 0,
-      duration: 0.4,
+      duration: 0.35,
       onComplete: () => {
         introOverlay.style.display = 'none';
-        document.body.style.overflow = '';
+        if (introOverlay.parentNode) {
+          introOverlay.parentNode.removeChild(introOverlay);
+        }
       }
     });
   }
@@ -191,17 +210,24 @@ function initCinematicSareeIntro() {
 let lenis = null;
 
 function initLenis() {
+  // Mobile touch devices: ALWAYS use 100% native momentum scrolling (Zero JS touch interception)
+  const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth < 768);
+
+  if (isTouchDevice) {
+    window.lenis = null;
+    return;
+  }
+
   if (window.Lenis) {
     try {
       lenis = new Lenis({
-        duration: 0.75,
+        duration: 0.8,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         orientation: 'vertical',
         gestureOrientation: 'vertical',
         smoothWheel: true,
-        smoothTouch: false, // 100% native mobile touch response
+        smoothTouch: false,
         wheelMultiplier: 1.0,
-        touchMultiplier: 1.0
       });
 
       window.lenis = lenis;
