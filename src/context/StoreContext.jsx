@@ -4,6 +4,10 @@ import { SAREES_DATA, CURRENCY_CONFIG, SAMPLE_ORDERS } from '../data/sarees';
 const StoreContext = createContext(null);
 
 export function StoreProvider({ children }) {
+  // Navigation & Page View ('home' | 'product')
+  const [currentView, setCurrentView] = useState('home');
+  const [activeProductId, setActiveProductId] = useState(null);
+
   // Products
   const [products] = useState(SAREES_DATA);
   const [selectedCollection, setSelectedCollection] = useState('all');
@@ -86,6 +90,41 @@ export function StoreProvider({ children }) {
       console.warn('Could not save user', e);
     }
   }, [user]);
+
+  // Handle URL hash changes (e.g. #product-saree-01 or browser back button)
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash;
+      if (hash.startsWith('#product-')) {
+        const pId = hash.replace('#product-', '');
+        setActiveProductId(pId);
+        setCurrentView('product');
+      } else {
+        setCurrentView('home');
+      }
+    };
+
+    handleHash();
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, []);
+
+  const openProductPage = (productId) => {
+    setActiveProductId(productId);
+    setCurrentView('product');
+    window.location.hash = `#product-${productId}`;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const goBackToCatalog = () => {
+    setCurrentView('home');
+    setActiveProductId(null);
+    window.location.hash = '#shop';
+    setTimeout(() => {
+      const shopElem = document.getElementById('shop');
+      if (shopElem) shopElem.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
 
   // Toast Helper
   const showToast = (message, type = 'gold') => {
@@ -195,6 +234,10 @@ export function StoreProvider({ children }) {
 
   return (
     <StoreContext.Provider value={{
+      currentView,
+      activeProductId,
+      openProductPage,
+      goBackToCatalog,
       products,
       selectedCollection,
       setSelectedCollection,

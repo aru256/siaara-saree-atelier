@@ -13,25 +13,25 @@ export default function TornPageIntro({ onComplete }) {
       return;
     }
 
-    // Sequence timing
-    // 0.4s: Tearing starts (golden spark rips down center seam)
-    const t1 = setTimeout(() => setStage('tearing'), 400);
+    // High performance sequenced intro
+    // 0.3s: Golden tear begins down center seam
+    const t1 = setTimeout(() => setStage('tearing'), 300);
 
-    // 1.4s: Silk panels tear apart and glide left & right
-    const t2 = setTimeout(() => setStage('opening'), 1400);
+    // 1.1s: Silk panels tear and glide open
+    const t2 = setTimeout(() => setStage('opening'), 1100);
 
-    // 2.2s: Center brand emblem revealed with golden glow
-    const t3 = setTimeout(() => setStage('logoRevealed'), 2200);
+    // 1.9s: Center brand seal revealed with golden shimmer
+    const t3 = setTimeout(() => setStage('logoRevealed'), 1900);
 
-    // 3.4s: Logo glides smoothly towards navbar
-    const t4 = setTimeout(() => setStage('gliding'), 3400);
+    // 3.0s: Logo glides smoothly towards navbar
+    const t4 = setTimeout(() => setStage('gliding'), 3000);
 
-    // 4.2s: Sequence fully completed & dismissed
+    // 3.7s: Sequence completed
     const t5 = setTimeout(() => {
       setDismissed(true);
       sessionStorage.setItem('klakruti_intro_seen', 'true');
       if (onComplete) onComplete();
-    }, 4200);
+    }, 3700);
 
     return () => {
       clearTimeout(t1);
@@ -56,7 +56,7 @@ export default function TornPageIntro({ onComplete }) {
 
   return (
     <div 
-      className={`fixed inset-0 z-[9999] pointer-events-none flex items-center justify-center transition-opacity duration-700 ${
+      className={`fixed inset-0 w-full h-[100dvh] overflow-hidden z-[9999] flex items-center justify-center transition-opacity duration-700 ${
         stage === 'gliding' ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'
       }`}
       style={{ perspective: '1200px' }}
@@ -66,9 +66,9 @@ export default function TornPageIntro({ onComplete }) {
 
       {/* Left Silk Curtain Panel */}
       <div 
-        className="absolute top-0 left-0 bottom-0 w-1/2 overflow-hidden transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] z-10"
+        className="absolute top-0 left-0 bottom-0 w-1/2 overflow-hidden transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] z-10 will-change-transform"
         style={{
-          transform: isTorn ? 'translateX(-105%) rotateY(-12deg)' : 'translateX(0%) rotateY(0deg)',
+          transform: isTorn ? 'translate3d(-105%, 0, 0) rotateY(-8deg)' : 'translate3d(0%, 0, 0) rotateY(0deg)',
           transformOrigin: 'left center'
         }}
       >
@@ -87,9 +87,9 @@ export default function TornPageIntro({ onComplete }) {
               backgroundSize: '24px 24px'
             }}
           />
-          {/* Organic Torn Rip Edge on Right Side of Left Panel */}
+          {/* Deckled Torn Edge Shadow & Gold Foil Sparkle */}
           <div 
-            className="absolute top-0 right-0 bottom-0 w-12 pointer-events-none"
+            className="absolute top-0 right-0 bottom-0 w-8 pointer-events-none"
             style={{
               background: 'linear-gradient(to right, transparent, rgba(197, 155, 81, 0.45))',
               filter: 'drop-shadow(3px 0 8px rgba(197, 155, 81, 0.5))'
@@ -100,9 +100,9 @@ export default function TornPageIntro({ onComplete }) {
 
       {/* Right Silk Curtain Panel */}
       <div 
-        className="absolute top-0 right-0 bottom-0 w-1/2 overflow-hidden transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] z-10"
+        className="absolute top-0 right-0 bottom-0 w-1/2 overflow-hidden transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] z-10 will-change-transform"
         style={{
-          transform: isTorn ? 'translateX(105%) rotateY(12deg)' : 'translateX(0%) rotateY(0deg)',
+          transform: isTorn ? 'translate3d(105%, 0, 0) rotateY(8deg)' : 'translate3d(0%, 0, 0) rotateY(0deg)',
           transformOrigin: 'right center'
         }}
       >
@@ -121,9 +121,9 @@ export default function TornPageIntro({ onComplete }) {
               backgroundSize: '24px 24px'
             }}
           />
-          {/* Organic Torn Rip Edge on Left Side of Right Panel */}
+          {/* Deckled Torn Edge Shadow & Gold Foil Sparkle */}
           <div 
-            className="absolute top-0 left-0 bottom-0 w-12 pointer-events-none"
+            className="absolute top-0 left-0 bottom-0 w-8 pointer-events-none"
             style={{
               background: 'linear-gradient(to left, transparent, rgba(197, 155, 81, 0.45))',
               filter: 'drop-shadow(-3px 0 8px rgba(197, 155, 81, 0.5))'
@@ -135,7 +135,7 @@ export default function TornPageIntro({ onComplete }) {
       {/* Center Golden Seam Line & Tear Tracer Spark */}
       {!isTorn && (
         <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-0.5 z-20 pointer-events-none flex flex-col items-center">
-          <div className="w-full h-full bg-gradient-to-b from-transparent via-[#C59B51] to-transparent opacity-70" />
+          <div className="w-full h-full bg-gradient-to-b from-transparent via-[#C59B51] to-transparent opacity-75" />
           
           {/* Traveling Golden Tear Tracer */}
           <div 
@@ -148,38 +148,37 @@ export default function TornPageIntro({ onComplete }) {
 
       {/* Center Authentic कल्रा Brand Monogram Revealed */}
       <div 
-        className={`absolute z-30 flex flex-col items-center text-center transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        className={`absolute z-30 px-4 flex flex-col items-center text-center transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           showLogo 
             ? isGliding
-              ? 'scale-75 -translate-y-64 opacity-0'
+              ? 'scale-75 -translate-y-48 sm:-translate-y-64 opacity-0'
               : 'scale-100 translate-y-0 opacity-100'
-            : 'scale-50 translate-y-8 opacity-0 pointer-events-none'
+            : 'scale-50 translate-y-6 opacity-0 pointer-events-none'
         }`}
       >
         {/* Luminous Antique Gold Monogram Seal */}
-        <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-[#ECCF96] via-[#C59B51] to-[#8F6929] p-0.5 shadow-[0_0_50px_rgba(197,155,81,0.6)] mb-4 flex items-center justify-center">
+        <div className="w-18 h-18 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-[#ECCF96] via-[#C59B51] to-[#8F6929] p-0.5 shadow-[0_0_50px_rgba(197,155,81,0.6)] mb-3 sm:mb-4 flex items-center justify-center">
           <div className="w-full h-full rounded-full bg-[#2B070D] flex flex-col items-center justify-center p-2 border border-[#E4C58B]/40">
             <span className="font-rozha text-2xl sm:text-3xl font-bold text-[#E4C58B] leading-none">कल्रा</span>
             <span className="font-cinzel text-[8px] sm:text-[9px] tracking-[0.25em] text-[#C59B51] uppercase font-bold mt-0.5">KRUTI</span>
           </div>
         </div>
 
-        <h2 className="font-cinzel text-xl sm:text-2xl font-bold text-[#F8F5EE] tracking-[0.2em] uppercase">
+        <h2 className="font-cinzel text-lg sm:text-2xl font-bold text-[#F8F5EE] tracking-[0.2em] uppercase">
           कल्रा KRUTI <span className="font-italiana italic text-[#C59B51] lowercase font-normal">by vyara</span>
         </h2>
-        <span className="text-[10px] sm:text-xs text-[#E4C58B]/90 tracking-[0.3em] uppercase font-semibold mt-1">
+        <span className="text-[9px] sm:text-xs text-[#E4C58B]/90 tracking-[0.3em] uppercase font-semibold mt-1">
           Pure Handloom Silk Atelier
         </span>
       </div>
 
-      {/* Skip Intro Button */}
+      {/* Responsive Skip Intro Button */}
       <button 
         onClick={handleSkip}
-        className="absolute bottom-6 right-6 z-40 px-4 py-1.5 rounded-full bg-[#2B070D]/80 hover:bg-[#58111A] text-[#E4C58B] border border-[#C59B51]/40 text-[10px] uppercase tracking-widest transition-all shadow-lg pointer-events-auto"
+        className="absolute bottom-6 right-5 sm:right-8 z-40 px-4 py-2 rounded-full bg-[#2B070D]/85 hover:bg-[#58111A] text-[#E4C58B] border border-[#C59B51]/40 text-[10px] sm:text-xs uppercase tracking-widest transition-all shadow-xl pointer-events-auto active:scale-95 cursor-pointer"
       >
         Skip Intro ✕
       </button>
     </div>
   );
 }
-

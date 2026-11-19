@@ -8,6 +8,7 @@ export default function ProductCard({ product }) {
     toggleWishlist, 
     addToCart, 
     formatPrice, 
+    openProductPage,
     setQuickViewProduct 
   } = useStore();
 
@@ -15,12 +16,14 @@ export default function ProductCard({ product }) {
   const discountPercent = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
 
   return (
-    <div className="product-card group flex flex-col justify-between bg-white rounded-2xl border border-[#C59B51]/25 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+    <div 
+      className="product-card group flex flex-col justify-between bg-white rounded-2xl border border-[#C59B51]/25 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer"
+      onClick={() => openProductPage(product.id)}
+    >
       <div>
         {/* Saree Image Container */}
         <div 
-          className="relative overflow-hidden aspect-[3/4] bg-[#EFE8DA] cursor-pointer"
-          onClick={() => setQuickViewProduct(product)}
+          className="relative overflow-hidden aspect-[3/4] bg-[#EFE8DA]"
         >
           <img 
             src={product.images[0]} 
@@ -72,7 +75,10 @@ export default function ProductCard({ product }) {
           </div>
 
           <h3 
-            onClick={() => setQuickViewProduct(product)}
+            onClick={(e) => {
+              e.stopPropagation();
+              openProductPage(product.id);
+            }}
             className="font-cormorant text-sm sm:text-base font-bold text-[#58111A] hover:text-[#C59B51] transition-colors cursor-pointer truncate leading-snug"
             title={product.name}
           >
@@ -109,7 +115,10 @@ export default function ProductCard({ product }) {
         </div>
 
         <button 
-          onClick={() => addToCart(product.id)}
+          onClick={(e) => {
+            e.stopPropagation();
+            addToCart(product.id);
+          }}
           className="px-2.5 sm:px-3.5 py-1.5 rounded-full bg-[#58111A] hover:bg-[#3B0910] text-[#FAF7F2] text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider transition-all flex items-center gap-1 shadow-sm shrink-0 hover:scale-105"
           title="Add to Shopping Bag"
         >

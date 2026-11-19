@@ -1,5 +1,5 @@
 import React from 'react';
-import { StoreProvider } from './context/StoreContext';
+import { StoreProvider, useStore } from './context/StoreContext';
 import TornPageIntro from './components/TornPageIntro';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -11,6 +11,7 @@ import BestSellers from './components/BestSellers';
 import Testimonials from './components/Testimonials';
 import OrderTracking from './components/OrderTracking';
 import BespokeAppointment from './components/BespokeAppointment';
+import ProductDetailPage from './components/ProductDetailPage';
 import Footer from './components/Footer';
 import CartDrawer from './components/CartDrawer';
 import WishlistDrawer from './components/WishlistDrawer';
@@ -19,43 +20,56 @@ import CheckoutModal from './components/CheckoutModal';
 import AuthModal from './components/AuthModal';
 import Toast from './components/Toast';
 
-export default function App() {
+function AppContent() {
+  const { currentView } = useStore();
+
   return (
-    <StoreProvider>
-      <div className="min-h-screen bg-[#F8F5EE] text-[#58111A] flex flex-col font-sans selection:bg-[#C59B51] selection:text-[#2B070D]">
-        
-        {/* Cinematic Torn-Page Silk Opening Intro */}
-        <TornPageIntro />
+    <div className="min-h-screen bg-[#F8F5EE] text-[#58111A] flex flex-col font-sans selection:bg-[#C59B51] selection:text-[#2B070D]">
+      
+      {/* Cinematic Torn-Page Silk Opening Intro (Only plays once per session) */}
+      <TornPageIntro />
 
-        {/* Global Luxury Navbar */}
-        <Navbar />
+      {/* Global Luxury Navbar */}
+      <Navbar />
 
-        {/* Main Content Sections */}
-        <main className="flex-1">
-          <Hero />
-          <BrandStory />
-          <CollectionsRunway />
-          <ShopCatalog />
-          <Craftsmanship />
-          <BestSellers />
-          <Testimonials />
-          <OrderTracking />
-          <BespokeAppointment />
-        </main>
+      {/* Dynamic Content: Flipkart-Style Full Product Page OR Home Catalog */}
+      <main className="flex-1">
+        {currentView === 'product' ? (
+          <ProductDetailPage />
+        ) : (
+          <>
+            <Hero />
+            <BrandStory />
+            <CollectionsRunway />
+            <ShopCatalog />
+            <Craftsmanship />
+            <BestSellers />
+            <Testimonials />
+            <OrderTracking />
+            <BespokeAppointment />
+          </>
+        )}
+      </main>
 
-        {/* Global Footer */}
-        <Footer />
+      {/* Global Footer */}
+      <Footer />
 
-        {/* Interactive Drawers & Modals */}
-        <CartDrawer />
-        <WishlistDrawer />
-        <ProductModal />
-        <CheckoutModal />
-        <AuthModal />
-        <Toast />
+      {/* Interactive Drawers & Modals */}
+      <CartDrawer />
+      <WishlistDrawer />
+      <ProductModal />
+      <CheckoutModal />
+      <AuthModal />
+      <Toast />
 
-      </div>
-    </StoreProvider>
+    </div>
   );
 }
 
+export default function App() {
+  return (
+    <StoreProvider>
+      <AppContent />
+    </StoreProvider>
+  );
+}

@@ -13,7 +13,9 @@ export default function Navbar() {
     setAuthOpen, 
     setAuthMode,
     currency, 
-    setCurrency 
+    setCurrency,
+    currentView,
+    goBackToCatalog
   } = useStore();
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -21,6 +23,14 @@ export default function Navbar() {
 
   const scrollTo = (id) => {
     setMobileMenuOpen(false);
+    if (currentView !== 'home') {
+      goBackToCatalog();
+      setTimeout(() => {
+        const elem = document.getElementById(id);
+        if (elem) elem.scrollIntoView({ behavior: 'smooth' });
+      }, 120);
+      return;
+    }
     const elem = document.getElementById(id);
     if (elem) {
       elem.scrollIntoView({ behavior: 'smooth' });
