@@ -3,7 +3,7 @@ import { Feather } from 'lucide-react';
 
 export default function BrandStory() {
   return (
-    <section id="story" className="py-20 sm:py-32 px-4 sm:px-8 max-w-7xl mx-auto border-t border-[#C59B51]/20">
+    <section id="story" className="pt-8 sm:pt-12 pb-16 sm:pb-24 px-4 sm:px-8 max-w-7xl mx-auto border-t border-[#C59B51]/20">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
         
         {/* Large Editorial Visuals Layer */}
