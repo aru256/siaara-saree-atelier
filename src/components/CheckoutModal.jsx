@@ -74,7 +74,7 @@ export default function CheckoutModal() {
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-5 h-5 text-[#C59B51]" />
             <h3 className="font-cinzel text-base font-bold text-[#58111A] tracking-wider uppercase">
-              Secure Checkout · कल्रा KRUTI
+              Secure Checkout · कला KRUTI
             </h3>
           </div>
           <button 

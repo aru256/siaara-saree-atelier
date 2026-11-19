@@ -51,7 +51,7 @@ export default function BrandStory() {
           </h2>
 
           <p className="font-sans text-[#7C2335] text-sm sm:text-base leading-relaxed font-normal">
-            Started with a deep passion for authentic Indian handlooms, <strong>कल्रा KRUTI by Vyara</strong> brings you pure silk sarees woven with love, patience, and generational artistry.
+            Started with a deep passion for authentic Indian handlooms, <strong>कला KRUTI by Vyara</strong> brings you pure silk sarees woven with love, patience, and generational artistry.
           </p>
 
           <p className="font-sans text-[#7C2335] text-sm sm:text-base leading-relaxed font-normal">

@@ -10,7 +10,7 @@ const REVIEWS = [
   },
   {
     stars: 5,
-    quote: "Finding genuine Kadwa Banarasi without machine shortcuts is rare today. कल्रा Kruti by Vyara’s pit-loom craftsmanship is a generational triumph.",
+    quote: "Finding genuine Kadwa Banarasi without machine shortcuts is rare today. कला Kruti by Vyara’s pit-loom craftsmanship is a generational triumph.",
     name: "Radhika Kirloskar",
     location: "Textile Collector · Mumbai"
   },

@@ -1,5 +1,5 @@
 /**
- * Authentic Saree Database & Constants for कल्रा KRUTI by Vyara
+ * Authentic Saree Database & Constants for कला KRUTI by Vyara
  */
 
 export const SAREES_DATA = [

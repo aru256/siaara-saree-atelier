@@ -70,7 +70,7 @@ export default function ProductDetailPage() {
     if (navigator.share) {
       navigator.share({
         title: product.name,
-        text: `Check out this handcrafted ${product.name} from कल्रा KRUTI by Vyara`,
+        text: `Check out this handcrafted ${product.name} from कला KRUTI by Vyara · Threads of culture, Beads of joy`,
         url: window.location.href
       }).catch(() => {});
     } else {
@@ -185,7 +185,7 @@ export default function ProductDetailPage() {
             {/* Title & Brand Header */}
             <div>
               <div className="flex items-center gap-2 text-xs text-[#C59B51] font-bold uppercase tracking-widest mb-1.5">
-                <span>कल्रा KRUTI by vyara</span>
+                <span>कला KRUTI by Vyara</span>
                 <span>·</span>
                 <span>{product.weaveType}</span>
               </div>

@@ -75,7 +75,7 @@ export default function BespokeAppointment() {
 
             {/* WhatsApp Concierge Bar */}
             <a 
-              href="https://wa.me/919444416544?text=Hello%20कल्रा%20Kruti%20Atelier,%20I%20would%20like%20to%20inquire%20about%20your%20pure%20silk%20sarees"
+              href="https://wa.me/919444416544?text=Hello%20कला%20Kruti%20Atelier,%20I%20would%20like%20to%20inquire%20about%20your%20pure%20silk%20sarees"
               target="_blank"
               rel="noopener noreferrer"
               className="p-4 rounded-2xl bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/30 flex items-center justify-between transition-colors cursor-pointer"

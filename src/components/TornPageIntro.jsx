@@ -20,18 +20,18 @@ export default function TornPageIntro({ onComplete }) {
     // 1.1s: Silk panels tear and glide open
     const t2 = setTimeout(() => setStage('opening'), 1100);
 
-    // 1.9s: Center brand seal revealed with golden shimmer
+    // 1.9s: Center Lotus Woman emblem revealed with golden shimmer
     const t3 = setTimeout(() => setStage('logoRevealed'), 1900);
 
-    // 3.0s: Logo glides smoothly towards navbar
-    const t4 = setTimeout(() => setStage('gliding'), 3000);
+    // 3.1s: Logo glides smoothly towards navbar
+    const t4 = setTimeout(() => setStage('gliding'), 3100);
 
-    // 3.7s: Sequence completed
+    // 3.8s: Sequence completed
     const t5 = setTimeout(() => {
       setDismissed(true);
       sessionStorage.setItem('klakruti_intro_seen', 'true');
       if (onComplete) onComplete();
-    }, 3700);
+    }, 3800);
 
     return () => {
       clearTimeout(t1);
@@ -146,7 +146,7 @@ export default function TornPageIntro({ onComplete }) {
         </div>
       )}
 
-      {/* Center Authentic कल्रा Brand Monogram Revealed */}
+      {/* Center Lotus Woman Emblem & Brand Typography (Exact User Design) */}
       <div 
         className={`absolute z-30 px-4 flex flex-col items-center text-center transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           showLogo 
@@ -156,19 +156,34 @@ export default function TornPageIntro({ onComplete }) {
             : 'scale-50 translate-y-6 opacity-0 pointer-events-none'
         }`}
       >
-        {/* Luminous Antique Gold Monogram Seal */}
-        <div className="w-18 h-18 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-[#ECCF96] via-[#C59B51] to-[#8F6929] p-0.5 shadow-[0_0_50px_rgba(197,155,81,0.6)] mb-3 sm:mb-4 flex items-center justify-center">
-          <div className="w-full h-full rounded-full bg-[#2B070D] flex flex-col items-center justify-center p-2 border border-[#E4C58B]/40">
-            <span className="font-rozha text-2xl sm:text-3xl font-bold text-[#E4C58B] leading-none">कल्रा</span>
-            <span className="font-cinzel text-[8px] sm:text-[9px] tracking-[0.25em] text-[#C59B51] uppercase font-bold mt-0.5">KRUTI</span>
-          </div>
+        {/* Lotus Blooming Woman Profile Emblem */}
+        <div className="relative mb-3 sm:mb-4 flex items-center justify-center">
+          <div className="absolute inset-0 bg-[#C59B51]/25 blur-2xl rounded-full scale-125 pointer-events-none" />
+          <img 
+            src="assets/brand-lotus-gold.png" 
+            alt="कला KRUTI Emblem" 
+            className="w-24 sm:w-36 h-auto object-contain drop-shadow-[0_0_25px_rgba(228,197,139,0.7)]"
+          />
         </div>
 
-        <h2 className="font-cinzel text-lg sm:text-2xl font-bold text-[#F8F5EE] tracking-[0.2em] uppercase">
-          कल्रा KRUTI <span className="font-italiana italic text-[#C59B51] lowercase font-normal">by vyara</span>
+        {/* Brand Name: कला in Hindi Devanagari, KRUTI in English */}
+        <h2 className="flex items-baseline justify-center gap-2 sm:gap-3 leading-none">
+          <span className="font-rozha text-3xl sm:text-5xl font-bold text-[#E4C58B]">
+            कला
+          </span>
+          <span className="font-cinzel text-2xl sm:text-4xl font-bold text-[#F8F5EE] tracking-[0.18em]">
+            KRUTI
+          </span>
         </h2>
-        <span className="text-[9px] sm:text-xs text-[#E4C58B]/90 tracking-[0.3em] uppercase font-semibold mt-1">
-          Pure Handloom Silk Atelier
+
+        {/* By Vyara (Directly Underneath) */}
+        <span className="font-cinzel text-xs sm:text-sm font-semibold tracking-[0.25em] text-[#C59B51] uppercase mt-1 sm:mt-1.5">
+          By Vyara
+        </span>
+
+        {/* Tagline: Threads of culture, Beads of joy */}
+        <span className="font-italiana italic text-xs sm:text-sm text-[#E4C58B]/95 tracking-wider mt-2 sm:mt-2.5 drop-shadow-sm">
+          Threads of culture, Beads of joy
         </span>
       </div>
 

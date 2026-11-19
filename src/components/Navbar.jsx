@@ -79,22 +79,27 @@ export default function Navbar() {
       {/* Main Navbar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-3.5 flex items-center justify-between">
         
-        {/* Brand Logo & Monogram */}
+        {/* Brand Logo & Monogram (Lotus Woman Emblem + कला KRUTI By Vyara) */}
         <a 
           href="#home" 
           onClick={(e) => { e.preventDefault(); scrollTo('home'); }}
-          className="flex items-center gap-3 group"
+          className="flex items-center gap-2.5 sm:gap-3 group"
           id="navbar-brand-logo"
         >
-          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#58111A] border border-[#C59B51]/50 flex flex-col items-center justify-center p-1 shadow-md group-hover:scale-105 transition-transform">
-            <span className="font-rozha text-sm sm:text-base font-bold text-[#E4C58B] leading-none">कल्रा</span>
+          <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#58111A] border border-[#C59B51]/50 flex items-center justify-center p-1.5 shadow-md group-hover:scale-105 transition-transform overflow-hidden shrink-0">
+            <img 
+              src="assets/brand-lotus-gold.png" 
+              alt="कला KRUTI by Vyara" 
+              className="w-full h-full object-contain filter drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]"
+            />
           </div>
           <div className="flex flex-col text-left">
-            <span className="font-cinzel text-base sm:text-xl font-bold tracking-[0.18em] text-[#58111A] leading-tight">
-              कल्रा KRUTI
-            </span>
-            <span className="font-italiana italic text-[10px] sm:text-xs text-[#C59B51] font-normal tracking-wider -mt-0.5">
-              by vyara
+            <div className="flex items-baseline gap-1.5">
+              <span className="font-rozha text-base sm:text-xl font-bold text-[#58111A] leading-tight">कला</span>
+              <span className="font-cinzel text-sm sm:text-lg font-bold tracking-[0.16em] text-[#58111A] leading-tight">KRUTI</span>
+            </div>
+            <span className="font-cinzel text-[9px] sm:text-[10px] text-[#C59B51] font-semibold tracking-wider -mt-0.5 uppercase">
+              By Vyara
             </span>
           </div>
         </a>

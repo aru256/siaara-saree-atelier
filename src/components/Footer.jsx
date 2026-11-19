@@ -16,15 +16,23 @@ export default function Footer() {
           {/* Brand Info */}
           <div className="lg:col-span-4 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-[#58111A] border border-[#C59B51]/50 flex items-center justify-center p-1 shadow-md">
-                <span className="font-rozha text-base font-bold text-[#E4C58B]">कल्रा</span>
+              <div className="w-12 h-12 rounded-full bg-[#58111A] border border-[#C59B51]/50 flex items-center justify-center p-2 shadow-md shrink-0">
+                <img 
+                  src="assets/brand-lotus-gold.png" 
+                  alt="कला KRUTI by Vyara" 
+                  className="w-full h-full object-contain"
+                />
               </div>
-              <div className="flex flex-col">
-                <span className="font-cinzel text-lg font-bold tracking-[0.18em] text-[#E4C58B]">
-                  कल्रा KRUTI
+              <div className="flex flex-col text-left">
+                <div className="flex items-baseline gap-1.5">
+                  <span className="font-rozha text-lg sm:text-2xl font-bold text-[#E4C58B]">कला</span>
+                  <span className="font-cinzel text-base sm:text-xl font-bold tracking-[0.16em] text-[#E4C58B]">KRUTI</span>
+                </div>
+                <span className="font-cinzel text-[10px] sm:text-xs text-[#C59B51] font-semibold tracking-wider uppercase -mt-0.5">
+                  By Vyara
                 </span>
-                <span className="font-italiana italic text-xs text-[#C59B51] font-normal tracking-wider -mt-0.5">
-                  by vyara
+                <span className="font-italiana italic text-[11px] text-[#E4C58B]/90 tracking-wide mt-0.5">
+                  Threads of culture, Beads of joy
                 </span>
               </div>
             </div>
@@ -94,7 +102,7 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#FAF7F2]/60">
-          <p>© 2026 कल्रा KRUTI by Vyara (Klakruti). All Rights Reserved. Pure Handloom Couture.</p>
+          <p>© 2026 कला KRUTI by Vyara. Threads of culture, Beads of joy. All Rights Reserved.</p>
           
           <div className="flex items-center gap-4">
             <button 
