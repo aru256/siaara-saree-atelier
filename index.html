@@ -16,9 +16,12 @@
             'brand-beige': '#F8F5EE',
             'brand-sand': '#EFE8DA',
             'brand-cream': '#FAF7F2',
-            'brand-espresso': '#180E09',
-            'brand-dark': '#120905',
-            'brand-mocha': '#4E3325',
+            'brand-espresso': '#58111A', // Royal Bridal Maroon Primary Text
+            'brand-dark': '#2B070D',     // Deep Imperial Velvet Maroon
+            'brand-mocha': '#7C2335',    // Warm Rosewood Maroon Secondary Text
+            'brand-maroon': '#58111A',
+            'brand-maroon-dark': '#2B070D',
+            'brand-maroon-light': '#8A293D',
             'brand-gold': '#C59B51',
             'brand-gold-light': '#E4C58B',
             'brand-gold-pale': '#F3E5C8',
@@ -229,107 +232,129 @@
     </div>
   </div>
 
-  <!-- ================= B. HERO SECTION (CINEMATIC 3D OPENING & AUTO-SCROLLING VISUAL MARQUEE) ================= -->
+  <!-- ================= B. HERO SECTION (CINEMATIC 3D SILK & SHARP SINGLE-IMAGE CAROUSEL) ================= -->
   <section id="home" class="relative min-h-[92vh] sm:min-h-[96vh] flex items-center justify-center overflow-hidden pt-8 pb-20 px-4 sm:px-8">
     
     <!-- Three.js 3D Silk Simulation Background Canvas -->
     <canvas id="silk-canvas"></canvas>
 
-    <!-- Auto-Scrolling Editorial Visual Marquee Backdrop (Infinite Saree Motion Tapestry) -->
-    <div class="hero-marquee-backdrop" aria-hidden="true">
-      <!-- Ribbon 1: Moving Rightwards Infinitely -->
-      <div class="hero-marquee-row marquee-reverse">
-        <div class="hero-marquee-track">
-          <div class="hero-marquee-card"><img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=500&q=80" alt="Tissue Silk Metallic Zari" /></div>
-          <div class="hero-marquee-card"><img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=500&q=80" alt="Royal Banarasi Crimson Brocade" /></div>
-          <div class="hero-marquee-card"><img src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=500&q=80" alt="Emerald Raw Silk Heritage" /></div>
-          <div class="hero-marquee-card"><img src="https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=500&q=80" alt="Handloom Zari Border Metier" /></div>
-          <div class="hero-marquee-card"><img src="https://images.unsplash.com/photo-1566737236500-c8ac43014a67?auto=format&fit=crop&w=500&q=80" alt="Lustrous Liquid Satin Drape" /></div>
-          <div class="hero-marquee-card"><img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=500&q=80" alt="Golden Brocade Floral Weave" /></div>
-          <!-- Seamless Duplicate for Infinite Loop -->
-          <div class="hero-marquee-card"><img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=500&q=80" alt="Tissue Silk Metallic Zari" /></div>
-          <div class="hero-marquee-card"><img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=500&q=80" alt="Royal Banarasi Crimson Brocade" /></div>
-          <div class="hero-marquee-card"><img src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=500&q=80" alt="Emerald Raw Silk Heritage" /></div>
-          <div class="hero-marquee-card"><img src="https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=500&q=80" alt="Handloom Zari Border Metier" /></div>
-          <div class="hero-marquee-card"><img src="https://images.unsplash.com/photo-1566737236500-c8ac43014a67?auto=format&fit=crop&w=500&q=80" alt="Lustrous Liquid Satin Drape" /></div>
-          <div class="hero-marquee-card"><img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=500&q=80" alt="Golden Brocade Floral Weave" /></div>
+    <!-- Crisp Single-Image Saree Slideshow (1 Photo At A Time, Loop Back To First, Unblurred & Sharp) -->
+    <div id="hero-slider" aria-label="Authentic Saree Drapes Showcase">
+      
+      <!-- Slide 1: Tissue Silk -->
+      <div class="hero-slide active" data-slide="0">
+        <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1920&q=88" alt="Tissue Silk Metallic Zari Saree" />
+        <div class="hero-slide-badge">
+          <span>Look 01 · Shimmering Tissue Silk</span>
         </div>
       </div>
 
-      <!-- Ribbon 2: Moving Leftwards Infinitely -->
-      <div class="hero-marquee-row marquee-forward">
-        <div class="hero-marquee-track">
-          <div class="hero-marquee-card"><img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=500&q=80" alt="Pastel Organza Embroidery" /></div>
-          <div class="hero-marquee-card"><img src="https://images.unsplash.com/photo-1610030469668-932145b41295?auto=format&fit=crop&w=500&q=80" alt="Artisan Pit Loom Weaving" /></div>
-          <div class="hero-marquee-card"><img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=500&q=80" alt="Deep Maroon Silk Drape" /></div>
-          <div class="hero-marquee-card"><img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=500&q=80" alt="Tested Gold Micron Zari" /></div>
-          <div class="hero-marquee-card"><img src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=500&q=80" alt="Royal Handloom Pallu" /></div>
-          <div class="hero-marquee-card"><img src="https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=500&q=80" alt="Kanjivaram Temple Silk" /></div>
-          <!-- Seamless Duplicate for Infinite Loop -->
-          <div class="hero-marquee-card"><img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=500&q=80" alt="Pastel Organza Embroidery" /></div>
-          <div class="hero-marquee-card"><img src="https://images.unsplash.com/photo-1610030469668-932145b41295?auto=format&fit=crop&w=500&q=80" alt="Artisan Pit Loom Weaving" /></div>
-          <div class="hero-marquee-card"><img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=500&q=80" alt="Deep Maroon Silk Drape" /></div>
-          <div class="hero-marquee-card"><img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=500&q=80" alt="Tested Gold Micron Zari" /></div>
-          <div class="hero-marquee-card"><img src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=500&q=80" alt="Royal Handloom Pallu" /></div>
-          <div class="hero-marquee-card"><img src="https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=500&q=80" alt="Kanjivaram Temple Silk" /></div>
+      <!-- Slide 2: Royal Banarasi -->
+      <div class="hero-slide" data-slide="1">
+        <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1920&q=88" alt="Royal Banarasi Crimson Kadwa Brocade" />
+        <div class="hero-slide-badge">
+          <span>Look 02 · Royal Crimson Banarasi</span>
         </div>
       </div>
+
+      <!-- Slide 3: Malai Silk Drape -->
+      <div class="hero-slide" data-slide="2">
+        <img src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1920&q=88" alt="Featherlight Malai Silk Drape" />
+        <div class="hero-slide-badge">
+          <span>Look 03 · Featherlight Malai Silk</span>
+        </div>
+      </div>
+
+      <!-- Slide 4: Kanjivaram Temple Silk -->
+      <div class="hero-slide" data-slide="3">
+        <img src="https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=1920&q=88" alt="Kanjivaram Temple Silk Korvai Saree" />
+        <div class="hero-slide-badge">
+          <span>Look 04 · Pure Kanjivaram Bridal</span>
+        </div>
+      </div>
+
+      <!-- Slide 5: Festive Organza -->
+      <div class="hero-slide" data-slide="4">
+        <img src="https://images.unsplash.com/photo-1566737236500-c8ac43014a67?auto=format&fit=crop&w=1920&q=88" alt="Handcrafted Festive Organza Saree" />
+        <div class="hero-slide-badge">
+          <span>Look 05 · Handcrafted Festive Organza</span>
+        </div>
+      </div>
+
     </div>
 
-    <!-- Atmospheric Glass Veil so Typography is 100% Crisp & High Fashion -->
-    <div class="hero-veil-overlay" aria-hidden="true"></div>
+    <!-- Manual Navigation Arrows (Customers Can Freely Slide Left & Right) -->
+    <button onclick="changeHeroSlide(-1)" class="hero-slider-arrow left-3 sm:left-8" aria-label="Previous Saree Photo">
+      <i data-lucide="chevron-left" class="w-5 h-5"></i>
+    </button>
+    <button onclick="changeHeroSlide(1)" class="hero-slider-arrow right-3 sm:right-8" aria-label="Next Saree Photo">
+      <i data-lucide="chevron-right" class="w-5 h-5"></i>
+    </button>
 
-    <div class="hero-content max-w-4xl mx-auto w-full flex flex-col items-center text-center gap-6 sm:gap-7 relative z-10 px-4">
+    <!-- Subtle Centered Scrim (Background Saree Photo is 100% Crisp & Fully Visible) -->
+    <div class="hero-subtle-scrim" aria-hidden="true"></div>
+
+    <!-- Center Hero Editorial Card with Delicate Glass Backing -->
+    <div class="hero-content hero-content-card max-w-4xl mx-auto w-full flex flex-col items-center text-center gap-6 sm:gap-7 relative z-10">
       
       <!-- Luxury Monogram Badge -->
       <div class="badge-luxury badge-gold">
         <i data-lucide="sparkles" class="w-3.5 h-3.5 text-brand-gold"></i>
-        <span>Campaign 2026 · Pure Handloom Couture</span>
+        <span>New 2026 Collection · Pure Handloom Sarees</span>
       </div>
 
-      <!-- Monumental Headline -->
-      <h1 class="font-cormorant text-5xl sm:text-7xl lg:text-8xl font-normal tracking-tight text-brand-espresso leading-[1.02]">
-        Woven in Whispers, <br/>
+      <!-- Monumental Headline in Royal Maroon -->
+      <h1 class="font-cormorant text-4xl sm:text-6xl lg:text-7xl font-normal tracking-tight text-brand-espresso leading-[1.04]">
+        Handwoven with Love, <br/>
         <span class="font-italiana italic text-gold-gradient font-normal">Draped in Royalty.</span>
       </h1>
 
-      <!-- Refined Atelier Narrative -->
-      <p class="font-sans text-brand-mocha text-sm sm:text-lg max-w-2xl leading-relaxed font-light mx-auto">
-        An evocative communion of pit-loom authenticity and high-fashion editorial grace. Explore metallic <strong>Tissue Silks</strong>, featherlight <strong>Malai Drapes</strong>, and generations-old <strong>Kadwa Banarasi</strong> brocades.
+      <!-- Clean, Light & Warm Indian English Description -->
+      <p class="font-sans text-brand-mocha text-sm sm:text-base lg:text-lg max-w-2xl leading-relaxed font-normal mx-auto">
+        Discover pure silk sarees handcrafted by traditional master weavers across India. From shimmering <strong>Tissue Silks</strong> and royal <strong>Banarasi brocades</strong> to lightweight <strong>Malai Drapes</strong>—made for your most memorable celebrations.
       </p>
 
       <!-- Royal Action CTAs -->
-      <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+      <div class="flex flex-wrap items-center justify-center gap-4 pt-1">
         <a href="#shop" class="btn-luxury-primary shadow-xl">
-          <span>Explore Atelier Catalog</span>
+          <span>Shop Pure Silk Sarees</span>
           <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </a>
         <a href="#contact" class="btn-luxury-outline">
           <i data-lucide="calendar" class="w-4 h-4 text-brand-gold"></i>
-          <span>Bespoke Bridal Appointment</span>
+          <span>Book Styling Call</span>
         </a>
       </div>
 
-      <!-- Hallmark Quality Indicators (Refined 3-Column Centerpiece) -->
-      <div class="grid grid-cols-3 gap-6 sm:gap-14 pt-8 border-hairline-t w-full max-w-xl mx-auto mt-2">
+      <!-- Hallmark Quality Indicators (Clear, Trustworthy Indian Luxury Signals) -->
+      <div class="grid grid-cols-3 gap-4 sm:gap-12 pt-6 border-hairline-t w-full max-w-xl mx-auto mt-1">
         <div class="text-center">
-          <span class="block text-2xl sm:text-3xl font-cormorant font-bold text-brand-espresso">100%</span>
-          <span class="text-[10px] text-brand-mocha tracking-widest uppercase">Mulberry Silk</span>
+          <span class="block text-xl sm:text-2xl font-cormorant font-bold text-brand-espresso">100% Silk</span>
+          <span class="text-[9px] sm:text-[10px] text-brand-mocha tracking-wider uppercase font-semibold">Silk Mark Certified</span>
         </div>
         <div class="text-center">
-          <span class="block text-2xl sm:text-3xl font-cormorant font-bold text-brand-espresso">GI-Tagged</span>
-          <span class="text-[10px] text-brand-mocha tracking-widest uppercase">Varanasi Looms</span>
+          <span class="block text-xl sm:text-2xl font-cormorant font-bold text-brand-espresso">Direct Looms</span>
+          <span class="text-[9px] sm:text-[10px] text-brand-mocha tracking-wider uppercase font-semibold">Fair Pay to Weavers</span>
         </div>
         <div class="text-center">
-          <span class="block text-2xl sm:text-3xl font-cormorant font-bold text-brand-espresso">Tested Zari</span>
-          <span class="text-[10px] text-brand-mocha tracking-widest uppercase">24K Micron Gold</span>
+          <span class="block text-xl sm:text-2xl font-cormorant font-bold text-brand-espresso">Tested Zari</span>
+          <span class="text-[9px] sm:text-[10px] text-brand-mocha tracking-wider uppercase font-semibold">24K Real Gold Finish</span>
         </div>
+      </div>
+
+      <!-- Slider Pagination Dots Indicator -->
+      <div id="hero-slider-dots" class="flex items-center gap-2 pt-2">
+        <button class="slider-dot active" onclick="goToHeroSlide(0)" aria-label="Slide 1"></button>
+        <button class="slider-dot" onclick="goToHeroSlide(1)" aria-label="Slide 2"></button>
+        <button class="slider-dot" onclick="goToHeroSlide(2)" aria-label="Slide 3"></button>
+        <button class="slider-dot" onclick="goToHeroSlide(3)" aria-label="Slide 4"></button>
+        <button class="slider-dot" onclick="goToHeroSlide(4)" aria-label="Slide 5"></button>
       </div>
 
     </div>
 
-    <!-- Minimalist Scroll Indicator -->
-    <a href="#story" class="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-brand-mocha/70 hover:text-brand-gold transition-colors z-10 text-[9px] uppercase tracking-[0.3em] font-semibold">
+    <!-- Minimalist Scroll Down Pill -->
+    <a href="#story" class="absolute bottom-3 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-brand-mocha hover:text-brand-gold transition-colors z-10 text-[9px] uppercase tracking-[0.25em] font-semibold">
       <span>Scroll</span>
       <i data-lucide="chevrons-down" class="w-3.5 h-3.5 animate-bounce"></i>
     </a>
@@ -354,7 +379,7 @@
         <div class="absolute -bottom-6 left-6 right-6 sm:right-auto glass-card p-5 rounded-2xl border-hairline max-w-sm shadow-xl">
           <span class="text-[9px] uppercase tracking-[0.25em] text-brand-gold font-bold block mb-1">Varanasi Looms Guild</span>
           <p class="font-cormorant text-base italic text-brand-espresso leading-snug">
-            "We do not merely weave threads. We weave the dignity, memories, and prayers of three generations."
+            "We do not just weave silk threads. We weave the love, blessings, and hard work of our artisan families."
           </p>
         </div>
       </div>
@@ -363,34 +388,34 @@
       <div class="lg:col-span-6 flex flex-col gap-6 text-left">
         <div class="badge-luxury badge-espresso">
           <i data-lucide="feather" class="w-3.5 h-3.5 text-brand-gold"></i>
-          <span>The Atelier Manifesto</span>
+          <span>Our Heritage Story</span>
         </div>
 
         <h2 class="font-cormorant text-4xl sm:text-6xl font-normal text-brand-espresso leading-[1.05]">
-          A Tapestry of Heritage, <br/>
-          <span class="font-italiana italic text-gold-gradient font-normal">Born on Wooden Pit-Looms.</span>
+          Two Generations of Heritage, <br/>
+          <span class="font-italiana italic text-gold-gradient font-normal">Handcrafted on Wooden Pit-Looms.</span>
         </h2>
 
-        <p class="font-sans text-brand-mocha text-sm sm:text-base leading-relaxed font-light">
-          Founded on the uncompromising refusal of industrial homogenization, <strong>कल्रा KRUTI by Vyara</strong> stands as a guardian of sacred Indian handloom traditions and heirloom handcrafted sarees.
+        <p class="font-sans text-brand-mocha text-sm sm:text-base leading-relaxed font-normal">
+          Started with a deep passion for authentic Indian handlooms, <strong>कल्रा KRUTI by Vyara</strong> brings you pure silk sarees woven with love, patience, and generational artistry.
         </p>
 
-        <p class="font-sans text-brand-mocha text-sm sm:text-base leading-relaxed font-light">
-          Each saree is hand-knotted by generational artisans in Varanasi, Kanchipuram, and Chanderi. Using raw, unadulterated mulberry silks, tested 24K electroplated gold zaris, and organic botanical dyeing, our drapes take up to 45 days to materialize.
+        <p class="font-sans text-brand-mocha text-sm sm:text-base leading-relaxed font-normal">
+          Every saree is handwoven by master weavers in Varanasi, Kanchipuram, and Chanderi. We use only pure mulberry silk, tested 24K real gold zari, and gentle botanical washes—taking up to 45 days of careful handloom work for each drape.
         </p>
 
         <div class="grid grid-cols-3 gap-6 pt-6 border-hairline-t">
           <div>
             <span class="block text-2xl font-cormorant font-bold text-brand-gold">45+</span>
-            <span class="text-[10px] text-brand-mocha uppercase tracking-wider">Artisan Families</span>
+            <span class="text-[10px] text-brand-mocha uppercase tracking-wider font-semibold">Artisan Families</span>
           </div>
           <div>
             <span class="block text-2xl font-cormorant font-bold text-brand-gold">100%</span>
-            <span class="text-[10px] text-brand-mocha uppercase tracking-wider">Silk Mark Certified</span>
+            <span class="text-[10px] text-brand-mocha uppercase tracking-wider font-semibold">Silk Mark Certified</span>
           </div>
           <div>
             <span class="block text-2xl font-cormorant font-bold text-brand-gold">32+</span>
-            <span class="text-[10px] text-brand-mocha uppercase tracking-wider">Countries Shipped</span>
+            <span class="text-[10px] text-brand-mocha uppercase tracking-wider font-semibold">Countries Shipped</span>
           </div>
         </div>
       </div>
@@ -453,23 +478,23 @@
               <div>
                 <span class="text-xs uppercase tracking-[0.25em] font-bold text-brand-gold block mb-1">Weave I / V</span>
                 <h3 class="font-cormorant text-3xl sm:text-5xl font-bold text-brand-espresso leading-tight">Tissue Silk Sarees</h3>
-                <span class="font-italiana italic text-brand-gold text-lg block mt-1">Luminous Glaze & Liquid Gold Aura</span>
-                <p class="text-xs sm:text-sm text-brand-mocha mt-3 font-light leading-relaxed">
-                  Pure mulberry silk warp interwoven with tested 24K gold and silver zari weft. Celebrated for its crisp structural drape that holds sculptural shape throughout high-society occasions.
+                <span class="font-italiana italic text-brand-gold text-lg block mt-1">Golden Shimmer & Modern Festive Elegance</span>
+                <p class="text-xs sm:text-sm text-brand-mocha mt-3 font-normal leading-relaxed">
+                  Pure mulberry silk woven with tested 24K real gold and silver zari. Known for its crisp, royal drape that holds its shape beautifully throughout weddings, parties, and festive celebrations.
                 </p>
               </div>
               <div class="grid grid-cols-2 gap-3 py-3 border-hairline-t border-hairline-b text-xs">
                 <div>
-                  <span class="text-[10px] text-brand-mocha uppercase tracking-wider block">Weft Material</span>
-                  <span class="font-bold text-brand-espresso">Tested 24K Zari</span>
+                  <span class="text-[10px] text-brand-mocha uppercase tracking-wider block font-semibold">Zari Quality</span>
+                  <span class="font-bold text-brand-espresso">Tested 24K Real Zari</span>
                 </div>
                 <div>
-                  <span class="text-[10px] text-brand-mocha uppercase tracking-wider block">Drape Weight</span>
-                  <span class="font-bold text-brand-gold font-cormorant text-base">580g Crisp Satin</span>
+                  <span class="text-[10px] text-brand-mocha uppercase tracking-wider block font-semibold">Drape Feel</span>
+                  <span class="font-bold text-brand-gold font-cormorant text-base">Crisp & Royal</span>
                 </div>
               </div>
               <button onclick="filterByCollection('tissue-silk'); document.getElementById('shop').scrollIntoView({behavior: 'smooth'})" class="btn-luxury-primary !py-2.5 !px-6 !text-xs self-start">
-                <span>Explore Tissue Silk Archive</span>
+                <span>View Tissue Silks</span>
                 <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
               </button>
             </div>
@@ -490,23 +515,23 @@
               <div>
                 <span class="text-xs uppercase tracking-[0.25em] font-bold text-brand-gold block mb-1">Weave II / V</span>
                 <h3 class="font-cormorant text-3xl sm:text-5xl font-bold text-brand-espresso leading-tight">Banarasi Katan Brocades</h3>
-                <span class="font-italiana italic text-brand-gold text-lg block mt-1">Authentic Pit-Loom Heirlooms</span>
-                <p class="text-xs sm:text-sm text-brand-mocha mt-3 font-light leading-relaxed">
-                  Authentic Kadwa bootis and heavy Shikargah hunting motifs manually hand-knotted on dense pure katan silk. Up to 120 hours of master weaver dedication with zero loose floats on the reverse.
+                <span class="font-italiana italic text-brand-gold text-lg block mt-1">Timeless Royal Wedding Classics</span>
+                <p class="text-xs sm:text-sm text-brand-mocha mt-3 font-normal leading-relaxed">
+                  Traditional Kadwa bootis and royal Shikargah motifs handwoven on pure katan silk. Each saree takes up to 120 hours of master weaver dedication with a neat, smooth finish on the reverse.
                 </p>
               </div>
               <div class="grid grid-cols-2 gap-3 py-3 border-hairline-t border-hairline-b text-xs">
                 <div>
-                  <span class="text-[10px] text-brand-mocha uppercase tracking-wider block">Weave Technique</span>
-                  <span class="font-bold text-brand-espresso">Kadwa Interlock</span>
+                  <span class="text-[10px] text-brand-mocha uppercase tracking-wider block font-semibold">Weave Technique</span>
+                  <span class="font-bold text-brand-espresso">Kadwa Handloom</span>
                 </div>
                 <div>
-                  <span class="text-[10px] text-brand-mocha uppercase tracking-wider block">Loom Duration</span>
+                  <span class="text-[10px] text-brand-mocha uppercase tracking-wider block font-semibold">Weaving Time</span>
                   <span class="font-bold text-brand-gold font-cormorant text-base">120+ Dedicated Hours</span>
                 </div>
               </div>
               <button onclick="filterByCollection('banarasi-silk'); document.getElementById('shop').scrollIntoView({behavior: 'smooth'})" class="btn-luxury-primary !py-2.5 !px-6 !text-xs self-start">
-                <span>Explore Banarasi Archive</span>
+                <span>View Banarasi Silks</span>
                 <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
               </button>
             </div>
@@ -517,33 +542,33 @@
             <div class="w-full md:w-1/2 aspect-[4/5] rounded-[22px] overflow-hidden shadow-xl relative img-curtain-wrap cursor-pointer" onclick="filterByCollection('malai-silk'); document.getElementById('shop').scrollIntoView({behavior: 'smooth'})">
               <img src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1000&q=85" alt="Malai Silk Drapes" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
               <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/70 via-transparent to-transparent"></div>
-              <span class="absolute top-4 left-4 badge-luxury bg-brand-dark/90 text-brand-gold-light text-[9px]">Look 03 · Butter Fluidity</span>
+              <span class="absolute top-4 left-4 badge-luxury bg-brand-dark/90 text-brand-gold-light text-[9px]">Look 03 · Butter Soft</span>
               <div class="absolute bottom-4 left-4 right-4 text-brand-sand">
                 <span class="text-[10px] tracking-widest uppercase font-bold text-brand-gold-light">Chanderi Looms</span>
-                <p class="text-xs text-brand-sand/80 italic">Crease-Free Tactile Bliss</p>
+                <p class="text-xs text-brand-sand/80 italic">Crease-Free Soft Comfort</p>
               </div>
             </div>
             <div class="w-full md:w-1/2 flex flex-col justify-between space-y-4 text-left">
               <div>
                 <span class="text-xs uppercase tracking-[0.25em] font-bold text-brand-gold block mb-1">Weave III / V</span>
                 <h3 class="font-cormorant text-3xl sm:text-5xl font-bold text-brand-espresso leading-tight">Malai Butter Silk Drapes</h3>
-                <span class="font-italiana italic text-brand-gold text-lg block mt-1">Featherlight Velvet Fluidity</span>
-                <p class="text-xs sm:text-sm text-brand-mocha mt-3 font-light leading-relaxed">
-                  Crease-free butter silk contours effortlessly around the body with natural grace. Treated in botanical washes for ultra-smooth skin feel that resists wrinkling even after 8 hours of festive movement.
+                <span class="font-italiana italic text-brand-gold text-lg block mt-1">Featherlight Comfort & Graceful Drape</span>
+                <p class="text-xs sm:text-sm text-brand-mocha mt-3 font-normal leading-relaxed">
+                  Soft, wrinkle-resistant butter silk that drapes naturally and feels wonderful against the skin. Keeps you feeling elegant and comfortable even after 8+ hours of festive celebrations.
                 </p>
               </div>
               <div class="grid grid-cols-2 gap-3 py-3 border-hairline-t border-hairline-b text-xs">
                 <div>
-                  <span class="text-[10px] text-brand-mocha uppercase tracking-wider block">Texture Finish</span>
-                  <span class="font-bold text-brand-espresso">Butter Satin Peach</span>
+                  <span class="text-[10px] text-brand-mocha uppercase tracking-wider block font-semibold">Touch & Feel</span>
+                  <span class="font-bold text-brand-espresso">Ultra Soft & Smooth</span>
                 </div>
                 <div>
-                  <span class="text-[10px] text-brand-mocha uppercase tracking-wider block">Wrinkle Index</span>
-                  <span class="font-bold text-emerald-700 font-cormorant text-base">Zero-Crease Active</span>
+                  <span class="text-[10px] text-brand-mocha uppercase tracking-wider block font-semibold">Wrinkle Resistance</span>
+                  <span class="font-bold text-emerald-700 font-cormorant text-base">Crease-Free Drape</span>
                 </div>
               </div>
               <button onclick="filterByCollection('malai-silk'); document.getElementById('shop').scrollIntoView({behavior: 'smooth'})" class="btn-luxury-primary !py-2.5 !px-6 !text-xs self-start">
-                <span>Explore Malai Silk Archive</span>
+                <span>View Malai Silks</span>
                 <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
               </button>
             </div>
@@ -564,23 +589,23 @@
               <div>
                 <span class="text-xs uppercase tracking-[0.25em] font-bold text-brand-gold block mb-1">Weave IV / V</span>
                 <h3 class="font-cormorant text-3xl sm:text-5xl font-bold text-brand-espresso leading-tight">Kanjivaram Temple Silks</h3>
-                <span class="font-italiana italic text-brand-gold text-lg block mt-1">Heavyweight Gold Checks & Korvai</span>
-                <p class="text-xs sm:text-sm text-brand-mocha mt-3 font-light leading-relaxed">
-                  Interlocked temple borders woven with traditional three-shuttle Korvai methodology. Woven on dense 3-ply mulberry silk with tested gold zari for royal South Indian bridal ceremonies.
+                <span class="font-italiana italic text-brand-gold text-lg block mt-1">Pure South Indian Bridal Heritage</span>
+                <p class="text-xs sm:text-sm text-brand-mocha mt-3 font-normal leading-relaxed">
+                  Traditional temple borders handwoven using the authentic Korvai technique on heavy 3-ply mulberry silk, featuring tested gold zari for weddings and auspicious occasions.
                 </p>
               </div>
               <div class="grid grid-cols-2 gap-3 py-3 border-hairline-t border-hairline-b text-xs">
                 <div>
-                  <span class="text-[10px] text-brand-mocha uppercase tracking-wider block">Border Metier</span>
+                  <span class="text-[10px] text-brand-mocha uppercase tracking-wider block font-semibold">Border Technique</span>
                   <span class="font-bold text-brand-espresso">3-Shuttle Korvai</span>
                 </div>
                 <div>
-                  <span class="text-[10px] text-brand-mocha uppercase tracking-wider block">Silk Ply Count</span>
-                  <span class="font-bold text-brand-gold font-cormorant text-base">3-Ply Mulberry Heavy</span>
+                  <span class="text-[10px] text-brand-mocha uppercase tracking-wider block font-semibold">Silk Purity</span>
+                  <span class="font-bold text-brand-gold font-cormorant text-base">3-Ply Heavy Silk</span>
                 </div>
               </div>
               <button onclick="filterByCollection('kanjivaram-silk'); document.getElementById('shop').scrollIntoView({behavior: 'smooth'})" class="btn-luxury-primary !py-2.5 !px-6 !text-xs self-start">
-                <span>Explore Kanjivaram Archive</span>
+                <span>View Kanjivarams</span>
                 <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
               </button>
             </div>
@@ -601,23 +626,23 @@
               <div>
                 <span class="text-xs uppercase tracking-[0.25em] font-bold text-brand-gold block mb-1">Weave V / V</span>
                 <h3 class="font-cormorant text-3xl sm:text-5xl font-bold text-brand-espresso leading-tight">Organza & Festive Couture</h3>
-                <span class="font-italiana italic text-brand-gold text-lg block mt-1">Translucent Sheer & Floral Scallops</span>
-                <p class="text-xs sm:text-sm text-brand-mocha mt-3 font-light leading-relaxed">
-                  Whisper-light translucent silk crowned with hand-cut floral scalloping, delicate kardana sequins, and resham thread embroidery for festive cocktails and modern receptions.
+                <span class="font-italiana italic text-brand-gold text-lg block mt-1">Delicate Sheer Charm & Handcrafted Borders</span>
+                <p class="text-xs sm:text-sm text-brand-mocha mt-3 font-normal leading-relaxed">
+                  Lightweight, sheer organza silk adorned with handcrafted floral scalloped borders, fine sequins, and delicate thread work—perfect for modern celebrations and cocktail events.
                 </p>
               </div>
               <div class="grid grid-cols-2 gap-3 py-3 border-hairline-t border-hairline-b text-xs">
                 <div>
-                  <span class="text-[10px] text-brand-mocha uppercase tracking-wider block">Artisanal Edges</span>
-                  <span class="font-bold text-brand-espresso">Hand-Cut Scallops</span>
+                  <span class="text-[10px] text-brand-mocha uppercase tracking-wider block font-semibold">Border Work</span>
+                  <span class="font-bold text-brand-espresso">Hand-Cut Floral Scallops</span>
                 </div>
                 <div>
-                  <span class="text-[10px] text-brand-mocha uppercase tracking-wider block">Sheer Weight</span>
-                  <span class="font-bold text-brand-gold font-cormorant text-base">340g Translucent</span>
+                  <span class="text-[10px] text-brand-mocha uppercase tracking-wider block font-semibold">Drape Weight</span>
+                  <span class="font-bold text-brand-gold font-cormorant text-base">Featherlight Sheer</span>
                 </div>
               </div>
               <button onclick="filterByCollection('organza-silk'); document.getElementById('shop').scrollIntoView({behavior: 'smooth'})" class="btn-luxury-primary !py-2.5 !px-6 !text-xs self-start">
-                <span>Explore Organza Archive</span>
+                <span>View Organza Sarees</span>
                 <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
               </button>
             </div>
@@ -692,13 +717,13 @@
     <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
       <div class="badge-luxury badge-espresso mb-3">
         <i data-lucide="scissors" class="w-3.5 h-3.5 text-brand-gold"></i>
-        <span>Generational Métier · Pure Handloom Craftsmanship</span>
+        <span>Pure Handloom Journey</span>
       </div>
       <h2 class="font-cormorant text-4xl sm:text-6xl font-normal text-brand-espresso">
-        The Anatomy of a <span class="font-italiana italic text-gold-gradient font-normal">Masterpiece</span>
+        How a Masterpiece Is <span class="font-italiana italic text-gold-gradient font-normal">Handwoven</span>
       </h2>
-      <p class="text-xs sm:text-sm text-brand-mocha mt-3 font-light">
-        A scroll-driven journey through our uncompromising four-stage handloom metier.
+      <p class="text-xs sm:text-sm text-brand-mocha mt-3 font-normal">
+        See how our master weavers create each pure silk saree by hand, step by step.
       </p>
     </div>
 
@@ -715,13 +740,13 @@
         <!-- Interactive Step Pills -->
         <div class="flex flex-wrap items-center gap-2 text-[10px] uppercase font-bold tracking-wider">
           <button onclick="setCraftStage(0)" id="craft-btn-0" class="craft-nav-btn active px-3.5 py-1.5 rounded-full border border-brand-gold bg-brand-dark text-brand-sand transition-all shadow-sm">
-            01 Sericulture
+            01 Pure Silk
           </button>
           <button onclick="setCraftStage(1)" id="craft-btn-1" class="craft-nav-btn px-3.5 py-1.5 rounded-full border border-brand-gold/30 text-brand-mocha hover:border-brand-gold transition-all">
-            02 Tested Zari
+            02 Real Zari
           </button>
           <button onclick="setCraftStage(2)" id="craft-btn-2" class="craft-nav-btn px-3.5 py-1.5 rounded-full border border-brand-gold/30 text-brand-mocha hover:border-brand-gold transition-all">
-            03 Pit Looms
+            03 Pit-Looms
           </button>
           <button onclick="setCraftStage(3)" id="craft-btn-3" class="craft-nav-btn px-3.5 py-1.5 rounded-full border border-brand-gold/30 text-brand-mocha hover:border-brand-gold transition-all">
             04 Silk Mark
@@ -735,7 +760,7 @@
         <!-- Left Column: Architectural Arch Image Frame with Crossfade Layers -->
         <div class="lg:col-span-6 relative aspect-[4/5] sm:aspect-[1/1] lg:aspect-[4/5] rounded-[24px] overflow-hidden shadow-2xl bg-brand-sand">
           <div id="craft-img-container" class="relative w-full h-full">
-            <img id="craft-img-0" src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1200&q=85" alt="Mulberry Sericulture" class="craft-img-slide absolute inset-0 w-full h-full object-cover transition-all duration-700 opacity-100 scale-100" />
+            <img id="craft-img-0" src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1200&q=85" alt="Mulberry Silk Weaving" class="craft-img-slide absolute inset-0 w-full h-full object-cover transition-all duration-700 opacity-100 scale-100" />
             <img id="craft-img-1" src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1200&q=85" alt="Pure 24K Tested Zari" class="craft-img-slide absolute inset-0 w-full h-full object-cover transition-all duration-700 opacity-0 scale-105" />
             <img id="craft-img-2" src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=85" alt="Wooden Pit Looms" class="craft-img-slide absolute inset-0 w-full h-full object-cover transition-all duration-700 opacity-0 scale-105" />
             <img id="craft-img-3" src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1200&q=85" alt="Silk Mark Certification" class="craft-img-slide absolute inset-0 w-full h-full object-cover transition-all duration-700 opacity-0 scale-105" />
@@ -745,7 +770,7 @@
           <div class="absolute bottom-4 left-4 right-4 glass-card py-3 px-5 rounded-2xl border border-brand-gold/30 flex items-center justify-between z-10 shadow-lg">
             <div class="flex items-center gap-2.5">
               <i data-lucide="shield-check" class="w-4 h-4 text-brand-gold"></i>
-              <span id="craft-hallmark-title" class="text-[11px] font-bold text-brand-espresso uppercase tracking-wider">Stage 01 · 100% Organic Sericulture</span>
+              <span id="craft-hallmark-title" class="text-[11px] font-bold text-brand-espresso uppercase tracking-wider">Stage 01 · 100% Pure Mulberry Silk</span>
             </div>
             <span id="craft-hallmark-counter" class="text-xs font-cinzel font-bold text-brand-gold">01 / 04</span>
           </div>
@@ -756,22 +781,22 @@
           <div id="craft-text-wrapper" class="space-y-4">
             <span id="craft-stage-number" class="text-xs uppercase tracking-[0.25em] text-brand-gold font-bold">Stage 01 / 04</span>
             <h3 id="craft-stage-title" class="font-cormorant text-3xl sm:text-5xl font-normal text-brand-espresso leading-tight">
-              Mulberry Sericulture & Botanical Washes
+              Pure Mulberry Silk & Botanical Washes
             </h3>
-            <p id="craft-stage-desc" class="font-sans text-xs sm:text-sm text-brand-mocha leading-relaxed font-light">
-              High-grade unbleached silk threads harvested from organic cocoons, treated exclusively in herbal botanical baths for unmatched tensile strength, lustrous sheen, and heirloom skin affinity.
+            <p id="craft-stage-desc" class="font-sans text-xs sm:text-sm text-brand-mocha leading-relaxed font-normal">
+              We handpick pure mulberry silk threads harvested from organic cocoons, treated in gentle botanical washes for natural shine, long-lasting strength, and wonderful softness.
             </p>
           </div>
 
           <!-- Technical Metrics Card -->
           <div class="grid grid-cols-2 gap-4 p-5 rounded-2xl bg-white border border-brand-gold/25 shadow-sm">
             <div>
-              <span class="block text-[10px] text-brand-mocha uppercase tracking-wider">Artisan Hallmark</span>
-              <span id="craft-stage-metric1" class="font-cormorant text-2xl font-bold text-brand-espresso">100% Organic</span>
+              <span class="block text-[10px] text-brand-mocha uppercase tracking-wider font-semibold">Artisan Hallmark</span>
+              <span id="craft-stage-metric1" class="font-cormorant text-2xl font-bold text-brand-espresso">100% Pure Silk</span>
             </div>
             <div>
-              <span class="block text-[10px] text-brand-mocha uppercase tracking-wider">Weave Longevity</span>
-              <span id="craft-stage-metric2" class="font-cormorant text-2xl font-bold text-brand-gold">Generational</span>
+              <span class="block text-[10px] text-brand-mocha uppercase tracking-wider font-semibold">Durability</span>
+              <span id="craft-stage-metric2" class="font-cormorant text-2xl font-bold text-brand-gold">Generations Long</span>
             </div>
           </div>
 
@@ -908,13 +933,13 @@
       <div class="text-center max-w-xl mx-auto mb-8">
         <div class="badge-luxury badge-gold mb-3">
           <i data-lucide="map-pin" class="w-3.5 h-3.5 text-brand-gold"></i>
-          <span>Loom to Doorstep Concierge</span>
+          <span>Doorstep Delivery Tracking</span>
         </div>
         <h2 class="font-cormorant text-3xl sm:text-5xl font-normal text-brand-espresso">
-          Track Your Heirloom
+          Track Your Saree Order
         </h2>
-        <p class="text-xs text-brand-mocha mt-2 font-light">
-          Enter your Order ID (e.g. <span class="font-bold text-brand-espresso cursor-pointer underline" onclick="fillSampleTrack('KLA-88342')">KLA-88342</span> or <span class="font-bold text-brand-espresso cursor-pointer underline" onclick="fillSampleTrack('KLA-76129')">KLA-76129</span>) or customer telephone number to inspect live weaving stages.
+        <p class="text-xs text-brand-mocha mt-2 font-normal">
+          Enter your Order ID (e.g. <span class="font-bold text-brand-espresso cursor-pointer underline" onclick="fillSampleTrack('KLA-88342')">KLA-88342</span> or <span class="font-bold text-brand-espresso cursor-pointer underline" onclick="fillSampleTrack('KLA-76129')">KLA-76129</span>) or mobile number to check the live status of your saree.
         </p>
       </div>
 
@@ -950,16 +975,16 @@
           <div>
             <div class="badge-luxury bg-brand-gold/20 text-brand-gold-light border border-brand-gold/40 mb-3 text-[10px]">
               <i data-lucide="sparkles" class="w-3.5 h-3.5 text-brand-gold"></i>
-              <span>Private Bespoke Salon</span>
+              <span>Personal Styling & Bridal Appointments</span>
             </div>
 
             <h2 class="font-cormorant text-4xl sm:text-6xl font-normal text-white leading-[1.02]">
-              Every Message is a <span class="font-italiana italic text-gold-gradient font-normal">Thread,</span><br/>
-              Woven into Memory.
+              Every Saree Tells a Story, <br/>
+              <span class="font-italiana italic text-gold-gradient font-normal">Let Us Help You Choose Yours.</span>
             </h2>
 
-            <p class="text-brand-sand/80 text-xs sm:text-sm mt-4 leading-relaxed font-light">
-              Connect directly with our master drapers. Whether you seek custom bridal trousseau colorways, blouse tailoring measurements, or physical fabric swatches, our concierge responds within 4 business hours.
+            <p class="text-brand-sand/80 text-xs sm:text-sm mt-4 leading-relaxed font-normal">
+              Need help choosing the right drape? Connect directly with our personal stylists. Whether you need custom bridal colors, blouse stitching measurements, or live video shopping, we are here for you.
             </p>
           </div>
 

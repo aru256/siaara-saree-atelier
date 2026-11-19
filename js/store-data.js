@@ -35,7 +35,7 @@ const DEFAULT_PRODUCTS = [
     zariType: 'Antique Gold Micron Electroplated Zari',
     blousePiece: 'Unstitched running tissue blouse with scalloped border (0.9m)',
     length: '6.4 Meters',
-    description: 'A sublime dialogue between spun gold filaments and fine silk threads. The Aura Tissue Silk captures ambient light with every step, exhibiting a radiant champagne glaze tailored for high-fashion wedding soirees.',
+    description: 'A gorgeous blend of pure gold zari and fine silk threads. The Aura Tissue Silk captures the light beautifully with every step, giving a radiant champagne glow perfect for wedding receptions and festive celebrations.',
     variants: ['Champagne Gold', 'Rose Gold', 'Liquid Silver'],
     images: [
       'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1200&q=85',
@@ -63,7 +63,7 @@ const DEFAULT_PRODUCTS = [
     zariType: 'Dual-tone Rose & Champagne Tested Zari',
     blousePiece: 'Embroidered tone-on-tone tissue blouse piece (0.85m)',
     length: '6.3 Meters',
-    description: 'Refined opulence cast in a delicate rose-gold reflection. Featuring an ethereal metallic luster and hand-trimmed scalloped border designed for receptions and sangeet celebrations.',
+    description: 'Pure luxury in a delicate rose-gold tone. Features an elegant metallic shimmer with handcrafted scalloped borders, designed for cocktail parties and sangeet celebrations.',
     variants: ['Rose Gold & Blush', 'Sunset Peach'],
     images: [
       'https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=1200&q=85',
@@ -93,7 +93,7 @@ const DEFAULT_PRODUCTS = [
     zariType: 'Hand-woven Kadwa Sona-Rupa Brocade',
     blousePiece: 'Elaborate heavy brocade blouse piece included (1.0m)',
     length: '6.5 Meters with Shikargah grand pallu',
-    description: 'Woven over 45 painstaking days on a traditional pit loom by generational Varanasi master weavers. The Kadwa technique leaves zero floats on the reverse side, accentuating delicate Mughal floral vines over warm sandstone katan silk.',
+    description: 'Handwoven over 45 days on a traditional pit-loom by master weavers in Varanasi. The authentic Kadwa technique ensures a neat finish with zero loose threads on the back, highlighting beautiful floral vines on rich katan silk.',
     variants: ['Sandstone Gold', 'Deep Ochre', 'Ivory Cream'],
     images: [
       'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1200&q=85',
@@ -121,7 +121,7 @@ const DEFAULT_PRODUCTS = [
     zariType: '24K Micron Gold Electroplated Zari',
     blousePiece: 'Heavy brocade blouse piece with matching back motif',
     length: '6.5 Meters with bridal pallu',
-    description: 'The crowning jewel of traditional Indian couture. An intense vermilion red canvas intricately hand-embellished with micro floral jaal and a dense temple border honoring centuries of sacred bridal craftsmanship.',
+    description: 'A timeless bridal classic. A rich crimson red pure silk saree handwoven with delicate golden jaal work and a royal temple border, made for wedding days and sacred ceremonies.',
     variants: ['Vermilion Red', 'Deep Maroon', 'Ruby Crimson'],
     images: [
       'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1200&q=85',
@@ -151,7 +151,7 @@ const DEFAULT_PRODUCTS = [
     zariType: 'Subtle Matte Rose Gold Micro-Border',
     blousePiece: 'Contrast raw silk unstitched blouse piece (0.8m)',
     length: '6.3 Meters with fluid fall',
-    description: 'Sensory luxury at its finest. Ultra-creamy and butter-soft to the touch, this drape contours effortlessly around the body, remaining completely crease-free and breathable from day rituals to evening celebrations.',
+    description: 'Featherlight, butter-soft luxury that feels wonderful on the skin. Drapes gracefully without creasing, keeping you comfortable and stylish from morning pooja to evening receptions.',
     variants: ['Mocha Brown', 'Caramel Beige', 'Espresso Dark'],
     images: [
       'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1200&q=85',
@@ -179,7 +179,7 @@ const DEFAULT_PRODUCTS = [
     zariType: 'Antique Bronze Border Weave',
     blousePiece: 'Running blouse piece with subtle bronze piping',
     length: '6.3 Meters',
-    description: 'Enigmatic, poised, and quietly commanding. Featuring a deep espresso coffee undertone with an exquisite velvety touch that cascades seamlessly like liquid satin.',
+    description: 'Soft and elegant in a rich deep coffee brown shade. The pure butter silk drapes smoothly like liquid satin with effortless, natural grace.',
     variants: ['Espresso Deep', 'Chestnut Brown'],
     images: [
       'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1200&q=85',
@@ -209,7 +209,7 @@ const DEFAULT_PRODUCTS = [
     zariType: 'Pure Silver Thread Electroplated in 24K Gold',
     blousePiece: 'Contrast emerald green blouse piece with temple border',
     length: '6.4 Meters with heavy Mayil (Peacock) pallu',
-    description: 'Crafted in the sacred temple town of Kanchipuram using the authentic 3-shuttle Korvai interlock technique. Dense gold zari checks and mythological yali motifs render this drape an everlasting family treasure.',
+    description: 'Handcrafted in Kanchipuram using the authentic 3-shuttle Korvai weaving method. Woven with heavy pure mulberry silk and tested gold zari checks, creating an heirloom saree for generations.',
     variants: ['Ochre Gold & Emerald', 'Copper & Royal Purple'],
     images: [
       'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1200&q=85',
@@ -239,7 +239,7 @@ const DEFAULT_PRODUCTS = [
     zariType: 'Fine Matte Champagne Cord Zari',
     blousePiece: 'Silk chanderi unstitched blouse piece (0.9m)',
     length: '6.2 Meters',
-    description: 'A whisper-light composition of translucent silk organza crowned with hand-embroidered floral creepers and cutwork scalloped borders. Contemporary minimalist royalty at its peak.',
+    description: 'Featherlight translucent organza silk finished with delicate hand-cut floral scalloped borders and subtle sequin work. Perfect for modern bridesmaids and festive evening parties.',
     variants: ['Ivory Sandstone', 'Powder Rose', 'Mint Whisper'],
     images: [
       'https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=1200&q=85',

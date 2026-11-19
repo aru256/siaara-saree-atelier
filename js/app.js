@@ -7,10 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // 0. Initialize Cinematic Saree Opening Intro (Scene 1 to Scene 5)
   initCinematicSareeIntro();
 
-  // 1. Initialize Fluid Natural Scrolling
+  // 1. Initialize Hero Single-Image Carousel
+  initHeroSlider();
+
+  // 2. Initialize Fluid Natural Scrolling
   initLenis();
 
-  // 2. Initialize Lucide Icons
+  // 3. Initialize Lucide Icons
   if (window.lucide) {
     lucide.createIcons();
   }
@@ -238,6 +241,112 @@ function initCinematicSareeIntro() {
     }
   }
 }
+
+// ================= HERO SINGLE-IMAGE SLIDESHOW (CRISP, VISIBLE SAREE CAROUSEL) =================
+let currentHeroSlide = 0;
+let heroSliderTimer = null;
+const HERO_SLIDE_INTERVAL = 5500; // 5.5 seconds per slide
+
+function initHeroSlider() {
+  const slider = document.getElementById('hero-slider');
+  if (!slider) return;
+
+  const slides = slider.querySelectorAll('.hero-slide');
+  if (slides.length <= 1) return;
+
+  // Start automatic sliding
+  startHeroAutoSlide();
+
+  // Mobile Touch Swipe Listener
+  let touchStartX = 0;
+  let touchStartY = 0;
+  slider.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 1) {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }
+  }, { passive: true });
+
+  slider.addEventListener('touchend', (e) => {
+    if (e.changedTouches.length === 1) {
+      const diffX = e.changedTouches[0].clientX - touchStartX;
+      const diffY = e.changedTouches[0].clientY - touchStartY;
+      // If horizontal movement is greater than vertical and exceeds 40px
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+        if (diffX < 0) {
+          changeHeroSlide(1); // Swipe left -> Next slide
+        } else {
+          changeHeroSlide(-1); // Swipe right -> Previous slide
+        }
+      }
+    }
+  }, { passive: true });
+
+  // Pause on desktop hover so customers can comfortably inspect the saree drape
+  slider.addEventListener('mouseenter', stopHeroAutoSlide);
+  slider.addEventListener('mouseleave', startHeroAutoSlide);
+}
+
+function startHeroAutoSlide() {
+  stopHeroAutoSlide();
+  heroSliderTimer = setInterval(() => {
+    changeHeroSlide(1);
+  }, HERO_SLIDE_INTERVAL);
+}
+
+function stopHeroAutoSlide() {
+  if (heroSliderTimer) {
+    clearInterval(heroSliderTimer);
+    heroSliderTimer = null;
+  }
+}
+
+function changeHeroSlide(direction) {
+  const slides = document.querySelectorAll('#hero-slider .hero-slide');
+  if (!slides || slides.length === 0) return;
+
+  const total = slides.length;
+  let nextIndex = (currentHeroSlide + direction) % total;
+  if (nextIndex < 0) nextIndex = total - 1;
+
+  goToHeroSlide(nextIndex);
+}
+
+function goToHeroSlide(index) {
+  const slides = document.querySelectorAll('#hero-slider .hero-slide');
+  const dots = document.querySelectorAll('#hero-slider-dots .slider-dot');
+  if (!slides || slides.length === 0) return;
+
+  const total = slides.length;
+  if (index < 0 || index >= total) return;
+
+  currentHeroSlide = index;
+
+  // Switch active slide
+  slides.forEach((slide, i) => {
+    if (i === index) {
+      slide.classList.add('active');
+    } else {
+      slide.classList.remove('active');
+    }
+  });
+
+  // Switch active pagination dot
+  dots.forEach((dot, i) => {
+    if (i === index) {
+      dot.classList.add('active');
+    } else {
+      dot.classList.remove('active');
+    }
+  });
+
+  // Reset timer on manual action
+  startHeroAutoSlide();
+}
+
+window.initHeroSlider = initHeroSlider;
+window.changeHeroSlide = changeHeroSlide;
+window.goToHeroSlide = goToHeroSlide;
 
 // ================= FLUID NATURAL SCROLL CONTROLLER (ZERO STICKY FRICTION) =================
 let lenis = null;
@@ -586,42 +695,42 @@ function initProductCard3DTilt() {
 const craftStages = [
   {
     num: "Stage 01 / 04",
-    title: "Mulberry Sericulture & Botanical Washes",
-    desc: "High-grade unbleached silk threads harvested from organic cocoons, treated exclusively in herbal botanical baths for unmatched tensile strength, lustrous sheen, and heirloom skin affinity.",
-    hallmark: "Stage 01 · 100% Organic Sericulture",
+    title: "Pure Mulberry Silk & Botanical Washes",
+    desc: "We handpick pure mulberry silk threads harvested from organic cocoons, treated in gentle botanical washes for natural shine, long-lasting strength, and wonderful softness.",
+    hallmark: "Stage 01 · 100% Pure Mulberry Silk",
     counter: "01 / 04",
-    metric1: "100% Organic",
-    metric2: "Generational",
+    metric1: "100% Pure Silk",
+    metric2: "Natural Washed",
     progress: "25%"
   },
   {
     num: "Stage 02 / 04",
-    title: "Tested 24K Micron Gold & Pure Silver Zari",
-    desc: "Pure silver core wires electroplated with authentic 24K gold foil, hand-twisted around fine mulberry silk filaments to create tarnish-resistant metallic threads that glow for generations.",
+    title: "Tested 24K Gold & Pure Silver Zari",
+    desc: "Woven with certified tested zari electroplated with genuine 24K gold micron finish that retains its luminous golden shine for generations without tarnishing.",
     hallmark: "Stage 02 · 24K Gold Tested Zari",
     counter: "02 / 04",
-    metric1: "24K Micron Gold",
-    metric2: "Tarnish-Proof",
+    metric1: "24K Real Gold",
+    metric2: "Tarnish-Resistant",
     progress: "50%"
   },
   {
     num: "Stage 03 / 04",
-    title: "Varanasi Wooden Pit-Loom Kadwa Weaving",
-    desc: "Master weavers manually manipulate warp and weft on centuries-old sunken pit-looms. Each Kadwa motif is independently hand-knotted with zero loose floats on the reverse drape.",
+    title: "Traditional Wooden Pit-Loom Weaving",
+    desc: "Skilled generational master weavers hand-knot every booti and border on traditional wooden pit-looms with zero loose threads on the back for a smooth, premium drape.",
     hallmark: "Stage 03 · 120+ Hours Pit-Loom Craft",
     counter: "03 / 04",
-    metric1: "120+ Loom Hours",
-    metric2: "Hand-Knotted",
+    metric1: "120+ Hand Hours",
+    metric2: "Zero-Float Finish",
     progress: "75%"
   },
   {
     num: "Stage 04 / 04",
-    title: "Silk Mark GI-Tagged Heritage Inspection",
-    desc: "Every completed saree undergoes a rigorous 32-point microscopic quality inspection for weaving tension, zari purity, and border alignment before receiving its certified GI-Tagged seal.",
-    hallmark: "Stage 04 · Certified Silk Mark GI-Tagged",
+    title: "Silk Mark Certified & Quality Inspection",
+    desc: "Every finished saree undergoes thorough quality checks for weave tension, zari purity, and border alignment, and is certified with the government Silk Mark guarantee.",
+    hallmark: "Stage 04 · Certified Silk Mark Guarantee",
     counter: "04 / 04",
-    metric1: "32-Point Audit",
-    metric2: "GI-Tagged Seal",
+    metric1: "Quality Checked",
+    metric2: "Govt. Silk Mark",
     progress: "100%"
   }
 ];
