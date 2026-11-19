@@ -285,27 +285,74 @@ body {
   justify-content: center;
 }
 
+/* ==========================================================================
+   CINEMATIC TORN-PAGE INTRO (HAUTE-COUTURE TEARING SEQUENCE)
+   ========================================================================== */
+
+#cinematic-saree-intro {
+  perspective: 1400px;
+}
+
 .intro-curtain {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 50.5vw;
+  width: calc(50vw + 24px);
   height: 100vh;
   z-index: 10;
-  overflow: hidden;
-  will-change: transform;
+  overflow: visible;
+  will-change: transform, opacity;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.9);
 }
 
+/* Left Page with Realistic Deckled Torn Paper / Raw Silk Edge */
 .intro-curtain-left {
   left: 0;
-  background: linear-gradient(135deg, rgba(20, 11, 7, 0.88), rgba(42, 23, 15, 0.82)), 
-              url('https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1200&q=85') center/cover;
+  transform-origin: top left;
+  background: 
+    linear-gradient(135deg, rgba(20, 11, 7, 0.94), rgba(42, 23, 15, 0.9)),
+    radial-gradient(circle at 100% 50%, rgba(197, 155, 81, 0.28), transparent 60%),
+    url('https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1400&q=85') center/cover;
+  clip-path: polygon(
+    0% 0%, 
+    100% 0%, 
+    98.2% 4%, 100% 8%, 97.8% 12%, 99.6% 16%, 98.1% 20%, 100% 24%, 
+    97.5% 28%, 99.8% 32%, 98.3% 36%, 100% 40%, 97.6% 44%, 99.5% 48%, 
+    98% 52%, 100% 56%, 97.4% 60%, 99.7% 64%, 98.2% 68%, 100% 72%, 
+    97.5% 76%, 99.6% 80%, 98% 84%, 100% 88%, 97.7% 92%, 99.8% 96%, 100% 100%, 
+    0% 100%
+  );
+  filter: drop-shadow(8px 0 24px rgba(0, 0, 0, 0.85));
 }
 
+/* Right Page with Matching Inverse Deckled Torn Paper Edge */
 .intro-curtain-right {
   right: 0;
-  background: linear-gradient(225deg, rgba(20, 11, 7, 0.88), rgba(42, 23, 15, 0.82)), 
-              url('https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1200&q=85') center/cover;
+  transform-origin: top right;
+  background: 
+    linear-gradient(225deg, rgba(20, 11, 7, 0.94), rgba(42, 23, 15, 0.9)),
+    radial-gradient(circle at 0% 50%, rgba(197, 155, 81, 0.28), transparent 60%),
+    url('https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1400&q=85') center/cover;
+  clip-path: polygon(
+    1.8% 0%, 100% 0%, 100% 100%, 0% 100%, 
+    2.3% 96%, 0.2% 92%, 2% 88%, 0.4% 84%, 2.5% 80%, 0% 76%, 
+    1.8% 72%, 0.3% 68%, 2.6% 64%, 0% 60%, 2% 56%, 0.5% 52%, 
+    2.4% 48%, 0% 44%, 1.7% 40%, 0.2% 36%, 2.5% 32%, 0% 28%, 
+    1.9% 24%, 0.4% 20%, 2.2% 16%, 0% 12%, 1.8% 8%, 0% 4%
+  );
+  filter: drop-shadow(-8px 0 24px rgba(0, 0, 0, 0.85));
+}
+
+/* Deckled Torn Paper Fringe Highlight */
+.torn-paper-edge {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: linear-gradient(to bottom, #FFFFFF 0%, #ECCF96 50%, #C59B51 100%);
+  opacity: 0.85;
+  filter: blur(0.5px);
+  pointer-events: none;
 }
 
 .curtain-gold-border {
@@ -323,19 +370,54 @@ body {
   50% { background-position: 0% 100%; }
 }
 
+/* Master Site Wrapper for Smooth Intro Page Reveal */
+#main-site-wrapper {
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), 
+              filter 0.85s cubic-bezier(0.16, 1, 0.3, 1), 
+              opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, filter, opacity;
+}
+
+#main-site-wrapper.intro-locked {
+  transform: scale(0.96);
+  filter: blur(8px);
+  opacity: 0.6;
+}
+
+#main-site-wrapper.intro-revealed {
+  transform: scale(1);
+  filter: blur(0px);
+  opacity: 1;
+}
+
 /* Horizontal Collection Runway (Fluid Natural Glide, Zero Pinning Hijacking) */
 .runway-track {
   display: flex;
   flex-direction: row;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   padding-bottom: 0.5rem;
+  will-change: transform;
 }
+
 .runway-track::-webkit-scrollbar {
   display: none;
+}
+
+@media (min-width: 768px) {
+  .runway-track {
+    overflow: visible !important;
+    scroll-behavior: auto !important;
+    scroll-snap-type: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .runway-track {
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 .runway-panel {

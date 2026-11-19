@@ -38,16 +38,18 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('siaara_user_updated', () => updateAuthUI());
 });
 
-// ================= CINEMATIC SAREE OPENING INTRO (SCENES 1 TO 5) =================
+// ================= CINEMATIC TORN-PAGE SAREE OPENING INTRO (SCENES 1 TO 5) =================
 function initCinematicSareeIntro() {
   const introOverlay = document.getElementById('cinematic-saree-intro');
   const curtainLeft = document.getElementById('intro-curtain-left');
   const curtainRight = document.getElementById('intro-curtain-right');
   const seam = document.getElementById('intro-seam');
+  const tearTracer = document.getElementById('intro-tear-tracer');
   const centerSeal = document.getElementById('intro-center-seal');
   const travelingLogo = document.getElementById('intro-traveling-logo');
   const glow = document.getElementById('intro-glow');
   const navLogo = document.getElementById('navbar-brand-logo');
+  const mainSiteWrapper = document.getElementById('main-site-wrapper');
 
   if (!introOverlay) return;
 
@@ -58,13 +60,18 @@ function initCinematicSareeIntro() {
   if (alreadyShown || prefersReduced) {
     introOverlay.style.display = 'none';
     if (navLogo) navLogo.style.opacity = '1';
+    if (mainSiteWrapper) {
+      mainSiteWrapper.classList.remove('intro-locked');
+      mainSiteWrapper.classList.add('intro-revealed');
+    }
     document.body.style.overflow = '';
     return;
   }
 
-  // Lock scrolling during intro
+  // Lock scrolling during intro and initialize main site in atmospheric preview state
   document.body.style.overflow = 'hidden';
   if (navLogo) navLogo.style.opacity = '0';
+  if (mainSiteWrapper) mainSiteWrapper.classList.add('intro-locked');
 
   // Position traveling logo in the exact center initially
   gsap.set(travelingLogo, {
@@ -80,25 +87,45 @@ function initCinematicSareeIntro() {
     defaults: { ease: 'power3.inOut' }
   });
 
-  // Scene 1: Closed Saree with Liquid Gold Seam & Center Seal Breathing
+  // Scene 1: Closed Parchment with Center Royal Loom Seal Breathing
   tl.fromTo(centerSeal, 
-    { scale: 0.92, opacity: 0.85 }, 
-    { scale: 1.05, opacity: 1, duration: 0.5, ease: 'power2.out' }
+    { scale: 0.9, opacity: 0.85 }, 
+    { scale: 1.06, opacity: 1, duration: 0.45, ease: 'power2.out' }
   );
 
-  // Scene 2: Saree Opens — Seam Separates & Silk Curtains Part to the Sides
-  tl.to(seam, { scaleX: 3.5, opacity: 1, duration: 0.25, ease: 'power2.in' })
-    .to(seam, { opacity: 0, scaleY: 0, duration: 0.35, ease: 'power2.out' })
-    .to(centerSeal, { scale: 1.35, opacity: 0, duration: 0.35, ease: 'power2.in' }, '<')
-    .to(curtainLeft, { xPercent: -103, duration: 1.15, ease: 'power3.inOut' }, '-=0.2')
-    .to(curtainRight, { xPercent: 103, duration: 1.15, ease: 'power3.inOut' }, '<')
-    .to(introOverlay, { backgroundColor: 'rgba(20, 11, 7, 0)', duration: 0.8 }, '<');
+  // Scene 2: Tearing the Page — Glowing rip tracer races down & torn deckled halves rip open in 3D
+  if (tearTracer) {
+    tl.to(tearTracer, {
+      height: '100%',
+      duration: 0.35,
+      ease: 'power2.in'
+    }, '-=0.15');
+  }
 
-  // Scene 3: Brand Logo Reveal — Majestic Monogram Basking in Gold Radiant Glow
-  tl.to(glow, { opacity: 0.85, scale: 1.25, duration: 0.6, ease: 'power2.out' }, '-=0.75')
-    .to(travelingLogo, { opacity: 1, scale: 1.0, duration: 0.6, ease: 'power2.out' }, '<+=0.1');
+  tl.to(centerSeal, { scale: 1.5, opacity: 0, duration: 0.35, ease: 'power2.in' }, '<+=0.1')
+    .to(curtainLeft, { 
+      xPercent: -115, 
+      rotateZ: -4.5, 
+      rotateY: -22, 
+      scale: 0.97, 
+      duration: 1.25, 
+      ease: 'power3.inOut' 
+    }, '<')
+    .to(curtainRight, { 
+      xPercent: 115, 
+      rotateZ: 4.5, 
+      rotateY: 22, 
+      scale: 0.97, 
+      duration: 1.25, 
+      ease: 'power3.inOut' 
+    }, '<')
+    .to(introOverlay, { backgroundColor: 'rgba(13, 7, 4, 0)', duration: 0.9 }, '<');
 
-  // Scene 4: Logo Moves to Navbar — Smoothly Flies to Exact Navbar Position
+  // Scene 3: Entering the Atelier & Royal Monogram Reveal through the Tear
+  tl.to(glow, { opacity: 0.9, scale: 1.3, duration: 0.65, ease: 'power2.out' }, '-=0.8')
+    .to(travelingLogo, { opacity: 1, scale: 1.0, duration: 0.65, ease: 'power2.out' }, '<+=0.08');
+
+  // Scene 4: Logo Sets into Navbar & Smooth Transition Reveals the Website
   tl.add(() => {
     if (!navLogo) {
       finishCinematicIntro();
@@ -114,6 +141,12 @@ function initCinematicSareeIntro() {
     const targetScale = navRect.height / curRect.height;
 
     gsap.to(glow, { opacity: 0, duration: 0.45 });
+
+    // Smooth page reveal transition begins simultaneously as the logo flies to set into the navbar
+    if (mainSiteWrapper) {
+      mainSiteWrapper.classList.remove('intro-locked');
+      mainSiteWrapper.classList.add('intro-revealed');
+    }
 
     gsap.to(travelingLogo, {
       x: `+=${deltaX}`,
@@ -139,9 +172,13 @@ function initCinematicSareeIntro() {
   function finishCinematicIntro() {
     sessionStorage.setItem('kruti_intro_shown', 'true');
     if (navLogo) navLogo.style.opacity = '1';
+    if (mainSiteWrapper) {
+      mainSiteWrapper.classList.remove('intro-locked');
+      mainSiteWrapper.classList.add('intro-revealed');
+    }
     gsap.to(introOverlay, {
       opacity: 0,
-      duration: 0.35,
+      duration: 0.4,
       onComplete: () => {
         introOverlay.style.display = 'none';
         document.body.style.overflow = '';
@@ -364,20 +401,67 @@ function initGSAPAnimations() {
     });
   }
 
-  // 9. Horizontal Collection Runway Entrance (Natural Fluid Scroll, Zero Trapping)
-  const runwaySection = document.getElementById('collections');
-  if (runwaySection) {
-    gsap.from('#collections .runway-panel', {
-      scrollTrigger: {
-        trigger: runwaySection,
-        start: 'top 82%',
-        toggleActions: 'play none none none'
+  // 9. Horizontal Collection Runway (Vertical Wheel Drives Horizontal Scroll, then Continues Vertically)
+  const collectionsSection = document.getElementById('collections');
+  const runwayTrack = document.getElementById('runway-track');
+
+  if (collectionsSection && runwayTrack) {
+    ScrollTrigger.matchMedia({
+      // Desktop & Tablet (min-width: 768px): Vertical Wheel Drives Horizontal Runway, then Resumes Vertically
+      "(min-width: 768px)": function() {
+        const getScrollDistance = () => {
+          return Math.max(400, runwayTrack.scrollWidth - window.innerWidth + 80);
+        };
+
+        const horizontalTween = gsap.to(runwayTrack, {
+          x: () => -getScrollDistance(),
+          ease: "none",
+          scrollTrigger: {
+            id: 'runway-pin',
+            trigger: collectionsSection,
+            pin: true,
+            anticipatePin: 1,
+            scrub: 0.8,
+            start: "top top",
+            end: () => `+=${getScrollDistance()}`,
+            invalidateOnRefresh: true,
+            onUpdate: (self) => {
+              const panels = runwayTrack.querySelectorAll('.runway-panel');
+              const totalPanels = panels.length || 5;
+              const currentIdx = Math.min(totalPanels, Math.max(1, Math.round(self.progress * (totalPanels - 1)) + 1));
+              const indexDisp = document.getElementById('runway-index-display');
+              if (indexDisp) indexDisp.textContent = '0' + currentIdx;
+
+              const progBar = document.getElementById('runway-progress-bar');
+              if (progBar) {
+                const percent = Math.min(100, Math.max(20, self.progress * 100));
+                progBar.style.width = `${percent}%`;
+              }
+            }
+          }
+        });
+
+        return () => {
+          horizontalTween.kill();
+          gsap.set(runwayTrack, { clearProps: 'all' });
+        };
       },
-      y: 40,
-      opacity: 0,
-      duration: 0.85,
-      stagger: 0.1,
-      ease: 'power3.out'
+
+      // Mobile (max-width: 767px): Native Touch Glide with Snap (Zero Trapping, Fluid Vertical Flow)
+      "(max-width: 767px)": function() {
+        gsap.from(runwayTrack.querySelectorAll('.runway-panel'), {
+          scrollTrigger: {
+            trigger: collectionsSection,
+            start: 'top 85%',
+            toggleActions: 'play none none none'
+          },
+          y: 25,
+          opacity: 0,
+          duration: 0.7,
+          stagger: 0.1,
+          ease: 'power2.out'
+        });
+      }
     });
   }
 
@@ -422,7 +506,22 @@ function initGSAPAnimations() {
 // ================= HORIZONTAL COLLECTION RUNWAY CONTROLLER =================
 function slideCollections(direction) {
   const track = document.getElementById('runway-track');
+  const collectionsSection = document.getElementById('collections');
   if (!track) return;
+
+  if (window.innerWidth >= 768 && window.ScrollTrigger) {
+    const st = ScrollTrigger.getById('runway-pin');
+    if (st) {
+      const step = (st.end - st.start) / 4;
+      const targetScroll = window.scrollY + direction * step;
+      if (window.lenis) {
+        window.lenis.scrollTo(targetScroll, { duration: 0.6 });
+      } else {
+        window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+      }
+      return;
+    }
+  }
 
   const panel = track.querySelector('.runway-panel');
   const panelWidth = panel ? panel.offsetWidth + 24 : 380;

@@ -47,29 +47,33 @@
 </head>
 <body class="bg-brand-beige text-brand-espresso antialiased selection:bg-brand-gold selection:text-brand-dark relative">
 
-  <!-- ================= CINEMATIC SAREE OPENING INTRO (SCENES 1 TO 5) ================= -->
-  <div id="cinematic-saree-intro" class="fixed inset-0 z-[120] pointer-events-auto overflow-hidden bg-[#140B07] flex items-center justify-center">
+  <!-- ================= CINEMATIC TORN-PAGE SAREE OPENING INTRO (SCENES 1 TO 5) ================= -->
+  <div id="cinematic-saree-intro" class="fixed inset-0 z-[120] pointer-events-auto overflow-hidden bg-[#0D0704] flex items-center justify-center">
     
-    <!-- Left Silk Saree Drape Panel with Liquid Gold Antique Zari Border -->
+    <!-- Left Torn Page Half with Deckled Paper / Raw Silk Zari Edge -->
     <div id="intro-curtain-left" class="intro-curtain intro-curtain-left">
-      <div class="curtain-gold-border right-0 border-r border-[#ECCF96]/80 shadow-[4px_0_24px_rgba(197,155,81,0.6)]"></div>
+      <div class="torn-paper-edge right-0"></div>
+      <div class="curtain-gold-border right-0 border-r border-[#ECCF96]/90 shadow-[6px_0_30px_rgba(197,155,81,0.7)]"></div>
     </div>
 
-    <!-- Right Silk Saree Drape Panel with Liquid Gold Antique Zari Border -->
+    <!-- Right Torn Page Half with Deckled Paper / Raw Silk Zari Edge -->
     <div id="intro-curtain-right" class="intro-curtain intro-curtain-right">
-      <div class="curtain-gold-border left-0 border-l border-[#ECCF96]/80 shadow-[-4px_0_24px_rgba(197,155,81,0.6)]"></div>
+      <div class="torn-paper-edge left-0"></div>
+      <div class="curtain-gold-border left-0 border-l border-[#ECCF96]/90 shadow-[-6px_0_30px_rgba(197,155,81,0.7)]"></div>
     </div>
 
-    <!-- Central Radiant Gold Brocade Seam & Zari Thread -->
-    <div id="intro-seam" class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-1 sm:w-1.5 bg-gradient-to-b from-transparent via-[#ECCF96] to-transparent z-20 pointer-events-none shadow-[0_0_25px_#ECCF96]"></div>
+    <!-- Glowing Tear Tracer Seam & Golden Rip Line -->
+    <div id="intro-seam" class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-1.5 z-20 pointer-events-none">
+      <div id="intro-tear-tracer" class="w-full bg-gradient-to-b from-white via-[#ECCF96] to-[#C59B51] h-0 shadow-[0_0_35px_#ECCF96]"></div>
+    </div>
     
-    <!-- Central Royal Loom Seal (Flashes as Seam Opens) -->
-    <div id="intro-center-seal" class="absolute z-25 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-[#ECCF96] via-[#C59B51] to-[#382319] flex items-center justify-center text-brand-dark font-rozha text-2xl sm:text-3xl font-bold shadow-[0_0_40px_rgba(197,155,81,0.85)] border-2 border-[#ECCF96] pointer-events-none">
+    <!-- Central Royal Loom Seal (Fractures with light when torn) -->
+    <div id="intro-center-seal" class="absolute z-25 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-18 h-18 sm:w-22 sm:h-22 rounded-full bg-gradient-to-br from-[#ECCF96] via-[#C59B51] to-[#2A170F] flex items-center justify-center text-brand-dark font-rozha text-2xl sm:text-3xl font-bold shadow-[0_0_50px_rgba(197,155,81,0.9)] border-2 border-[#ECCF96] pointer-events-none">
       क
     </div>
 
     <!-- Radiant Ambient Light Aura behind Traveling Logo -->
-    <div id="intro-glow" class="absolute w-80 sm:w-96 h-80 sm:h-96 rounded-full bg-gradient-to-r from-[#ECCF96]/35 via-[#C59B51]/25 to-transparent blur-3xl z-15 pointer-events-none opacity-0"></div>
+    <div id="intro-glow" class="absolute w-80 sm:w-96 h-80 sm:h-96 rounded-full bg-gradient-to-r from-[#ECCF96]/40 via-[#C59B51]/30 to-transparent blur-3xl z-15 pointer-events-none opacity-0"></div>
 
     <!-- Traveling Brand Monogram (Smoothly Journeys from Center to Navbar) -->
     <div id="intro-traveling-logo" class="fixed z-30 flex items-center gap-3 sm:gap-4 pointer-events-none opacity-0 will-change-transform">
@@ -86,10 +90,14 @@
     </div>
 
     <!-- Skip Intro Button -->
-    <button id="skip-intro-btn" onclick="skipCinematicIntro()" class="absolute bottom-6 right-6 z-40 px-3.5 py-1.5 rounded-full bg-black/50 backdrop-blur-md text-brand-sand/80 hover:text-white hover:bg-black/80 text-[10px] uppercase tracking-widest border border-brand-gold/30 transition-all">
-      Skip Intro
+    <button id="skip-intro-btn" onclick="skipCinematicIntro()" class="absolute bottom-6 right-6 z-40 px-4 py-2 rounded-full bg-black/60 backdrop-blur-md text-brand-sand/90 hover:text-white hover:bg-black/90 text-[10px] uppercase tracking-widest border border-brand-gold/40 transition-all shadow-lg flex items-center gap-1.5">
+      <span>Skip Intro</span>
+      <span class="text-brand-gold">→</span>
     </button>
   </div>
+
+  <!-- ================= MASTER WEBSITE WRAPPER (CINEMATIC SMOOTH REVEAL ON INTRO SETTLE) ================= -->
+  <div id="main-site-wrapper" class="relative z-10 will-change-transform">
 
   <!-- ================= PERSISTENT AMBIENT LIGHT MESH (NATURAL SCROLL TRANSITIONS) ================= -->
   <div class="ambient-bg-layer" aria-hidden="true">
@@ -1331,6 +1339,8 @@
   <a href="https://wa.me/919840012345?text=Hello%20कल्रा%20KRUTI%20by%20Vyara,%20I%20would%20like%20to%20inquire%20about%20your%20handcrafted%20saree%20collection." target="_blank" rel="noopener noreferrer" class="hidden lg:flex whatsapp-float-btn" title="Chat on WhatsApp">
     <i data-lucide="message-circle" class="w-7 h-7"></i>
   </a>
+
+  </div> <!-- End #main-site-wrapper -->
 
   <!-- ================= DRAWERS & MODALS ================= -->
 
