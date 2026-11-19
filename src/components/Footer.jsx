@@ -27,7 +27,7 @@ export default function Footer() {
                 <img 
                   src="assets/klakruti-by-vyara-light.png" 
                   alt="कलाKruti BY VYARA" 
-                  className="h-8 sm:h-10 w-auto object-contain filter drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)]"
+                  className="h-9 sm:h-11 w-auto object-contain filter drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)]"
                 />
                 <span className="font-italiana italic text-[11px] text-[#E4C58B]/90 tracking-wide mt-1">
                   Threads of Culture, Beads of Joy

@@ -101,6 +101,18 @@ body {
 }
 
 /* Typography Utility Classes */
+@font-face {
+  font-family: 'Copperplate';
+  src: url('../assets/Copperplate.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-copperplate {
+  font-family: 'Copperplate', 'Copperplate Gothic Light', 'Cinzel', serif;
+}
+
 .font-tillana {
   font-family: 'Tillana', 'Kalam', 'Rozha One', 'Noto Serif Devanagari', cursive, serif;
 }

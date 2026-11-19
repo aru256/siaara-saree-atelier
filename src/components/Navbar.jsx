@@ -100,7 +100,7 @@ export default function Navbar() {
               <img 
                 src="assets/klakruti-by-vyara-light.png" 
                 alt="कलाKruti BY VYARA" 
-                className="h-7 sm:h-9 w-auto object-contain filter drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)] group-hover:brightness-110 transition-all"
+                className="h-8 sm:h-10 w-auto object-contain filter drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)] group-hover:brightness-110 transition-all"
               />
             </div>
           </a>
