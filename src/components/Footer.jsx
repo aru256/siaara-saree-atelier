@@ -24,9 +24,9 @@ export default function Footer() {
                 />
               </div>
               <div className="flex flex-col text-left">
-                <div className="flex items-baseline gap-1.5">
-                  <span className="font-rozha text-lg sm:text-2xl font-bold text-[#E4C58B]">कला</span>
-                  <span className="font-cinzel text-base sm:text-xl font-bold tracking-[0.16em] text-[#E4C58B]">KRUTI</span>
+                <div className="flex items-baseline leading-none">
+                  <span className="font-tillana text-lg sm:text-2xl font-bold text-[#E4C58B]">कला</span>
+                  <span className="font-cinzel text-base sm:text-xl font-bold tracking-[0.14em] text-[#E4C58B] -ml-0.5">KRUTI</span>
                 </div>
                 <span className="font-cinzel text-[10px] sm:text-xs text-[#C59B51] font-semibold tracking-wider uppercase -mt-0.5">
                   By Vyara

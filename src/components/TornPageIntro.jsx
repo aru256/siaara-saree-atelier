@@ -166,12 +166,12 @@ export default function TornPageIntro({ onComplete }) {
           />
         </div>
 
-        {/* Brand Name: कला in Hindi Devanagari, KRUTI in English */}
-        <h2 className="flex items-baseline justify-center gap-2 sm:gap-3 leading-none">
-          <span className="font-rozha text-3xl sm:text-5xl font-bold text-[#E4C58B]">
+        {/* Brand Name: कला in stylish Tillana with curved ल, KRUTI in English with ZERO GAP */}
+        <h2 className="flex items-baseline justify-center leading-none">
+          <span className="font-tillana text-3xl sm:text-5xl font-bold text-[#E4C58B]">
             कला
           </span>
-          <span className="font-cinzel text-2xl sm:text-4xl font-bold text-[#F8F5EE] tracking-[0.18em]">
+          <span className="font-cinzel text-2xl sm:text-4xl font-bold text-[#F8F5EE] tracking-[0.14em] -ml-0.5">
             KRUTI
           </span>
         </h2>

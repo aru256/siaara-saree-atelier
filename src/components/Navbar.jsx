@@ -94,9 +94,9 @@ export default function Navbar() {
             />
           </div>
           <div className="flex flex-col text-left">
-            <div className="flex items-baseline gap-1.5">
-              <span className="font-rozha text-base sm:text-xl font-bold text-[#58111A] leading-tight">कला</span>
-              <span className="font-cinzel text-sm sm:text-lg font-bold tracking-[0.16em] text-[#58111A] leading-tight">KRUTI</span>
+            <div className="flex items-baseline leading-none">
+              <span className="font-tillana text-base sm:text-2xl font-bold text-[#58111A]">कला</span>
+              <span className="font-cinzel text-sm sm:text-lg font-bold tracking-[0.14em] text-[#58111A] -ml-0.5">KRUTI</span>
             </div>
             <span className="font-cinzel text-[9px] sm:text-[10px] text-[#C59B51] font-semibold tracking-wider -mt-0.5 uppercase">
               By Vyara
