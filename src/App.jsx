@@ -32,11 +32,11 @@ function AppContent() {
       {/* Global Luxury Navbar */}
       <Navbar />
 
-      {/* Dynamic Content: Flipkart-Style Full Product Page OR Home Catalog with Smooth Silk Fade Transition */}
-      <main className={`flex-1 transition-all duration-200 ease-out ${
+      {/* Dynamic Content: Flipkart-Style Full Product Page OR Home Catalog with Pure Silk Fade Transition */}
+      <main className={`flex-1 transition-opacity duration-200 ease-out ${
         pageTransition === 'exiting' 
-          ? 'opacity-0 scale-[0.99] translate-y-1 pointer-events-none' 
-          : 'opacity-100 scale-100 translate-y-0 pointer-events-auto'
+          ? 'opacity-0 pointer-events-none' 
+          : 'opacity-100 pointer-events-auto'
       }`}>
         {currentView === 'product' ? (
           <ProductDetailPage />

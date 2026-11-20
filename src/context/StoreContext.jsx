@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
 import { SAREES_DATA, CURRENCY_CONFIG, SAMPLE_ORDERS } from '../data/sarees';
 
 const StoreContext = createContext(null);
@@ -8,6 +8,9 @@ export function StoreProvider({ children }) {
   const [currentView, setCurrentView] = useState('home');
   const [activeProductId, setActiveProductId] = useState(null);
   const [pageTransition, setPageTransition] = useState('entered'); // 'entered' | 'exiting'
+
+  // Preserved Catalog Scroll Position for seamless return
+  const savedCatalogScrollY = useRef(0);
 
   // Products
   const [products] = useState(SAREES_DATA);
@@ -98,14 +101,18 @@ export function StoreProvider({ children }) {
       const hash = window.location.hash;
       if (hash.startsWith('#product-')) {
         const pId = hash.replace('#product-', '');
+        if (currentView === 'home') {
+          savedCatalogScrollY.current = window.scrollY || window.pageYOffset || 0;
+        }
         setActiveProductId(pId);
         setCurrentView('product');
         window.scrollTo(0, 0);
       } else {
         if (currentView === 'product') {
+          const returnY = savedCatalogScrollY.current || 0;
           setCurrentView('home');
           setActiveProductId(null);
-          window.scrollTo(0, 0);
+          window.scrollTo(0, returnY);
         }
       }
     };
@@ -116,17 +123,26 @@ export function StoreProvider({ children }) {
   }, [currentView]);
 
   const openProductPage = (productId) => {
-    // 1. Begin quick elegant fade out without page scroll
+    // 1. Save exact scroll position where customer tapped the saree in catalog
+    if (currentView === 'home') {
+      savedCatalogScrollY.current = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+    }
+
+    // 2. Pure silk fade-out (zero scrolling motion)
     setPageTransition('exiting');
 
-    // 2. Switch views and immediately position at top without scrolling jitter
+    // 3. Switch view after fade-out, anchor immediately at top
     setTimeout(() => {
       setActiveProductId(productId);
       setCurrentView('product');
-      window.location.hash = `#product-${productId}`;
+      try {
+        history.replaceState(null, '', `#product-${productId}`);
+      } catch (e) {
+        window.location.hash = `#product-${productId}`;
+      }
       window.scrollTo(0, 0);
 
-      // 3. Smoothly fade in the product page
+      // 4. Smoothly fade in product page
       requestAnimationFrame(() => {
         setPageTransition('entered');
       });
@@ -134,18 +150,26 @@ export function StoreProvider({ children }) {
   };
 
   const goBackToCatalog = () => {
-    // 1. Begin quick elegant fade out
+    // 1. Pure silk fade-out of product page
     setPageTransition('exiting');
 
-    // 2. Switch to catalog and immediately position without scrolling jitter
+    // 2. Restore catalog view and place user EXACTLY where they were browsing
     setTimeout(() => {
+      const returnY = savedCatalogScrollY.current || 0;
       setCurrentView('home');
       setActiveProductId(null);
-      window.location.hash = '';
-      window.scrollTo(0, 0);
+      try {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      } catch (e) {
+        window.location.hash = '';
+      }
 
-      // 3. Smoothly fade in the home catalog
+      // Restore exact scroll coordinate instantly
+      window.scrollTo(0, returnY);
+
+      // 3. Smoothly fade back into the catalog at the exact scroll position
       requestAnimationFrame(() => {
+        window.scrollTo(0, returnY);
         setPageTransition('entered');
       });
     }, 180);
