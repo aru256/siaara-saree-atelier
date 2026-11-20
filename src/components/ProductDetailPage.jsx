@@ -28,7 +28,7 @@ export default function ProductDetailPage() {
   const [pincodeStatus, setPincodeStatus] = useState(null);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo(0, 0);
     if (product) {
       setSelectedVariant(product.variants[0]);
       setActiveImgIdx(0);

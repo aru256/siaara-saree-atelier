@@ -21,7 +21,7 @@ import AuthModal from './components/AuthModal';
 import Toast from './components/Toast';
 
 function AppContent() {
-  const { currentView } = useStore();
+  const { currentView, pageTransition } = useStore();
 
   return (
     <div className="min-h-screen bg-[#F8F5EE] text-[#58111A] flex flex-col font-sans selection:bg-[#C59B51] selection:text-[#2B070D]">
@@ -32,8 +32,12 @@ function AppContent() {
       {/* Global Luxury Navbar */}
       <Navbar />
 
-      {/* Dynamic Content: Flipkart-Style Full Product Page OR Home Catalog */}
-      <main className="flex-1">
+      {/* Dynamic Content: Flipkart-Style Full Product Page OR Home Catalog with Smooth Silk Fade Transition */}
+      <main className={`flex-1 transition-all duration-200 ease-out ${
+        pageTransition === 'exiting' 
+          ? 'opacity-0 scale-[0.99] translate-y-1 pointer-events-none' 
+          : 'opacity-100 scale-100 translate-y-0 pointer-events-auto'
+      }`}>
         {currentView === 'product' ? (
           <ProductDetailPage />
         ) : (

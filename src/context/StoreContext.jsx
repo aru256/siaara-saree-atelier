@@ -7,6 +7,7 @@ export function StoreProvider({ children }) {
   // Navigation & Page View ('home' | 'product')
   const [currentView, setCurrentView] = useState('home');
   const [activeProductId, setActiveProductId] = useState(null);
+  const [pageTransition, setPageTransition] = useState('entered'); // 'entered' | 'exiting'
 
   // Products
   const [products] = useState(SAREES_DATA);
@@ -99,31 +100,55 @@ export function StoreProvider({ children }) {
         const pId = hash.replace('#product-', '');
         setActiveProductId(pId);
         setCurrentView('product');
+        window.scrollTo(0, 0);
       } else {
-        setCurrentView('home');
+        if (currentView === 'product') {
+          setCurrentView('home');
+          setActiveProductId(null);
+          window.scrollTo(0, 0);
+        }
       }
     };
 
     handleHash();
     window.addEventListener('hashchange', handleHash);
     return () => window.removeEventListener('hashchange', handleHash);
-  }, []);
+  }, [currentView]);
 
   const openProductPage = (productId) => {
-    setActiveProductId(productId);
-    setCurrentView('product');
-    window.location.hash = `#product-${productId}`;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // 1. Begin quick elegant fade out without page scroll
+    setPageTransition('exiting');
+
+    // 2. Switch views and immediately position at top without scrolling jitter
+    setTimeout(() => {
+      setActiveProductId(productId);
+      setCurrentView('product');
+      window.location.hash = `#product-${productId}`;
+      window.scrollTo(0, 0);
+
+      // 3. Smoothly fade in the product page
+      requestAnimationFrame(() => {
+        setPageTransition('entered');
+      });
+    }, 180);
   };
 
   const goBackToCatalog = () => {
-    setCurrentView('home');
-    setActiveProductId(null);
-    window.location.hash = '#shop';
+    // 1. Begin quick elegant fade out
+    setPageTransition('exiting');
+
+    // 2. Switch to catalog and immediately position without scrolling jitter
     setTimeout(() => {
-      const shopElem = document.getElementById('shop');
-      if (shopElem) shopElem.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
+      setCurrentView('home');
+      setActiveProductId(null);
+      window.location.hash = '';
+      window.scrollTo(0, 0);
+
+      // 3. Smoothly fade in the home catalog
+      requestAnimationFrame(() => {
+        setPageTransition('entered');
+      });
+    }, 180);
   };
 
   // Toast Helper
@@ -236,6 +261,7 @@ export function StoreProvider({ children }) {
     <StoreContext.Provider value={{
       currentView,
       activeProductId,
+      pageTransition,
       openProductPage,
       goBackToCatalog,
       products,
