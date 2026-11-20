@@ -57,13 +57,14 @@ export default function OrderTracking() {
 
         {/* Tracking Search Form */}
         <form onSubmit={handleSearch} className="max-w-md mx-auto luxury-search-bar mb-6 flex items-center gap-2 bg-white p-1.5 rounded-full border border-[#C59B51]/40 shadow-sm">
-          <Search className="w-4 h-4 ml-3 text-[#7C2335]/70 shrink-0" />
+          <Search className="w-4 h-4 ml-3.5 text-[#7C2335]/70 shrink-0 pointer-events-none" />
           <input 
             type="text" 
             placeholder="e.g. KLA-88342 or 9849012345" 
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full text-xs sm:text-sm text-[#58111A] font-medium pl-2 focus:outline-none bg-transparent" 
+            style={{ paddingLeft: '0.75rem' }}
+            className="w-full text-xs sm:text-sm text-[#58111A] font-medium focus:outline-none bg-transparent" 
             required 
           />
           <button type="submit" className="btn-luxury-primary !py-2.5 !px-6 !text-xs shrink-0">

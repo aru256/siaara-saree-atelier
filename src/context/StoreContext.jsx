@@ -390,6 +390,19 @@ export function StoreProvider({ children }) {
     showToast(`Order #${newOrder.orderId} placed successfully!`, 'gold');
   };
 
+  // Update Existing Order (Cancellation, Return, Status)
+  const updateOrder = (orderId, updates) => {
+    setOrders(prev => {
+      const next = prev.map(o => {
+        if (o.orderId === orderId) {
+          return { ...o, ...updates };
+        }
+        return o;
+      });
+      return next;
+    });
+  };
+
   // Wishlist actions
   const toggleWishlist = (productId) => {
     const prod = products.find(p => p.id === productId);
@@ -475,6 +488,7 @@ export function StoreProvider({ children }) {
       setWishlistOpen,
       orders,
       addNewOrder,
+      updateOrder,
       user,
       login,
       logout,

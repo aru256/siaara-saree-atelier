@@ -964,6 +964,19 @@ textarea {
   appearance: none;
 }
 
+/* Universal Fix for Search Bars and Inputs with Left Icons (Zero Overlap Guaranteed) */
+.input-with-icon,
+input.input-with-icon,
+input[data-has-icon="true"],
+.relative > input.with-icon,
+.relative > input[class*="pl-10"],
+.relative > input[class*="pl-11"],
+.relative > input[class*="pl-12"],
+.relative > input[class*="pl-14"],
+.relative > input[class*="pl-16"] {
+  padding-left: 3.25rem !important; /* 52px clearance ensures 20px+ space after 16px icon */
+}
+
 /* Luxury Input Field Wrap with Regal Seal Badge */
 .luxury-input-wrap {
   position: relative;
