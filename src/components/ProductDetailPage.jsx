@@ -332,14 +332,14 @@ export default function ProductDetailPage() {
               
               <form onSubmit={handleCheckPincode} className="flex gap-2">
                 <div className="relative flex-1">
-                  <MapPin className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[#7C2335]/60" />
+                  <MapPin className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#7C2335]/60 pointer-events-none" />
                   <input 
                     type="text" 
                     placeholder="Enter 6-digit Pincode (e.g. 400001)"
                     maxLength={6}
                     value={pincode}
                     onChange={(e) => setPincode(e.target.value)}
-                    className="w-full pl-9 pr-3 py-2 rounded-xl border border-[#C59B51]/40 text-xs text-[#58111A] bg-[#FAF7F2] focus:outline-none focus:border-[#58111A]"
+                    className="w-full pl-11 sm:pl-12 pr-3 py-2.5 rounded-xl border border-[#C59B51]/40 text-xs text-[#58111A] bg-[#FAF7F2] focus:outline-none focus:border-[#58111A]"
                   />
                 </div>
                 <button 

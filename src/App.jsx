@@ -9,9 +9,10 @@ import ShopCatalog from './components/ShopCatalog';
 import Craftsmanship from './components/Craftsmanship';
 import BestSellers from './components/BestSellers';
 import Testimonials from './components/Testimonials';
-import OrderTracking from './components/OrderTracking';
-import BespokeAppointment from './components/BespokeAppointment';
 import ProductDetailPage from './components/ProductDetailPage';
+import AboutUsPage from './components/AboutUsPage';
+import ContactUsPage from './components/ContactUsPage';
+import MyOrdersPage from './components/MyOrdersPage';
 import Footer from './components/Footer';
 import CartDrawer from './components/CartDrawer';
 import WishlistDrawer from './components/WishlistDrawer';
@@ -32,15 +33,17 @@ function AppContent() {
       {/* Global Luxury Navbar */}
       <Navbar />
 
-      {/* Dynamic Content: Flipkart-Style Full Product Page OR Home Catalog with Pure Silk Fade Transition */}
+      {/* Dynamic Content: Dedicated Pages (Product, About Us, Contact Us, My Orders) OR Home Catalog with Pure Silk Fade */}
       <main className={`flex-1 transition-opacity duration-200 ease-out ${
         pageTransition === 'exiting' 
           ? 'opacity-0 pointer-events-none' 
           : 'opacity-100 pointer-events-auto'
       }`}>
-        {currentView === 'product' ? (
-          <ProductDetailPage />
-        ) : (
+        {currentView === 'product' && <ProductDetailPage />}
+        {currentView === 'about' && <AboutUsPage />}
+        {currentView === 'contact' && <ContactUsPage />}
+        {currentView === 'orders' && <MyOrdersPage />}
+        {currentView === 'home' && (
           <>
             <Hero />
             <BrandStory />
@@ -49,8 +52,6 @@ function AppContent() {
             <Craftsmanship />
             <BestSellers />
             <Testimonials />
-            <OrderTracking />
-            <BespokeAppointment />
           </>
         )}
       </main>

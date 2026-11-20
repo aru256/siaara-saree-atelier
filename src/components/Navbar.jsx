@@ -15,6 +15,7 @@ export default function Navbar() {
     currency, 
     setCurrency,
     currentView,
+    navigatePage,
     goBackToCatalog,
     setSelectedCollection
   } = useStore();
@@ -97,8 +98,8 @@ export default function Navbar() {
           {/* Brand Logo & Monogram (Lotus Emblem + कलाKruti by Vyara in Copperplate) */}
           <a 
             href="#home" 
-            onClick={(e) => { e.preventDefault(); scrollTo('home'); }}
-            className="flex items-center gap-3 sm:gap-4 group"
+            onClick={(e) => { e.preventDefault(); navigatePage('home'); }}
+            className="flex items-center gap-3 sm:gap-4 group cursor-pointer"
             id="navbar-brand-logo"
           >
             {/* Independent Floating Lotus Emblem (No Circle, Sized Prominently) */}
@@ -122,23 +123,82 @@ export default function Navbar() {
 
           {/* Desktop Navigation Links (Clean Pure White Text & Crisp Transitions) */}
           <nav className="hidden lg:flex items-center gap-7 text-xs font-semibold tracking-wider text-white uppercase">
-            <button onClick={() => scrollTo('collections')} className="text-white hover:text-white/75 transition-colors py-1 cursor-pointer">
-              Collections
+            <button 
+              onClick={() => {
+                if (currentView !== 'home') navigatePage('home');
+                else window.scrollTo({ top: 0, behavior: 'smooth' });
+              }} 
+              className={`hover:text-[#E4C58B] transition-colors py-1 cursor-pointer relative ${
+                currentView === 'home' ? 'text-[#E4C58B]' : 'text-white'
+              }`}
+            >
+              Home
+              {currentView === 'home' && <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#E4C58B] rounded-full" />}
             </button>
-            <button onClick={() => scrollTo('story')} className="text-white hover:text-white/75 transition-colors py-1 cursor-pointer">
-              Brand Story
-            </button>
-            <button onClick={() => scrollTo('shop')} className="text-white hover:text-white/75 transition-colors py-1 cursor-pointer">
+
+            <button 
+              onClick={() => {
+                setSelectedCollection('all');
+                if (currentView !== 'home') {
+                  navigatePage('home');
+                  setTimeout(() => {
+                    const el = document.getElementById('shop');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }, 200);
+                } else {
+                  scrollTo('shop');
+                }
+              }} 
+              className="text-white hover:text-[#E4C58B] transition-colors py-1 cursor-pointer"
+            >
               Shop Sarees
             </button>
-            <button onClick={() => scrollTo('craftsmanship')} className="text-white hover:text-white/75 transition-colors py-1 cursor-pointer">
-              Craftsmanship
+
+            <button 
+              onClick={() => {
+                if (currentView !== 'home') {
+                  navigatePage('home');
+                  setTimeout(() => {
+                    const el = document.getElementById('collections');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }, 200);
+                } else {
+                  scrollTo('collections');
+                }
+              }} 
+              className="text-white hover:text-[#E4C58B] transition-colors py-1 cursor-pointer"
+            >
+              Collections
             </button>
-            <button onClick={() => scrollTo('track-order')} className="text-white hover:text-white/75 transition-colors py-1 cursor-pointer">
+
+            <button 
+              onClick={() => navigatePage('about')} 
+              className={`hover:text-[#E4C58B] transition-colors py-1 cursor-pointer relative ${
+                currentView === 'about' ? 'text-[#E4C58B]' : 'text-white'
+              }`}
+            >
+              About Us
+              {currentView === 'about' && <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#E4C58B] rounded-full" />}
+            </button>
+
+            <button 
+              onClick={() => navigatePage('orders')} 
+              className={`hover:text-[#E4C58B] transition-colors py-1 cursor-pointer relative ${
+                currentView === 'orders' ? 'text-[#E4C58B]' : 'text-white'
+              }`}
+            >
               Track Order
+              {currentView === 'orders' && <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#E4C58B] rounded-full" />}
             </button>
-            <button onClick={() => scrollTo('contact')} className="text-white hover:text-white/75 transition-colors py-1 cursor-pointer">
-              Personal Styling
+
+            <button 
+              onClick={() => navigatePage('contact')} 
+              className={`hover:text-[#E4C58B] transition-colors py-1 cursor-pointer relative ${
+                currentView === 'contact' ? 'text-[#E4C58B]' : 'text-white'
+              }`}
+            >
+              Contact Us
+              {currentView === 'contact' && <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#E4C58B] rounded-full" />}
             </button>
           </nav>
 
@@ -274,10 +334,10 @@ export default function Navbar() {
           <div className="py-5 pl-12 pr-4 flex-1 space-y-1 text-sm font-semibold tracking-wider uppercase overflow-y-auto">
             {/* 1. Home */}
             <button 
-              onClick={() => scrollTo('home')}
+              onClick={() => { setMobileMenuOpen(false); navigatePage('home'); }}
               className="w-full text-left px-3.5 py-2.5 rounded-xl text-white hover:text-[#E4C58B] hover:bg-white/5 transition-all flex items-center gap-3 cursor-pointer"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E4C58B]"></span>
+              <span className={`w-1.5 h-1.5 rounded-full ${currentView === 'home' ? 'bg-[#E4C58B]' : 'bg-white/40'}`}></span>
               <span>Home</span>
             </button>
 
@@ -364,28 +424,28 @@ export default function Navbar() {
 
             {/* 6. Track order */}
             <button 
-              onClick={() => scrollTo('track-order')}
+              onClick={() => { setMobileMenuOpen(false); navigatePage('orders'); }}
               className="w-full text-left px-3.5 py-2.5 rounded-xl text-white hover:text-[#E4C58B] hover:bg-white/5 transition-all flex items-center gap-3 cursor-pointer"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E4C58B]"></span>
+              <span className={`w-1.5 h-1.5 rounded-full ${currentView === 'orders' ? 'bg-[#E4C58B]' : 'bg-white/40'}`}></span>
               <span>Track Order</span>
             </button>
 
             {/* 7. About us */}
             <button 
-              onClick={() => scrollTo('story')}
+              onClick={() => { setMobileMenuOpen(false); navigatePage('about'); }}
               className="w-full text-left px-3.5 py-2.5 rounded-xl text-white hover:text-[#E4C58B] hover:bg-white/5 transition-all flex items-center gap-3 cursor-pointer"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E4C58B]"></span>
+              <span className={`w-1.5 h-1.5 rounded-full ${currentView === 'about' ? 'bg-[#E4C58B]' : 'bg-white/40'}`}></span>
               <span>About Us</span>
             </button>
 
             {/* 8. Contact us */}
             <button 
-              onClick={() => scrollTo('contact')}
+              onClick={() => { setMobileMenuOpen(false); navigatePage('contact'); }}
               className="w-full text-left px-3.5 py-2.5 rounded-xl text-white hover:text-[#E4C58B] hover:bg-white/5 transition-all flex items-center gap-3 cursor-pointer"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E4C58B]"></span>
+              <span className={`w-1.5 h-1.5 rounded-full ${currentView === 'contact' ? 'bg-[#E4C58B]' : 'bg-white/40'}`}></span>
               <span>Contact Us</span>
             </button>
 

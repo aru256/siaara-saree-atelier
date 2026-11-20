@@ -10,7 +10,9 @@ export default function CheckoutModal() {
     cartSubtotal, 
     clearCart, 
     formatPrice, 
-    showToast 
+    showToast,
+    navigatePage,
+    addNewOrder 
   } = useStore();
 
   const [paymentMethod, setPaymentMethod] = useState('cod');
@@ -38,24 +40,28 @@ export default function CheckoutModal() {
       orderId,
       date: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }),
       customer: formData,
-      items: cart,
-      paymentMethod,
+      items: [...cart],
+      paymentMethod: paymentMethod === 'cod' ? 'Cash on Delivery (Verified)' : paymentMethod === 'upi' ? 'UPI Payment (Prepaid)' : 'Card / NetBanking',
       total: cartSubtotal,
-      status: 'Order Confirmed · Preparing on Looms'
+      status: 'Order Confirmed · Preparing on Looms',
+      statusType: 'in-transit',
+      courier: 'BlueDart Express Air (Consignment Initiated)',
+      awb: `BLR-${Math.floor(1000000 + Math.random() * 9000000)}`,
+      expectedDelivery: 'Expected in 3-4 Business Days',
+      steps: [
+        { label: 'Order Confirmed', date: 'Today', done: true, desc: 'Your bespoke handloom reservation is locked.' },
+        { label: 'Silk Mark Certified Audit', date: 'Tomorrow', done: false, desc: 'Authenticity barcode verification.' },
+        { label: 'Pit-Loom Press & Packaging', date: 'In 2 Days', done: false, desc: 'Hand-folded in royal muslin box.' },
+        { label: 'Dispatched via Air Express', date: 'In 3 Days', done: false, desc: 'Insured BlueDart consignment dispatch.' },
+        { label: 'Delivered to Doorstep', date: 'Expected Soon', done: false, desc: 'Handover with Silk Mark seal intact.' }
+      ]
     };
 
-    // Save to orders in localStorage
-    try {
-      const existing = JSON.parse(localStorage.getItem('siaara_orders') || '[]');
-      existing.unshift(newOrder);
-      localStorage.setItem('siaara_orders', JSON.stringify(existing));
-    } catch (err) {
-      console.warn('Could not persist order', err);
+    if (addNewOrder) {
+      addNewOrder(newOrder);
     }
-
     setPlacedOrder(newOrder);
     clearCart();
-    showToast(`Order #${orderId} placed successfully!`, 'gold');
   };
 
   return (
@@ -131,10 +137,9 @@ export default function CheckoutModal() {
                 <button 
                   onClick={() => {
                     setCheckoutOpen(false);
-                    const trackElem = document.getElementById('track-order');
-                    if (trackElem) trackElem.scrollIntoView({ behavior: 'smooth' });
+                    navigatePage('orders');
                   }}
-                  className="btn-luxury-primary !py-2.5 !px-6 !text-xs"
+                  className="btn-luxury-primary !py-2.5 !px-6 !text-xs cursor-pointer"
                 >
                   Track This Order
                 </button>

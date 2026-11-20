@@ -48,14 +48,14 @@ export default function ShopCatalog() {
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
           
           {/* Instant Search Bar */}
-          <div className="relative">
-            <Search className="w-3.5 h-3.5 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#7C2335]/70" />
+          <div className="relative w-full sm:w-64">
+            <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#7C2335]/70 pointer-events-none" />
             <input 
               type="text" 
               placeholder="Search by color or weave..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-9 pr-4 py-2 rounded-full border border-[#C59B51]/40 bg-white text-xs text-[#58111A] placeholder-[#7C2335]/50 focus:outline-none focus:border-[#58111A] w-full sm:w-56 transition-all"
+              className="w-full pl-11 sm:pl-12 pr-4 py-2 rounded-full border border-[#C59B51]/40 bg-white text-xs text-[#58111A] placeholder-[#7C2335]/60 focus:outline-none focus:border-[#58111A] transition-all"
             />
           </div>
 

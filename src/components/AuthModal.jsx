@@ -107,14 +107,14 @@ export default function AuthModal() {
                     Your Full Name *
                   </label>
                   <div className="relative">
-                    <User className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[#7C2335]/60" />
+                    <User className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#7C2335]/60 pointer-events-none" />
                     <input 
                       type="text" 
                       required
                       placeholder="e.g. Radhika Sharma"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full pl-9 pr-3 py-2 rounded-xl border border-[#C59B51]/40 text-xs text-[#58111A] bg-white focus:outline-none focus:border-[#58111A]"
+                      className="w-full pl-11 pr-3 py-2 rounded-xl border border-[#C59B51]/40 text-xs text-[#58111A] bg-white focus:outline-none focus:border-[#58111A]"
                     />
                   </div>
                 </div>
@@ -125,14 +125,14 @@ export default function AuthModal() {
                   Email Address *
                 </label>
                 <div className="relative">
-                  <Mail className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[#7C2335]/60" />
+                  <Mail className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#7C2335]/60 pointer-events-none" />
                   <input 
                     type="email" 
                     required
                     placeholder="name@example.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-9 pr-3 py-2 rounded-xl border border-[#C59B51]/40 text-xs text-[#58111A] bg-white focus:outline-none focus:border-[#58111A]"
+                    className="w-full pl-11 pr-3 py-2 rounded-xl border border-[#C59B51]/40 text-xs text-[#58111A] bg-white focus:outline-none focus:border-[#58111A]"
                   />
                 </div>
               </div>
@@ -142,14 +142,14 @@ export default function AuthModal() {
                   Password *
                 </label>
                 <div className="relative">
-                  <Lock className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[#7C2335]/60" />
+                  <Lock className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#7C2335]/60 pointer-events-none" />
                   <input 
                     type="password" 
                     required
                     placeholder="••••••••"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-9 pr-3 py-2 rounded-xl border border-[#C59B51]/40 text-xs text-[#58111A] bg-white focus:outline-none focus:border-[#58111A]"
+                    className="w-full pl-11 pr-3 py-2 rounded-xl border border-[#C59B51]/40 text-xs text-[#58111A] bg-white focus:outline-none focus:border-[#58111A]"
                   />
                 </div>
               </div>

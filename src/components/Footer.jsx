@@ -1,9 +1,26 @@
 import React from 'react';
-import { ShieldCheck, Heart, ArrowUp } from 'lucide-react';
+import { useStore } from '../context/StoreContext';
+import { ShieldCheck, ArrowUp } from 'lucide-react';
 
 export default function Footer() {
+  const { navigatePage, setSelectedCollection, currentView } = useStore();
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleCollectionClick = (collectionId) => {
+    setSelectedCollection(collectionId);
+    if (currentView !== 'home') {
+      navigatePage('home');
+      setTimeout(() => {
+        const el = document.getElementById('shop');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 200);
+    } else {
+      const el = document.getElementById('shop');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -15,7 +32,7 @@ export default function Footer() {
           
           {/* Brand Info */}
           <div className="lg:col-span-4 space-y-4">
-            <div className="flex items-center gap-3.5">
+            <div className="flex items-center gap-3.5 cursor-pointer" onClick={() => navigatePage('home')}>
               {/* Independent Floating Lotus Emblem */}
               <div className="flex items-center justify-center shrink-0">
                 <img 
@@ -52,11 +69,38 @@ export default function Footer() {
               Signature Weaves
             </h4>
             <ul className="space-y-2 text-xs text-[#FAF7F2]/75">
-              <li><a href="#collections" className="hover:text-[#C59B51] transition-colors">Tissue Silk Sarees</a></li>
-              <li><a href="#collections" className="hover:text-[#C59B51] transition-colors">Banarasi Katan Brocades</a></li>
-              <li><a href="#collections" className="hover:text-[#C59B51] transition-colors">Malai Butter Silk Drapes</a></li>
-              <li><a href="#collections" className="hover:text-[#C59B51] transition-colors">Kanjivaram Temple Silks</a></li>
-              <li><a href="#collections" className="hover:text-[#C59B51] transition-colors">Festive Organza Couture</a></li>
+              <li>
+                <button 
+                  onClick={() => handleCollectionClick('tissue-silk')} 
+                  className="hover:text-[#E4C58B] transition-colors cursor-pointer text-left"
+                >
+                  Tissue Silk Sarees
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleCollectionClick('banarasi-silk')} 
+                  className="hover:text-[#E4C58B] transition-colors cursor-pointer text-left"
+                >
+                  Banarasi Katan Brocades
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleCollectionClick('malai-silk')} 
+                  className="hover:text-[#E4C58B] transition-colors cursor-pointer text-left"
+                >
+                  Malai Butter Silk Drapes
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleCollectionClick('all')} 
+                  className="hover:text-[#E4C58B] transition-colors cursor-pointer text-left"
+                >
+                  All Handloom Drapes
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -66,10 +110,38 @@ export default function Footer() {
               Client Concierge
             </h4>
             <ul className="space-y-2 text-xs text-[#FAF7F2]/75">
-              <li><a href="#track-order" className="hover:text-[#C59B51] transition-colors">Track Your Saree</a></li>
-              <li><a href="#contact" className="hover:text-[#C59B51] transition-colors">Book Video Styling</a></li>
-              <li><a href="#contact" className="hover:text-[#C59B51] transition-colors">Studio Appointments</a></li>
-              <li><a href="admin.html" className="hover:text-[#C59B51] transition-colors">Executive Admin Portal</a></li>
+              <li>
+                <button 
+                  onClick={() => navigatePage('orders')} 
+                  className="hover:text-[#E4C58B] transition-colors cursor-pointer text-left"
+                >
+                  Track Order / My Orders
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => navigatePage('about')} 
+                  className="hover:text-[#E4C58B] transition-colors cursor-pointer text-left"
+                >
+                  About Our Heritage
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => navigatePage('contact')} 
+                  className="hover:text-[#E4C58B] transition-colors cursor-pointer text-left"
+                >
+                  Contact & Styling Concierge
+                </button>
+              </li>
+              <li>
+                <a 
+                  href="admin.html" 
+                  className="hover:text-[#E4C58B] transition-colors inline-block"
+                >
+                  Executive Admin Portal
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -86,11 +158,11 @@ export default function Footer() {
                 type="email" 
                 required
                 placeholder="Enter email address"
-                className="flex-1 px-3 py-1.5 rounded-full bg-white/10 border border-[#C59B51]/40 text-xs text-white placeholder-white/50 focus:outline-none"
+                className="flex-1 px-4 py-2 rounded-full bg-white/10 border border-[#C59B51]/40 text-xs text-white placeholder-white/50 focus:outline-none"
               />
               <button 
                 type="submit"
-                className="px-4 py-1.5 rounded-full bg-[#58111A] text-[#E4C58B] text-xs font-bold uppercase hover:bg-[#C59B51] hover:text-[#2B070D] transition-colors"
+                className="px-4 py-2 rounded-full bg-[#58111A] text-[#E4C58B] border border-[#C59B51]/40 text-xs font-bold uppercase hover:bg-[#C59B51] hover:text-[#2B070D] transition-colors cursor-pointer"
               >
                 Join
               </button>
@@ -106,7 +178,7 @@ export default function Footer() {
           <div className="flex items-center gap-4">
             <button 
               onClick={scrollToTop}
-              className="flex items-center gap-1 hover:text-[#E4C58B] transition-colors"
+              className="flex items-center gap-1 hover:text-[#E4C58B] transition-colors cursor-pointer"
             >
               <span>Back to Top</span>
               <ArrowUp className="w-3.5 h-3.5" />
@@ -118,4 +190,3 @@ export default function Footer() {
     </footer>
   );
 }
-
