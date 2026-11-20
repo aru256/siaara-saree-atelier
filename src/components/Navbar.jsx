@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useStore } from '../context/StoreContext';
-import { ShoppingBag, Heart, User, Menu, X, ShieldCheck, ChevronDown } from 'lucide-react';
+import { ShoppingBag, Heart, User, Menu, X, ChevronDown, ChevronUp, Sparkles, Truck, Info, Phone, LogIn } from 'lucide-react';
 import { CURRENCY_CONFIG } from '../data/sarees';
 
 export default function Navbar() {
@@ -15,11 +15,25 @@ export default function Navbar() {
     currency, 
     setCurrency,
     currentView,
-    goBackToCatalog
+    goBackToCatalog,
+    setSelectedCollection
   } = useStore();
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [currencyOpen, setCurrencyOpen] = useState(false);
+  const [collectionsDropdown, setCollectionsDropdown] = useState(true);
+
+  // Lock background scroll when mobile drawer is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
 
   const scrollTo = (id) => {
     setMobileMenuOpen(false);
@@ -185,39 +199,195 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Drawer Menu (Velvet Maroon) */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#2B070D] border-b border-white/20 px-6 py-6 flex flex-col gap-4 text-sm font-semibold tracking-wider text-white uppercase shadow-2xl animate-in slide-in-from-top-4 duration-300">
-          <button onClick={() => scrollTo('collections')} className="text-left py-2 border-b border-white/10 hover:text-white/80">
-            Collections Runway
-          </button>
-          <button onClick={() => scrollTo('story')} className="text-left py-2 border-b border-white/10 hover:text-white/80">
-            Brand Heritage Story
-          </button>
-          <button onClick={() => scrollTo('shop')} className="text-left py-2 border-b border-white/10 hover:text-white/80">
-            Shop All Pure Silk Sarees
-          </button>
-          <button onClick={() => scrollTo('craftsmanship')} className="text-left py-2 border-b border-white/10 hover:text-white/80">
-            Handloom Craftsmanship
-          </button>
-          <button onClick={() => scrollTo('track-order')} className="text-left py-2 border-b border-white/10 hover:text-white/80">
-            Track Delivery
-          </button>
-          <button onClick={() => scrollTo('contact')} className="text-left py-2 border-b border-white/10 hover:text-white/80">
-            Personal Styling & Studio Visit
-          </button>
+      {/* ================= STYLISH MOBILE RIGHT-SIDE SLIDING DRAWER ================= */}
+      {/* Backdrop overlay */}
+      <div 
+        className={`fixed inset-0 z-[120] lg:hidden transition-all duration-500 ${
+          mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+      >
+        {/* Dim Backdrop with blur */}
+        <div 
+          onClick={() => setMobileMenuOpen(false)}
+          className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-500 cursor-pointer"
+        />
 
-          <div className="pt-2 flex flex-col gap-2.5">
-            <a 
-              href="admin.html" 
-              className="w-full py-2.5 px-4 rounded-full border border-white/30 text-white text-center text-xs font-bold flex items-center justify-center gap-1.5 bg-white/10 hover:bg-white/20"
+        {/* Sculpted Curved Drawer Panel Sliding from the Right */}
+        <div 
+          className={`absolute top-0 right-0 bottom-0 w-[86%] max-w-[340px] sm:max-w-[380px] h-[100dvh] bg-gradient-to-b from-[#2B070D] via-[#350A11] to-[#1A0307] text-[#FAF7F2] shadow-[-20px_0_50px_rgba(0,0,0,0.85),-4px_0_20px_rgba(197,155,81,0.25)] border-l-2 border-[#C59B51]/50 rounded-l-[38px] sm:rounded-l-[46px] flex flex-col justify-between overflow-y-auto transform transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] z-10 will-change-transform ${
+            mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
+        >
+          {/* Top Brand Header & Close Button */}
+          <div className="pt-6 pb-4 px-6 border-b border-[#C59B51]/25 flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
+              <img 
+                src="assets/brand-lotus-gold.png" 
+                alt="कलाKruti" 
+                className="w-7 h-7 object-contain drop-shadow"
+              />
+              <img 
+                src="assets/klakruti-by-vyara-light.png" 
+                alt="कलाKruti BY VYARA" 
+                className="h-6 w-auto object-contain"
+              />
+            </div>
+
+            <button 
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white flex items-center justify-center transition-all hover:rotate-90 cursor-pointer"
+              aria-label="Close Menu"
             >
-              <ShieldCheck className="w-4 h-4 text-white" />
-              <span>Open Executive Admin</span>
-            </a>
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* Navigation Links Body */}
+          <div className="py-5 px-5 flex-1 space-y-1 text-sm font-semibold tracking-wider uppercase overflow-y-auto">
+            {/* 1. Home */}
+            <button 
+              onClick={() => scrollTo('home')}
+              className="w-full text-left px-4 py-2.5 rounded-xl text-white hover:text-[#E4C58B] hover:bg-white/5 transition-all flex items-center gap-3 cursor-pointer"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E4C58B]"></span>
+              <span>Home</span>
+            </button>
+
+            {/* 2. Shop */}
+            <button 
+              onClick={() => { setSelectedCollection('all'); scrollTo('shop'); }}
+              className="w-full text-left px-4 py-2.5 rounded-xl text-white hover:text-[#E4C58B] hover:bg-white/5 transition-all flex items-center gap-3 cursor-pointer"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E4C58B]"></span>
+              <span>Shop</span>
+            </button>
+
+            {/* 3. New arrivals */}
+            <button 
+              onClick={() => scrollTo('collections')}
+              className="w-full text-left px-4 py-2.5 rounded-xl text-white hover:text-[#E4C58B] hover:bg-white/5 transition-all flex items-center justify-between cursor-pointer"
+            >
+              <div className="flex items-center gap-3">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#E4C58B]"></span>
+                <span>New Arrivals</span>
+              </div>
+              <span className="text-[9px] px-2 py-0.5 rounded-full bg-[#E4C58B] text-[#2B070D] font-bold">NEW</span>
+            </button>
+
+            {/* 4. Collections with Sub-items */}
+            <div className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden my-1">
+              <button 
+                onClick={() => setCollectionsDropdown(!collectionsDropdown)}
+                className="w-full flex items-center justify-between px-4 py-2.5 text-white hover:bg-white/10 transition-colors text-left cursor-pointer"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#E4C58B]"></span>
+                  <span>Collections</span>
+                </div>
+                {collectionsDropdown ? (
+                  <ChevronUp className="w-4 h-4 text-[#E4C58B]" />
+                ) : (
+                  <ChevronDown className="w-4 h-4 text-white/70" />
+                )}
+              </button>
+
+              {collectionsDropdown && (
+                <div className="pl-7 pr-3 pb-2 pt-0.5 space-y-1 lowercase text-xs font-medium">
+                  <button 
+                    onClick={() => { setSelectedCollection('tissue-silk'); scrollTo('shop'); }}
+                    className="w-full text-left py-2 px-3 rounded-lg text-[#FAF7F2]/80 hover:text-[#E4C58B] hover:bg-white/5 transition-colors flex items-center gap-2.5 cursor-pointer"
+                  >
+                    <span className="text-[#E4C58B] text-sm leading-none">-</span>
+                    <span className="capitalize">tissue silk</span>
+                  </button>
+                  <button 
+                    onClick={() => { setSelectedCollection('malai-silk'); scrollTo('shop'); }}
+                    className="w-full text-left py-2 px-3 rounded-lg text-[#FAF7F2]/80 hover:text-[#E4C58B] hover:bg-white/5 transition-colors flex items-center gap-2.5 cursor-pointer"
+                  >
+                    <span className="text-[#E4C58B] text-sm leading-none">-</span>
+                    <span className="capitalize">malai silk</span>
+                  </button>
+                  <button 
+                    onClick={() => { setSelectedCollection('banarasi-silk'); scrollTo('shop'); }}
+                    className="w-full text-left py-2 px-3 rounded-lg text-[#FAF7F2]/80 hover:text-[#E4C58B] hover:bg-white/5 transition-colors flex items-center gap-2.5 cursor-pointer"
+                  >
+                    <span className="text-[#E4C58B] text-sm leading-none">-</span>
+                    <span className="capitalize">banarsi silk</span>
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* 5. Wishlist */}
+            <button 
+              onClick={() => { setMobileMenuOpen(false); setWishlistOpen(true); }}
+              className="w-full text-left px-4 py-2.5 rounded-xl text-white hover:text-[#E4C58B] hover:bg-white/5 transition-all flex items-center justify-between cursor-pointer"
+            >
+              <div className="flex items-center gap-3">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#E4C58B]"></span>
+                <span>Wishlist</span>
+              </div>
+              {wishlist.length > 0 && (
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-white text-[#2B070D] font-bold">
+                  {wishlist.length}
+                </span>
+              )}
+            </button>
+
+            {/* 6. Track order */}
+            <button 
+              onClick={() => scrollTo('track-order')}
+              className="w-full text-left px-4 py-2.5 rounded-xl text-white hover:text-[#E4C58B] hover:bg-white/5 transition-all flex items-center gap-3 cursor-pointer"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E4C58B]"></span>
+              <span>Track Order</span>
+            </button>
+
+            {/* 7. About us */}
+            <button 
+              onClick={() => scrollTo('story')}
+              className="w-full text-left px-4 py-2.5 rounded-xl text-white hover:text-[#E4C58B] hover:bg-white/5 transition-all flex items-center gap-3 cursor-pointer"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E4C58B]"></span>
+              <span>About Us</span>
+            </button>
+
+            {/* 8. Contact us */}
+            <button 
+              onClick={() => scrollTo('contact')}
+              className="w-full text-left px-4 py-2.5 rounded-xl text-white hover:text-[#E4C58B] hover:bg-white/5 transition-all flex items-center gap-3 cursor-pointer"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E4C58B]"></span>
+              <span>Contact Us</span>
+            </button>
+
+            {/* 9. Login/ register */}
+            <div className="pt-3">
+              <button 
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  setAuthMode(user ? 'account' : 'login');
+                  setAuthOpen(true);
+                }}
+                className="w-full py-2.5 px-4 rounded-xl bg-white hover:bg-white/95 text-[#2B070D] text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition-transform active:scale-95 cursor-pointer"
+              >
+                <User className="w-4 h-4 text-[#2B070D]" />
+                <span>{user ? `My Account (${user.name.split(' ')[0]})` : 'Login / Register'}</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Footer inside Drawer */}
+          <div className="p-5 border-t border-[#C59B51]/20 text-center">
+            <span className="font-italiana italic text-xs text-[#E4C58B] tracking-wide block">
+              Threads of Culture, Beads of Joy
+            </span>
+            <span className="text-[10px] text-white/50 tracking-wider uppercase mt-1 block">
+              100% Certified Pure Silk
+            </span>
           </div>
         </div>
-      )}
+      </div>
     </header>
   );
 }
