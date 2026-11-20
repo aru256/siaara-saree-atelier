@@ -199,7 +199,16 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* ================= STYLISH MOBILE RIGHT-SIDE SLIDING DRAWER ================= */}
+      {/* Hidden SVG Definition for Repeating Curve In / Curve Out Wave Clip Path */}
+      <svg className="absolute w-0 h-0 pointer-events-none" aria-hidden="true">
+        <defs>
+          <clipPath id="wavy-drawer-clip" clipPathUnits="objectBoundingBox">
+            <path d="M 1 0 L 1 1 L 0.0800 1 C 0.1400 0.9700, 0.1400 0.9300, 0.0800 0.9000 C 0.0200 0.8700, 0.0200 0.8300, 0.0800 0.8000 C 0.1400 0.7700, 0.1400 0.7300, 0.0800 0.7000 C 0.0200 0.6700, 0.0200 0.6300, 0.0800 0.6000 C 0.1400 0.5700, 0.1400 0.5300, 0.0800 0.5000 C 0.0200 0.4700, 0.0200 0.4300, 0.0800 0.4000 C 0.1400 0.3700, 0.1400 0.3300, 0.0800 0.3000 C 0.0200 0.2700, 0.0200 0.2300, 0.0800 0.2000 C 0.1400 0.1700, 0.1400 0.1300, 0.0800 0.1000 C 0.0200 0.0700, 0.0200 0.0300, 0.0800 0.0000 Z" />
+          </clipPath>
+        </defs>
+      </svg>
+
+      {/* ================= STYLISH MOBILE RIGHT-SIDE SLIDING DRAWER WITH REPEATING CURVES ================= */}
       {/* Backdrop overlay */}
       <div 
         className={`fixed inset-0 z-[120] lg:hidden transition-all duration-500 ${
@@ -212,15 +221,34 @@ export default function Navbar() {
           className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-500 cursor-pointer"
         />
 
-        {/* Sculpted Curved Drawer Panel Sliding from the Right */}
+        {/* Sculpted Drawer Panel Sliding from the Right with Repeating Curve In / Curve Out Edge */}
         <div 
-          className={`absolute top-0 right-0 bottom-0 w-[86%] max-w-[340px] sm:max-w-[380px] h-[100dvh] bg-gradient-to-b from-[#2B070D] via-[#350A11] to-[#1A0307] text-[#FAF7F2] shadow-[-20px_0_50px_rgba(0,0,0,0.85),-4px_0_20px_rgba(197,155,81,0.25)] border-l-2 border-[#C59B51]/50 rounded-l-[38px] sm:rounded-l-[46px] flex flex-col justify-between overflow-y-auto transform transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] z-10 will-change-transform ${
+          className={`absolute top-0 right-0 bottom-0 w-[88%] max-w-[340px] sm:max-w-[380px] h-[100dvh] bg-gradient-to-b from-[#2B070D] via-[#350A11] to-[#1A0307] text-[#FAF7F2] shadow-[-25px_0_60px_rgba(0,0,0,0.9)] flex flex-col justify-between overflow-y-auto transform transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] z-10 will-change-transform ${
             mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
+          style={{
+            WebkitClipPath: 'url(#wavy-drawer-clip)',
+            clipPath: 'url(#wavy-drawer-clip)',
+          }}
         >
+          {/* Gleaming Golden Zari Wavy Border Overlay along the Repeating Curves */}
+          <svg 
+            className="absolute inset-0 w-full h-full pointer-events-none z-30 filter drop-shadow-[-2px_0_6px_rgba(228,197,139,0.4)]" 
+            viewBox="0 0 1 1" 
+            preserveAspectRatio="none"
+          >
+            <path 
+              d="M 0.0800 0 C 0.0200 0.0300, 0.0200 0.0700, 0.0800 0.1000 C 0.1400 0.1300, 0.1400 0.1700, 0.0800 0.2000 C 0.0200 0.2300, 0.0200 0.2700, 0.0800 0.3000 C 0.1400 0.3300, 0.1400 0.3700, 0.0800 0.4000 C 0.0200 0.4300, 0.0200 0.4700, 0.0800 0.5000 C 0.1400 0.5300, 0.1400 0.5700, 0.0800 0.6000 C 0.0200 0.6300, 0.0200 0.6700, 0.0800 0.7000 C 0.1400 0.7300, 0.1400 0.7700, 0.0800 0.8000 C 0.0200 0.8300, 0.0200 0.8700, 0.0800 0.9000 C 0.1400 0.9300, 0.1400 0.9700, 0.0800 1.0000" 
+              fill="none" 
+              stroke="#E4C58B" 
+              strokeWidth="2.5" 
+              vectorEffect="non-scaling-stroke" 
+            />
+          </svg>
+
           {/* Top Brand Header & Close Button */}
-          <div className="pt-6 pb-4 px-6 border-b border-[#C59B51]/25 flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
+          <div className="pt-6 pb-4 pl-14 pr-5 border-b border-[#C59B51]/25 flex items-center justify-between">
+            <div className="flex items-center gap-2">
               <img 
                 src="assets/brand-lotus-gold.png" 
                 alt="कलाKruti" 
@@ -243,11 +271,11 @@ export default function Navbar() {
           </div>
 
           {/* Navigation Links Body */}
-          <div className="py-5 px-5 flex-1 space-y-1 text-sm font-semibold tracking-wider uppercase overflow-y-auto">
+          <div className="py-5 pl-12 pr-4 flex-1 space-y-1 text-sm font-semibold tracking-wider uppercase overflow-y-auto">
             {/* 1. Home */}
             <button 
               onClick={() => scrollTo('home')}
-              className="w-full text-left px-4 py-2.5 rounded-xl text-white hover:text-[#E4C58B] hover:bg-white/5 transition-all flex items-center gap-3 cursor-pointer"
+              className="w-full text-left px-3.5 py-2.5 rounded-xl text-white hover:text-[#E4C58B] hover:bg-white/5 transition-all flex items-center gap-3 cursor-pointer"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-[#E4C58B]"></span>
               <span>Home</span>
@@ -256,7 +284,7 @@ export default function Navbar() {
             {/* 2. Shop */}
             <button 
               onClick={() => { setSelectedCollection('all'); scrollTo('shop'); }}
-              className="w-full text-left px-4 py-2.5 rounded-xl text-white hover:text-[#E4C58B] hover:bg-white/5 transition-all flex items-center gap-3 cursor-pointer"
+              className="w-full text-left px-3.5 py-2.5 rounded-xl text-white hover:text-[#E4C58B] hover:bg-white/5 transition-all flex items-center gap-3 cursor-pointer"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-[#E4C58B]"></span>
               <span>Shop</span>
@@ -265,7 +293,7 @@ export default function Navbar() {
             {/* 3. New arrivals */}
             <button 
               onClick={() => scrollTo('collections')}
-              className="w-full text-left px-4 py-2.5 rounded-xl text-white hover:text-[#E4C58B] hover:bg-white/5 transition-all flex items-center justify-between cursor-pointer"
+              className="w-full text-left px-3.5 py-2.5 rounded-xl text-white hover:text-[#E4C58B] hover:bg-white/5 transition-all flex items-center justify-between cursor-pointer"
             >
               <div className="flex items-center gap-3">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#E4C58B]"></span>
@@ -278,7 +306,7 @@ export default function Navbar() {
             <div className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden my-1">
               <button 
                 onClick={() => setCollectionsDropdown(!collectionsDropdown)}
-                className="w-full flex items-center justify-between px-4 py-2.5 text-white hover:bg-white/10 transition-colors text-left cursor-pointer"
+                className="w-full flex items-center justify-between px-3.5 py-2.5 text-white hover:bg-white/10 transition-colors text-left cursor-pointer"
               >
                 <div className="flex items-center gap-3">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#E4C58B]"></span>
@@ -292,7 +320,7 @@ export default function Navbar() {
               </button>
 
               {collectionsDropdown && (
-                <div className="pl-7 pr-3 pb-2 pt-0.5 space-y-1 lowercase text-xs font-medium">
+                <div className="pl-6 pr-3 pb-2 pt-0.5 space-y-1 lowercase text-xs font-medium">
                   <button 
                     onClick={() => { setSelectedCollection('tissue-silk'); scrollTo('shop'); }}
                     className="w-full text-left py-2 px-3 rounded-lg text-[#FAF7F2]/80 hover:text-[#E4C58B] hover:bg-white/5 transition-colors flex items-center gap-2.5 cursor-pointer"
@@ -321,7 +349,7 @@ export default function Navbar() {
             {/* 5. Wishlist */}
             <button 
               onClick={() => { setMobileMenuOpen(false); setWishlistOpen(true); }}
-              className="w-full text-left px-4 py-2.5 rounded-xl text-white hover:text-[#E4C58B] hover:bg-white/5 transition-all flex items-center justify-between cursor-pointer"
+              className="w-full text-left px-3.5 py-2.5 rounded-xl text-white hover:text-[#E4C58B] hover:bg-white/5 transition-all flex items-center justify-between cursor-pointer"
             >
               <div className="flex items-center gap-3">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#E4C58B]"></span>
@@ -337,7 +365,7 @@ export default function Navbar() {
             {/* 6. Track order */}
             <button 
               onClick={() => scrollTo('track-order')}
-              className="w-full text-left px-4 py-2.5 rounded-xl text-white hover:text-[#E4C58B] hover:bg-white/5 transition-all flex items-center gap-3 cursor-pointer"
+              className="w-full text-left px-3.5 py-2.5 rounded-xl text-white hover:text-[#E4C58B] hover:bg-white/5 transition-all flex items-center gap-3 cursor-pointer"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-[#E4C58B]"></span>
               <span>Track Order</span>
@@ -346,7 +374,7 @@ export default function Navbar() {
             {/* 7. About us */}
             <button 
               onClick={() => scrollTo('story')}
-              className="w-full text-left px-4 py-2.5 rounded-xl text-white hover:text-[#E4C58B] hover:bg-white/5 transition-all flex items-center gap-3 cursor-pointer"
+              className="w-full text-left px-3.5 py-2.5 rounded-xl text-white hover:text-[#E4C58B] hover:bg-white/5 transition-all flex items-center gap-3 cursor-pointer"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-[#E4C58B]"></span>
               <span>About Us</span>
@@ -355,7 +383,7 @@ export default function Navbar() {
             {/* 8. Contact us */}
             <button 
               onClick={() => scrollTo('contact')}
-              className="w-full text-left px-4 py-2.5 rounded-xl text-white hover:text-[#E4C58B] hover:bg-white/5 transition-all flex items-center gap-3 cursor-pointer"
+              className="w-full text-left px-3.5 py-2.5 rounded-xl text-white hover:text-[#E4C58B] hover:bg-white/5 transition-all flex items-center gap-3 cursor-pointer"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-[#E4C58B]"></span>
               <span>Contact Us</span>
@@ -378,7 +406,7 @@ export default function Navbar() {
           </div>
 
           {/* Footer inside Drawer */}
-          <div className="p-5 border-t border-[#C59B51]/20 text-center">
+          <div className="p-5 pl-14 pr-5 border-t border-[#C59B51]/20 text-center">
             <span className="font-italiana italic text-xs text-[#E4C58B] tracking-wide block">
               Threads of Culture, Beads of Joy
             </span>
